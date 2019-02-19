@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Administrateur")
+@Table(name="Administrateur")
 public class Administrateur implements Serializable {
 
 	private static final long serialVersionUID = 6501686897066383042L;
@@ -33,7 +33,7 @@ public class Administrateur implements Serializable {
 	private String role;
 	
 	@Column(name="active")
-	private boolean isActive;
+	private String active;
 	
 	/**
 	 * @return the id
@@ -98,14 +98,14 @@ public class Administrateur implements Serializable {
 	/**
 	 * @return the isActive
 	 */
-	public boolean isActive() {
-		return isActive;
+	public String getActive() {
+		return active;
 	}
 	/**
 	 * @param isActive the isActive to set
 	 */
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public void setActive(String active) {
+		this.active = active;
 	}
 
 }

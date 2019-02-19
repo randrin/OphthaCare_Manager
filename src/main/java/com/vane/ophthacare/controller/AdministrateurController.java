@@ -1,5 +1,7 @@
 package com.vane.ophthacare.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,19 @@ public class AdministrateurController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Administrateur.class);
 	
+	@GetMapping("/allAdmins")
+	public ResponseEntity<Object> getAllAdmins() {
+		
+		logger.info("Start getting administrateurs");
+		
+		List<Administrateur> admins = administrateurRepository.findAll();
+		
+		if (admins == null) {
+			return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_ADMIN_NO_PERMISSION), HttpStatus.OK);
+		}
+		return new ResponseEntity<Object>(admins, HttpStatus.OK);
+	}
+	
 	@GetMapping("/login")
 	public ResponseEntity<Object> login (
 			@RequestParam("username") String username, 
@@ -38,7 +53,7 @@ public class AdministrateurController {
 		if (admin == null) {
 			return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_ADMIN_NO_PERMISSION), HttpStatus.OK);
 		} else {
-			if (admin.isActive()) {
+			if (admin.getActive().equals("true")) {
 				return new ResponseEntity<Object>(admin, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_ADMIN_NO_PERMISSION), HttpStatus.OK);
