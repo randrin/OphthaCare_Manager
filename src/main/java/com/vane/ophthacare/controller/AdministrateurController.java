@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,14 +42,17 @@ public class AdministrateurController {
 		return new ResponseEntity<Object>(admins, HttpStatus.OK);
 	}
 	
-	@GetMapping("/login")
+	@PostMapping("/login")
 	public ResponseEntity<Object> login (
 			@RequestParam("username") String username, 
 			@RequestParam("password") String password) {
 		
 		logger.info("Start logging administrateur");
+		logger.info("Username/Pseudo administrateur: " +username);
+		logger.info("Password administrateur: " +password);
 		
 		Administrateur admin = administrateurRepository.findByPseudoAdmin(username);
+		logger.info("Admin qui est entrain de se connecter: " +admin);
 		
 		if (admin == null) {
 			return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_ADMIN_NO_PERMISSION), HttpStatus.OK);
