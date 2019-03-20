@@ -52,12 +52,13 @@ public class AdministrateurController {
 		logger.info("Password administrateur: " +password);
 		
 		Administrateur admin = administrateurRepository.findByPseudoAdmin(username);
-		logger.info("Admin qui est entrain de se connecter: " +admin);
+		//logger.info("Admin qui est entrain de se connecter: " +admin.getNomAdmin()+ " "+admin.getPrenomAdmin());
 		
 		if (admin == null) {
 			return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_ADMIN_NO_PERMISSION), HttpStatus.OK);
 		} else {
 			if (admin.getActive().equals("true")) {
+				logger.info("Admin : [" +admin.getNomAdmin()+ " "+admin.getPrenomAdmin()+ "] activé? " +admin.getActive());
 				return new ResponseEntity<Object>(admin, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_ADMIN_NO_PERMISSION), HttpStatus.OK);
