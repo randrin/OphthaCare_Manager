@@ -58,7 +58,7 @@ public class AdministrateurController {
 			return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_ADMIN_NO_PERMISSION), HttpStatus.OK);
 		} else {
 			if (admin.getActive().equals("true")) {
-				logger.info("Admin : [" +admin.getNomAdmin()+ " "+admin.getPrenomAdmin()+ "] activé? " +admin.getActive());
+				logger.info("Admin : [" +admin.getNomAdmin()+ " "+admin.getPrenomAdmin()+ "] is activated? " +admin.getActive());
 				return new ResponseEntity<Object>(admin, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_ADMIN_NO_PERMISSION), HttpStatus.OK);
