@@ -27,7 +27,7 @@ public class AdministrateurController {
 	@Autowired
 	private AdministrateurRepository administrateurRepository;
 	
-	private static final Logger logger = LoggerFactory.getLogger(Administrateur.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdministrateurController.class);
 	
 	@GetMapping("/allAdmins")
 	public ResponseEntity<Object> getAllAdmins() {

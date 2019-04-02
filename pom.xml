@@ -14,12 +14,29 @@
 	<packaging>war</packaging>
 	<name>OphthaCare_Manager</name>
 	<description>Plateforme de prise en charge des patients souffrant des diffèrentes pathélogiques du mal des yeux à la clinique du Dr. Nimpa Vanessa. </description>
+	
 	<properties>
 		<java.version>1.8</java.version>
 		<hibernate.version>5.2.4.Final</hibernate.version>
+		<poi.version>3.17</poi.version>
 	</properties>
 
 	<dependencies>
+		<!-- Used to work with the older excel file format - `.xls` -->
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>${poi.version}</version>
+		</dependency>
+		
+		<!-- Used to work with the newer excel file format - `.xlsx` -->
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>${poi.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>

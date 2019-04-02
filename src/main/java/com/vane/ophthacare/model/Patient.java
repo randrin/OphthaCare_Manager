@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.vane.ophthacare.excel.export.ExcelField;
+
 @Entity
 @Table(name="Patients")
 public class Patient implements Serializable {
@@ -81,6 +83,7 @@ public class Patient implements Serializable {
 	/**
 	 * @return the nomPatient
 	 */
+	@ExcelField(field = "Nom", position = 0)
 	public String getNomPatient() {
 		return nomPatient;
 	}
@@ -88,6 +91,7 @@ public class Patient implements Serializable {
 	/**
 	 * @param nomPatient the nomPatient to set
 	 */
+	@ExcelField(field = "Nom", position = 0)
 	public void setNomPatient(String nomPatient) {
 		this.nomPatient = nomPatient;
 	}
@@ -95,6 +99,7 @@ public class Patient implements Serializable {
 	/**
 	 * @return the prenomPatient
 	 */
+	@ExcelField(field = "Prènom", position = 1)
 	public String getPrenomPatient() {
 		return prenomPatient;
 	}
@@ -102,6 +107,7 @@ public class Patient implements Serializable {
 	/**
 	 * @param prenomPatient the prenomPatient to set
 	 */
+	@ExcelField(field = "Prènom", position = 1)
 	public void setPrenomPatient(String prenomPatient) {
 		this.prenomPatient = prenomPatient;
 	}
@@ -109,6 +115,7 @@ public class Patient implements Serializable {
 	/**
 	 * @return the dateNaisPatient
 	 */
+	@ExcelField(field = "Date de Naissance", position = 3)
 	public String getDateNaisPatient() {
 		return dateNaisPatient;
 	}
@@ -116,6 +123,7 @@ public class Patient implements Serializable {
 	/**
 	 * @param dateNaisPatient the dateNaisPatient to set
 	 */
+	@ExcelField(field = "Date de Naissance", position = 3)
 	public void setDateNaisPatient(String dateNaisPatient) {
 		this.dateNaisPatient = dateNaisPatient;
 	}
@@ -123,6 +131,7 @@ public class Patient implements Serializable {
 	/**
 	 * @return the agePatient
 	 */
+	@ExcelField(field = "Age", position = 4)
 	public int getAgePatient() {
 		return agePatient;
 	}
@@ -130,6 +139,7 @@ public class Patient implements Serializable {
 	/**
 	 * @param agePatient the agePatient to set
 	 */
+	@ExcelField(field = "Age", position = 4)
 	public void setAgePatient(int agePatient) {
 		this.agePatient = agePatient;
 	}
@@ -137,6 +147,7 @@ public class Patient implements Serializable {
 	/**
 	 * @return the sexePatient
 	 */
+	@ExcelField(field = "Sexe", position = 2)
 	public String getSexePatient() {
 		return sexePatient;
 	}
@@ -144,6 +155,7 @@ public class Patient implements Serializable {
 	/**
 	 * @param sexePatient the sexePatient to set
 	 */
+	@ExcelField(field = "Sexe", position = 2)
 	public void setSexePatient(String sexePatient) {
 		this.sexePatient = sexePatient;
 	}
@@ -151,6 +163,7 @@ public class Patient implements Serializable {
 	/**
 	 * @return the addressePatient
 	 */
+	@ExcelField(field = "Addresse", position = 9)
 	public String getAddressePatient() {
 		return addressePatient;
 	}
@@ -158,6 +171,7 @@ public class Patient implements Serializable {
 	/**
 	 * @param addressePatient the addressePatient to set
 	 */
+	@ExcelField(field = "Addresse", position = 9)
 	public void setAddressePatient(String addressePatient) {
 		this.addressePatient = addressePatient;
 	}
@@ -165,6 +179,7 @@ public class Patient implements Serializable {
 	/**
 	 * @return the codePostPatient
 	 */
+	@ExcelField(field = "Code Postale", position = 11)
 	public Integer getCodePostPatient() {
 		return codePostPatient;
 	}
@@ -172,6 +187,7 @@ public class Patient implements Serializable {
 	/**
 	 * @param codePostPatient the codePostPatient to set
 	 */
+	@ExcelField(field = "Code Postale", position = 11)
 	public void setCodePostPatient(Integer codePostPatient) {
 		this.codePostPatient = codePostPatient;
 	}
@@ -179,6 +195,7 @@ public class Patient implements Serializable {
 	/**
 	 * @return the domicilePatient
 	 */
+	@ExcelField(field = "Domicile", position = 10)
 	public String getDomicilePatient() {
 		return domicilePatient;
 	}
@@ -186,6 +203,7 @@ public class Patient implements Serializable {
 	/**
 	 * @param domicilePatient the domicilePatient to set
 	 */
+	@ExcelField(field = "Domicile", position = 10)
 	public void setDomicilePatient(String domicilePatient) {
 		this.domicilePatient = domicilePatient;
 	}
@@ -193,6 +211,7 @@ public class Patient implements Serializable {
 	/**
 	 * @return the infoSupplPatient
 	 */
+	@ExcelField(field = "Informations Supplémentaires", position = 12)
 	public String getInfoSupplPatient() {
 		return infoSupplPatient;
 	}
@@ -200,6 +219,7 @@ public class Patient implements Serializable {
 	/**
 	 * @param infoSupplPatient the infoSupplPatient to set
 	 */
+	@ExcelField(field = "Informations Supplémentaires", position = 12)
 	public void setInfoSupplPatient(String infoSupplPatient) {
 		this.infoSupplPatient = infoSupplPatient;
 	}
@@ -207,6 +227,7 @@ public class Patient implements Serializable {
 	/**
 	 * @return the emailPatient
 	 */
+	@ExcelField(field = "Adresse Electronique", position = 5)
 	public String getEmailPatient() {
 		return emailPatient;
 	}
@@ -214,6 +235,7 @@ public class Patient implements Serializable {
 	/**
 	 * @param emailPatient the emailPatient to set
 	 */
+	@ExcelField(field = "Adresse Electronique", position = 5)
 	public void setEmailPatient(String emailPatient) {
 		this.emailPatient = emailPatient;
 	}
@@ -221,6 +243,7 @@ public class Patient implements Serializable {
 	/**
 	 * @return the numTelPatient
 	 */
+	@ExcelField(field = "Numéro Cellulaire", position = 6)
 	public Integer getNumTelPatient() {
 		return numTelPatient;
 	}
@@ -228,6 +251,7 @@ public class Patient implements Serializable {
 	/**
 	 * @param numTelPatient the numTelPatient to set
 	 */
+	@ExcelField(field = "Numéro Cellulaire", position = 6)
 	public void setNumTelPatient(Integer numTelPatient) {
 		this.numTelPatient = numTelPatient;
 	}
@@ -235,6 +259,7 @@ public class Patient implements Serializable {
 	/**
 	 * @return the numFixePatient
 	 */
+	@ExcelField(field = "Numéro Fixe", position = 7)
 	public Integer getNumFixePatient() {
 		return numFixePatient;
 	}
@@ -242,6 +267,7 @@ public class Patient implements Serializable {
 	/**
 	 * @param numFixePatient the numFixePatient to set
 	 */
+	@ExcelField(field = "Numéro Fixe", position = 7)
 	public void setNumFixePatient(Integer numFixePatient) {
 		this.numFixePatient = numFixePatient;
 	}
