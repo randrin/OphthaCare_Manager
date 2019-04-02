@@ -5,6 +5,11 @@ public class Response {
 	private String code;
 	private String message;
 	
+	public Response(ResponseCodes errorCode) {
+		this.code = errorCode.getCode();
+		this.message = errorCode.getMessage();
+	}
+	
 	public Response(ExceptionCodes errorCode) {
 		this.code = errorCode.getCode();
 		this.message = errorCode.getMessage();
