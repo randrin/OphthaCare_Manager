@@ -26,6 +26,9 @@ public class Patient implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idPatient;
 	
+	@Column(name="code_patient")
+	private String codePatient;
+
 	@Column(name="nom_patient")
 	private String nomPatient;
 	
@@ -62,9 +65,9 @@ public class Patient implements Serializable {
 	@Column(name="numFixe_patient")
 	private Integer numFixePatient;
 
-	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
-	@JoinColumn(name="patient_maladies")
-	List<Maladies> maladie;
+	//@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+	//@JoinColumn(name="patient_maladies")
+	//List<Maladies> maladie;
 	
 	/**
 	 * @return the idPatient
@@ -80,6 +83,20 @@ public class Patient implements Serializable {
 		this.idPatient = idPatient;
 	}
 
+	/**
+	 * @return the codePatient
+	 */
+	public String getCodePatient() {
+		return codePatient;
+	}
+
+	/**
+	 * @param codePatient the codePatient to set
+	 */
+	public void setCodePatient(String codePatient) {
+		this.codePatient = codePatient;
+	}
+	
 	/**
 	 * @return the nomPatient
 	 */
@@ -272,17 +289,17 @@ public class Patient implements Serializable {
 		this.numFixePatient = numFixePatient;
 	}
 
-	/**
-	 * @return the maladie
-	 */
-	public List<Maladies> getMaladie() {
-		return maladie;
-	}
-
-	/**
-	 * @param maladie the maladie to set
-	 */
-	public void setMaladie(List<Maladies> maladie) {
-		this.maladie = maladie;
-	}
+//	/**
+//	 * @return the maladie
+//	 */
+//	public List<Maladies> getMaladie() {
+//		return maladie;
+//	}
+//
+//	/**
+//	 * @param maladie the maladie to set
+//	 */
+//	public void setMaladie(List<Maladies> maladie) {
+//		this.maladie = maladie;
+//	}
 }

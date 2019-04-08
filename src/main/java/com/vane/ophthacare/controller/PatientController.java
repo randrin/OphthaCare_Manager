@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +27,7 @@ import com.vane.ophthacare.Exception.Response;
 import com.vane.ophthacare.Exception.ResponseCodes;
 import com.vane.ophthacare.model.Patient;
 import com.vane.ophthacare.repository.PatientRepository;
+import com.vane.ophthacare.utils.Utils;
 
 @RestController
 @CrossOrigin
@@ -44,7 +47,49 @@ public class PatientController {
 		return patientRepository.findAll();
 	}
 	
-	@DeleteMapping(path ={"/delete/{id}"})
+	@PutMapping("/insert")
+	public ResponseEntity<Object> insertPatient(@RequestBody Patient patient, 
+			@RequestHeader(value= "caller",required = false) String caller) {
+		
+		logger.info("INSERT -> /patient/insert/{id} - Start - Caller ["+caller+"]");
+		
+		if (StringUtils.isEmpty(caller)) {
+			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
+		}
+		
+		if(patient == null){
+			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
+		}
+		
+		String erreur = Utils.checkAttributeFromObject(patient, false);
+		
+		logger.info("Erreur response: " +erreur);
+		
+		if (erreur != "OK") {
+			logger.error(ResponseCodes.ERROR_GENERIC.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
+		}
+		
+		//Set Model Patient
+		patient.setCodePatient(Utils.codePatient(patient.getNomPatient(), patient.getPrenomPatient(), patient.getDateNaisPatient()));
+		patient.setAgePatient(Utils.calculAgePatient(patient.getDateNaisPatient()));
+		
+		
+		Patient p = patientRepository.save(patient);
+		
+		if (p == null) {
+			logger.error(ResponseCodes.ERROR_SET_PATIENT_DB.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_PATIENT_DB), HttpStatus.OK);
+		}
+		
+		logger.info("INSERT -> patient/insert/{id} - End - Caller ["+caller+"]");
+		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_INSERT_PATIENT), HttpStatus.OK);
+	}
+
+	
+	@DeleteMapping(path = {"/delete/{id}"})
 	public ResponseEntity<Object> deletePatient (@PathVariable("id") String id,
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
@@ -63,8 +108,8 @@ public class PatientController {
 		try {
 			patientRepository.deleteById(Integer.parseInt(id));
 		} catch (Exception e) {
-			logger.error(ResponseCodes.ERROR_DELETE_USER_DB.toString());
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_DELETE_USER_DB), HttpStatus.OK);
+			logger.error(ResponseCodes.ERROR_DELETE_PATIENT_DB.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_DELETE_PATIENT_DB), HttpStatus.OK);
 		}
 		
 		Iterator<Patient> iter = patientList.iterator();
@@ -76,7 +121,7 @@ public class PatientController {
 			}
 		}
 		
-		logger.info("DELETE patient/delete/{id} - End - Caller ["+caller+"]");
-		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_DELETE_USER), HttpStatus.OK);
+		logger.info("DELETE -> patient/delete/{id} - End - Caller ["+caller+"]");
+		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_DELETE_PATIENT), HttpStatus.OK);
 	}
 } 
