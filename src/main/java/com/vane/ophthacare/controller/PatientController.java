@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -51,14 +52,14 @@ public class PatientController {
 	public ResponseEntity<Object> insertPatient(@RequestBody Patient patient, 
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("INSERT -> /patient/insert/{id} - Start - Caller ["+caller+"]");
+		logger.info("INSERT -> /patient/insert - Start - Caller ["+caller+"]");
 		
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
 		
-		if(patient == null){
+		if(patient == null) {
 			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
 		}
@@ -76,6 +77,44 @@ public class PatientController {
 		patient.setCodePatient(Utils.codePatient(patient.getNomPatient(), patient.getPrenomPatient(), patient.getDateNaisPatient()));
 		patient.setAgePatient(Utils.calculAgePatient(patient.getDateNaisPatient()));
 		
+		Patient p = patientRepository.save(patient);
+		
+		if (p == null) {
+			logger.error(ResponseCodes.ERROR_SET_PATIENT_DB.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_PATIENT_DB), HttpStatus.OK);
+		}
+		
+		logger.info("INSERT -> patient/insert - End - Caller ["+caller+"]");
+		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_INSERT_PATIENT), HttpStatus.OK);
+	}
+
+	@PostMapping("/update")
+	public ResponseEntity<Object> updatePatient(@RequestBody Patient patient, 
+			@RequestHeader(value= "caller",required = false) String caller) {
+		
+		logger.info("UPDATE -> /patient/update - Start - Caller ["+caller+"]");
+		
+		if (StringUtils.isEmpty(caller)) {
+			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
+		}
+		
+		if(patient == null) {
+			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
+		}
+		
+		String erreur = Utils.checkAttributeFromObject(patient, false);
+		
+		logger.info("Erreur response: " +erreur);
+		
+		if (erreur != "OK") {
+			logger.error(ResponseCodes.ERROR_GENERIC.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
+		}
+		
+		//Set Model Patient
+		patient.setAgePatient(Utils.calculAgePatient(patient.getDateNaisPatient()));
 		
 		Patient p = patientRepository.save(patient);
 		
@@ -84,10 +123,9 @@ public class PatientController {
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_PATIENT_DB), HttpStatus.OK);
 		}
 		
-		logger.info("INSERT -> patient/insert/{id} - End - Caller ["+caller+"]");
-		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_INSERT_PATIENT), HttpStatus.OK);
+		logger.info("UPDATE -> patient/update - End - Caller ["+caller+"]");
+		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_MODIFY_PATIENT), HttpStatus.OK);
 	}
-
 	
 	@DeleteMapping(path = {"/delete/{id}"})
 	public ResponseEntity<Object> deletePatient (@PathVariable("id") String id,
