@@ -29,17 +29,19 @@ public class AdministrateurController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdministrateurController.class);
 	
-	@GetMapping("/allAdmins")
+	@GetMapping("/getAllAdmins")
 	public ResponseEntity<Object> getAllAdmins() {
 		
-		logger.info("Start getting administrateurs");
+		logger.info("GET -> /admin/getAllAdmins - Start");
 		
-		List<Administrateur> admins = administrateurRepository.findAll();
+		List<Administrateur> listAdmins = administrateurRepository.findAll();
 		
-		if (admins == null) {
+		if (listAdmins == null) {
 			return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_ADMIN_NO_PERMISSION), HttpStatus.OK);
 		}
-		return new ResponseEntity<Object>(admins, HttpStatus.OK);
+		
+		logger.info("GET -> /admin/getAllAdmins - End");
+		return new ResponseEntity<Object>(listAdmins, HttpStatus.OK);
 	}
 	
 	@PostMapping("/login")

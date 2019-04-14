@@ -42,10 +42,19 @@ public class PatientController {
 	
 	public List<Patient> patientList = new ArrayList<>();
 	
-	@GetMapping("/getAll")
-	public List<Patient> getAllPatients () {
-		logger.info("Start method getAllPatients");
-		return patientRepository.findAll();
+	@GetMapping("/getAllPatients")
+	public ResponseEntity<Object> getAllPatients () {
+		logger.info("GET -> /patient/getAllPatients - Start");
+		
+		List<Patient> listPatients = patientRepository.findAll();
+		
+		if (listPatients == null) {
+			logger.error(ResponseCodes.ERROR_GET_PATIENTS_DB.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GET_PATIENTS_DB), HttpStatus.OK);
+		}
+		
+		logger.info("GET -> /patient/getAllPatients - End");
+		return new ResponseEntity<Object>(listPatients, HttpStatus.OK);
 	}
 	
 	@PutMapping("/insert")
