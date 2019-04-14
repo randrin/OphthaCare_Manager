@@ -3,9 +3,9 @@ package com.vane.ophthacare.Exception;
 public enum ResponseCodes {
 	
 	//Italian response code for FE
-	OK_INSERT_USER("OK","User added to DB"),
-	OK_DELETE_USER("OK","User deleted from DB"),
-	OK_MODIFY_USER("OK","User modified"),
+	OK_INSERT_PATIENT("OK","User added to DB"),
+	OK_DELETE_PATIENT("OK","User deleted from DB"),
+	OK_MODIFY_PATIENT("OK","User modified"),
 	OK_INSERT_EMAIL("OK","Email added to DB"),
 	OK_MODIFY_EMAIL("OK","Email modified"),
 	OK_DELETE_EMAIL("OK","Email deleted from DB"),
@@ -18,13 +18,13 @@ public enum ResponseCodes {
 	
 	
 	
-	ERROR_GENERIC("ERR0001",""),
-	ERROR_USER_NO_PERMISSION("ERR0002","User without permissions. Contact your administrator"),
-	ERROR_USER_NOT_FOUND("ERR0003","User or Password not found on LDAP"),
-	ERROR_GET_USERS_DB("ERR0004","Error getting users on DB"),
-	ERROR_SET_USER_DB("ERR0005","Error on insert user on DB"),
-	ERROR_DELETE_USER_DB("ERR0006","Error on delete user on DB"),
-	ERROR_MODIFY_USER_DB("ERR0007","Error on modify user on DB"),
+	ERROR_GENERIC("ERR0001","Generic Error"),
+	ERROR_PATIENT_NO_PERMISSION("ERR0002","User without permissions. Contact your administrator"),
+	ERROR_PATIENT_NOT_FOUND("ERR0003","User or Password not found on LDAP"),
+	ERROR_GET_PATIENTS_DB("ERR0004","Error getting users on DB"),
+	ERROR_SET_PATIENT_DB("ERR0005","Error on insert user on DB"),
+	ERROR_DELETE_PATIENT_DB("ERR0006","Error on delete user on DB"),
+	ERROR_MODIFY_PATIENT_DB("ERR0007","Error on modify user on DB"),
 	ERROR_PARSE_OBJECT("ERR0008","Error on parsing JSON Data"),
 	ERROR_INVALID_INPUT("ERR0009","Invalid Parameters"),
 	

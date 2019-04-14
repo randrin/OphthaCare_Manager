@@ -1,6 +1,7 @@
 package com.vane.ophthacare.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.vane.ophthacare.excel.export.ExcelField;
 
 @Entity
@@ -24,8 +27,11 @@ public class Patient implements Serializable {
 	@Id
 	@Column(name="id_patient")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idPatient;
+	private Integer idPatient;
 	
+	@Column(name="code_patient")
+	private String codePatient;
+
 	@Column(name="nom_patient")
 	private String nomPatient;
 	
@@ -53,33 +59,47 @@ public class Patient implements Serializable {
 	@Column(name="infoSuppl_patient")
 	private String infoSupplPatient;
 	
-	@Column(name="email_patient")
+	@Column(name="email_patient", length = 25)
 	private String emailPatient;
 	
 	@Column(name="numTel_patient")
-	private Integer numTelPatient;
+	private BigInteger numTelPatient;
 	
 	@Column(name="numFixe_patient")
-	private Integer numFixePatient;
+	private BigInteger numFixePatient;
 
-	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
-	@JoinColumn(name="patient_maladies")
-	List<Maladies> maladie;
+	//@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+	//@JoinColumn(name="patient_maladies")
+	//List<Maladies> maladie;
 	
 	/**
 	 * @return the idPatient
 	 */
-	public long getIdPatient() {
+	public Integer getIdPatient() {
 		return idPatient;
 	}
 
 	/**
 	 * @param idPatient the idPatient to set
 	 */
-	public void setIdPatient(long idPatient) {
+	public void setIdPatient(Integer idPatient) {
 		this.idPatient = idPatient;
 	}
 
+	/**
+	 * @return the codePatient
+	 */
+	public String getCodePatient() {
+		return codePatient;
+	}
+
+	/**
+	 * @param codePatient the codePatient to set
+	 */
+	public void setCodePatient(String codePatient) {
+		this.codePatient = codePatient;
+	}
+	
 	/**
 	 * @return the nomPatient
 	 */
@@ -244,7 +264,7 @@ public class Patient implements Serializable {
 	 * @return the numTelPatient
 	 */
 	@ExcelField(field = "Numéro Cellulaire", position = 6)
-	public Integer getNumTelPatient() {
+	public BigInteger getNumTelPatient() {
 		return numTelPatient;
 	}
 
@@ -252,7 +272,7 @@ public class Patient implements Serializable {
 	 * @param numTelPatient the numTelPatient to set
 	 */
 	@ExcelField(field = "Numéro Cellulaire", position = 6)
-	public void setNumTelPatient(Integer numTelPatient) {
+	public void setNumTelPatient(BigInteger numTelPatient) {
 		this.numTelPatient = numTelPatient;
 	}
 
@@ -260,7 +280,7 @@ public class Patient implements Serializable {
 	 * @return the numFixePatient
 	 */
 	@ExcelField(field = "Numéro Fixe", position = 7)
-	public Integer getNumFixePatient() {
+	public BigInteger getNumFixePatient() {
 		return numFixePatient;
 	}
 
@@ -268,21 +288,21 @@ public class Patient implements Serializable {
 	 * @param numFixePatient the numFixePatient to set
 	 */
 	@ExcelField(field = "Numéro Fixe", position = 7)
-	public void setNumFixePatient(Integer numFixePatient) {
+	public void setNumFixePatient(BigInteger numFixePatient) {
 		this.numFixePatient = numFixePatient;
 	}
 
-	/**
-	 * @return the maladie
-	 */
-	public List<Maladies> getMaladie() {
-		return maladie;
-	}
-
-	/**
-	 * @param maladie the maladie to set
-	 */
-	public void setMaladie(List<Maladies> maladie) {
-		this.maladie = maladie;
-	}
+//	/**
+//	 * @return the maladie
+//	 */
+//	public List<Maladies> getMaladie() {
+//		return maladie;
+//	}
+//
+//	/**
+//	 * @param maladie the maladie to set
+//	 */
+//	public void setMaladie(List<Maladies> maladie) {
+//		this.maladie = maladie;
+//	}
 }
