@@ -30,10 +30,10 @@ public class Administrateur implements Serializable {
 	private String pseudoAdmin;
 	
 	@Column(name="role")
-	private String role;
+	private String roleAdmin;
 	
 	@Column(name="active")
-	private String active;
+	private String activeAdmin;
 	
 	/**
 	 * @return the id
@@ -84,28 +84,28 @@ public class Administrateur implements Serializable {
 		this.pseudoAdmin = pseudoAdmin;
 	}
 	/**
-	 * @return the role
+	 * @return the roleAdmin
 	 */
-	public String getRole() {
-		return role;
+	public String getRoleAdmin() {
+		return roleAdmin;
 	}
 	/**
-	 * @param role the role to set
+	 * @param roleAdmin the roleAdmin to set
 	 */
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoleAdmin(String roleAdmin) {
+		this.roleAdmin = roleAdmin;
 	}
 	/**
-	 * @return the isActive
+	 * @return the isActiveAdmin
 	 */
-	public String getActive() {
-		return active;
+	public String getActiveAdmin() {
+		return activeAdmin;
 	}
 	/**
-	 * @param isActive the isActive to set
+	 * @param isActiveAdmin the isActiveAdmin to set
 	 */
-	public void setActive(String active) {
-		this.active = active;
+	public void setActiveAdmin(String activeAdmin) {
+		this.activeAdmin = activeAdmin;
 	}
 
 }

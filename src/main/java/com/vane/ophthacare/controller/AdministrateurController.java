@@ -49,6 +49,7 @@ public class AdministrateurController {
 			@RequestParam("username") String username, 
 			@RequestParam("password") String password) {
 		
+		logger.info("POST -> /admin/login - Start");
 		logger.info("Start logging administrateur");
 		logger.info("Username/Pseudo administrateur: " +username);
 		logger.info("Password administrateur: " +password);
@@ -59,10 +60,12 @@ public class AdministrateurController {
 		if (admin == null) {
 			return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_ADMIN_NO_PERMISSION), HttpStatus.OK);
 		} else {
-			if (admin.getActive().equals("true")) {
-				logger.info("Admin : [" +admin.getNomAdmin()+ " "+admin.getPrenomAdmin()+ "] is activated? " +admin.getActive());
+			if (admin.getActiveAdmin().equals("true")) {
+				logger.info("Admin : [" +admin.getNomAdmin()+ " "+admin.getPrenomAdmin()+ "] is activated? " +admin.getActiveAdmin());
+				logger.info("POST -> /admin/login - End");
 				return new ResponseEntity<Object>(admin, HttpStatus.OK);
 			} else {
+				logger.info("POST -> /admin/login - End");
 				return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_ADMIN_NO_PERMISSION), HttpStatus.OK);
 			}
 		}
