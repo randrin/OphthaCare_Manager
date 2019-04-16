@@ -1,6 +1,7 @@
 package com.vane.ophthacare.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,10 +31,16 @@ public class Administrateur implements Serializable {
 	private String pseudoAdmin;
 	
 	@Column(name="role")
-	private String role;
+	private String roleAdmin;
 	
 	@Column(name="active")
-	private String active;
+	private String activeAdmin;
+	
+	@Column(name="last_login")
+	private Date lastLoginAdmin;
+	
+	@Column(name="registration_admin")
+	private Date registrationAdmin;
 	
 	/**
 	 * @return the id
@@ -84,28 +91,51 @@ public class Administrateur implements Serializable {
 		this.pseudoAdmin = pseudoAdmin;
 	}
 	/**
-	 * @return the role
+	 * @return the roleAdmin
 	 */
-	public String getRole() {
-		return role;
+	public String getRoleAdmin() {
+		return roleAdmin;
 	}
 	/**
-	 * @param role the role to set
+	 * @param roleAdmin the roleAdmin to set
 	 */
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoleAdmin(String roleAdmin) {
+		this.roleAdmin = roleAdmin;
 	}
 	/**
-	 * @return the isActive
+	 * @return the isActiveAdmin
 	 */
-	public String getActive() {
-		return active;
+	public String getActiveAdmin() {
+		return activeAdmin;
 	}
 	/**
-	 * @param isActive the isActive to set
+	 * @param isActiveAdmin the isActiveAdmin to set
 	 */
-	public void setActive(String active) {
-		this.active = active;
+	public void setActiveAdmin(String activeAdmin) {
+		this.activeAdmin = activeAdmin;
 	}
-
+	/**
+	 * @return the lastLoginAdmin
+	 */
+	public Date getLastLoginAdmin() {
+		return lastLoginAdmin;
+	}
+	/**
+	 * @param lastLoginAdmin the lastLoginAdmin to set
+	 */
+	public void setLastLoginAdmin(Date lastLoginAdmin) {
+		this.lastLoginAdmin = lastLoginAdmin;
+	}
+	/**
+	 * @return the registrationAdmin
+	 */
+	public Date getRegistrationAdmin() {
+		return registrationAdmin;
+	}
+	/**
+	 * @param registrationAdmin the registrationAdmin to set
+	 */
+	public void setRegistrationAdmin(Date registrationAdmin) {
+		this.registrationAdmin = registrationAdmin;
+	}
 }

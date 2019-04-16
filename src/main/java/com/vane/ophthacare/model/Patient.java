@@ -70,7 +70,7 @@ public class Patient implements Serializable {
 
 	//@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
 	//@JoinColumn(name="patient_maladies")
-	//List<Maladies> maladie;
+	//List<Maladie> maladie;
 	
 	/**
 	 * @return the idPatient
@@ -295,14 +295,14 @@ public class Patient implements Serializable {
 //	/**
 //	 * @return the maladie
 //	 */
-//	public List<Maladies> getMaladie() {
+//	public List<Maladie> getMaladie() {
 //		return maladie;
 //	}
 //
 //	/**
 //	 * @param maladie the maladie to set
 //	 */
-//	public void setMaladie(List<Maladies> maladie) {
+//	public void setMaladie(List<Maladie> maladie) {
 //		this.maladie = maladie;
 //	}
 }
