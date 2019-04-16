@@ -1,6 +1,7 @@
 package com.vane.ophthacare.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,6 +35,12 @@ public class Administrateur implements Serializable {
 	
 	@Column(name="active")
 	private String activeAdmin;
+	
+	@Column(name="last_login")
+	private Date lastLoginAdmin;
+	
+	@Column(name="registration_admin")
+	private Date registrationAdmin;
 	
 	/**
 	 * @return the id
@@ -107,5 +114,28 @@ public class Administrateur implements Serializable {
 	public void setActiveAdmin(String activeAdmin) {
 		this.activeAdmin = activeAdmin;
 	}
-
+	/**
+	 * @return the lastLoginAdmin
+	 */
+	public Date getLastLoginAdmin() {
+		return lastLoginAdmin;
+	}
+	/**
+	 * @param lastLoginAdmin the lastLoginAdmin to set
+	 */
+	public void setLastLoginAdmin(Date lastLoginAdmin) {
+		this.lastLoginAdmin = lastLoginAdmin;
+	}
+	/**
+	 * @return the registrationAdmin
+	 */
+	public Date getRegistrationAdmin() {
+		return registrationAdmin;
+	}
+	/**
+	 * @param registrationAdmin the registrationAdmin to set
+	 */
+	public void setRegistrationAdmin(Date registrationAdmin) {
+		this.registrationAdmin = registrationAdmin;
+	}
 }
