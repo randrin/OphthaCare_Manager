@@ -85,7 +85,7 @@ public class AdministrateurController {
 		
 		logger.info("DELETE -> /admin/delete/{id} - Start - Caller ["+caller+"]");
 		
-		if(id == null) {
+		if(id == null) { 
 			logger.error(ResponseCodes.ERROR_INVALID_INPUT.toString());
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_INVALID_INPUT), HttpStatus.OK);
 		}
@@ -106,7 +106,7 @@ public class AdministrateurController {
 
 		while (iter.hasNext()) {
 			Administrateur admin = iter.next();
-			if(admin.getId().equals(Integer.parseInt(id))) {	
+			if(admin.getIdAdmin().equals(Integer.parseInt(id))) {	
 				iter.remove();
 			}
 		}

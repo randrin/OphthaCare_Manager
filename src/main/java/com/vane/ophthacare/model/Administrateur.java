@@ -17,9 +17,9 @@ public class Administrateur implements Serializable {
 	private static final long serialVersionUID = 6501686897066383042L;
 	
 	@Id
-	@Column(name="id_patient")
+	@Column(name="id_admin")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long idAdmin;
 	
 	@Column(name="nom_admin")
 	private String nomAdmin;
@@ -43,16 +43,16 @@ public class Administrateur implements Serializable {
 	private Date registrationAdmin;
 	
 	/**
-	 * @return the id
+	 * @return the idAdmin
 	 */
-	public Long getId() {
-		return id;
+	public Long getIdAdmin() {
+		return idAdmin;
 	}
 	/**
-	 * @param id the id to set
+	 * @param idAdmin the idAdmin to set
 	 */
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdAdmin(Long idAdmin) {
+		this.idAdmin = idAdmin;
 	}
 	/**
 	 * @return the nomAdmin
