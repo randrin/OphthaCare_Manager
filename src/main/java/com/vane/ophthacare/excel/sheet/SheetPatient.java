@@ -15,7 +15,7 @@ import com.vane.ophthacare.model.Patient;
 public class SheetPatient extends SheetInterface {
 
 	public static final String SHEET_NAME = "Patients OphthaCare Clinique";
-	private final String TITLE = "OphthaCare Clinique";
+	private final String TITLE = "OphthaCare Clinique Patients";
 	private final short indexColorFont = IndexedColors.BLACK.getIndex();
 	private final short indexColorBackground = IndexedColors.YELLOW.getIndex();
 	

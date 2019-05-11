@@ -38,7 +38,7 @@ public enum ResponseCodes {
 	ERROR_SET_SOP_DB("ERR0013","Error on insert Alarm on DB"),
 	ERROR_DELETE_SOP_DB("ERR0014","Error on delete sop on DB"),
 	ERROR_GET_REPORT_DB("ERR0015","Error getting report on DB"),
-	ERROR_EXCEL_CONCURRENCY_EXPORT("ERR0016","To many process for export excel..Wait many second"),
+	ERROR_EXCEL_CONCURRENCY_EXPORT("ERR0016","To many process for export excel... Wait many second"),
 	ERROR_EXCEL_FILE_IMPORT_MISSING("ERR0017","Seleziona un file da aggiungere"),
 	ERROR_EXCEL_ID_NULL("ERR0018","Campo 'Id Scheda Monitoraggio' vuoto."),
 	ERROR_EXCEL_SHEET_NULL("ERR0019","Sheet 'Informazioni Scheda' non presente"),

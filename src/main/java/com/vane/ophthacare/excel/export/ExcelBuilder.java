@@ -5,7 +5,11 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.vane.ophthacare.excel.sheet.SheetAdministrateur;
+import com.vane.ophthacare.excel.sheet.SheetMaladie;
 import com.vane.ophthacare.excel.sheet.SheetPatient;
+import com.vane.ophthacare.model.Administrateur;
+import com.vane.ophthacare.model.Maladie;
 import com.vane.ophthacare.model.Patient;
 
 public class ExcelBuilder {
@@ -15,6 +19,24 @@ public class ExcelBuilder {
 
 		SheetPatient sheetPatient = new SheetPatient(workbook, patients);
 		sheetPatient.createSheet();
+		
+		return workbook;
+	}
+	
+	public static Workbook buildExcelAdmin (List<Administrateur> admins) {
+		Workbook workbook = new XSSFWorkbook();
+
+		SheetAdministrateur sheetAdministrateur = new SheetAdministrateur(workbook, admins);
+		sheetAdministrateur.createSheet();
+		
+		return workbook;
+	}
+
+	public static Workbook buildExcelMaladie(List<Maladie> maladies) {
+		Workbook workbook = new XSSFWorkbook();
+
+		SheetMaladie sheetMaladie = new SheetMaladie(workbook, maladies);
+		sheetMaladie.createSheet();
 		
 		return workbook;
 	}

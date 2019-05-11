@@ -25,7 +25,10 @@ import com.vane.ophthacare.Exception.Response;
 import com.vane.ophthacare.Exception.ResponseCodes;
 import com.vane.ophthacare.excel.export.ExcelBuilder;
 import com.vane.ophthacare.model.Administrateur;
+import com.vane.ophthacare.model.Maladie;
 import com.vane.ophthacare.model.Patient;
+import com.vane.ophthacare.repository.AdministrateurRepository;
+import com.vane.ophthacare.repository.MaladieRepository;
 import com.vane.ophthacare.repository.PatientRepository;
 
 @RestController
@@ -37,12 +40,18 @@ public class ExcelController {
 	@Autowired
 	public PatientRepository patientRepository;
 	
+	@Autowired
+	public AdministrateurRepository administrateurRepository;
+	
+	@Autowired
+	public MaladieRepository maladieRepository;
+	
 	private static final Logger logger = LoggerFactory.getLogger(ExcelController.class);
 	
 	@GetMapping(value="/downloadExcelPatients", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Object> downloadExcelUtenze(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
+	public ResponseEntity<Object> downloadExcelPatients(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
 		
-		logger.info("DOWNLOAD -> /excel/downloadExcelPatients - Start - Caller ["+caller+"]");
+		logger.info("GET -> /excel/downloadExcelPatients - Start - Caller ["+caller+"]");
 		
 		Workbook workbook = null;
 		List<Patient> patientList = patientRepository.findAll();
@@ -54,19 +63,78 @@ public class ExcelController {
 		if(workbook == null) {
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
 		}
+		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		workbook.write(out);
 		ByteArrayInputStream test = new ByteArrayInputStream(out.toByteArray());
 
-
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
-		logger.info("DOWNLOAD -> /excel/downloadExcelPatients - End - Caller ["+caller+"]");
+		logger.info("GET -> /excel/downloadExcelPatients - End - Caller ["+caller+"]");
 		return ResponseEntity
 				.ok()
 				.headers(headers)
 				.body(new InputStreamResource(test));
 	}
 	
+	@GetMapping(value="/downloadExcelAdministrateurs", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> downloadExcelAdministrateurs(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
+		
+		logger.info("GET -> /excel/downloadExcelAdministrateurs - Start - Caller ["+caller+"]");
+		
+		Workbook workbook = null;
+		List<Administrateur> adminList = administrateurRepository.findAll();
+
+		if(adminList != null && adminList.size() > 0) {
+			workbook =  ExcelBuilder.buildExcelAdmin(adminList);
+		} 
+
+		if(workbook == null) {
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
+		}
+		
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		workbook.write(out);
+		ByteArrayInputStream test = new ByteArrayInputStream(out.toByteArray());
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
+
+		logger.info("GET -> /excel/downloadExcelAdministrateurs - End - Caller ["+caller+"]");
+		return ResponseEntity
+				.ok()
+				.headers(headers)
+				.body(new InputStreamResource(test));
+	}
+	
+	@GetMapping(value="/downloadExcelMaladies", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> downloadExcelMaladies(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
+		
+		logger.info("GET -> /excel/downloadExcelMaladies - Start - Caller ["+caller+"]");
+		
+		Workbook workbook = null;
+		List<Maladie> maladieList = maladieRepository.findAll();
+
+		if(maladieList != null && maladieList.size() > 0) {
+			workbook =  ExcelBuilder.buildExcelMaladie(maladieList);
+		} 
+
+		if(workbook == null) {
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
+		}
+		
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		workbook.write(out);
+		ByteArrayInputStream test = new ByteArrayInputStream(out.toByteArray());
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
+
+		logger.info("GET -> /excel/downloadExcelMaladies - End - Caller ["+caller+"]");
+		return ResponseEntity
+				.ok()
+				.headers(headers)
+				.body(new InputStreamResource(test));
+	}
 }
