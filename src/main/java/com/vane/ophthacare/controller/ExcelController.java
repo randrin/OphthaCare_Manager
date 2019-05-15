@@ -26,9 +26,11 @@ import com.vane.ophthacare.Exception.ResponseCodes;
 import com.vane.ophthacare.excel.export.ExcelBuilder;
 import com.vane.ophthacare.model.Administrateur;
 import com.vane.ophthacare.model.Maladie;
+import com.vane.ophthacare.model.Medecin;
 import com.vane.ophthacare.model.Patient;
 import com.vane.ophthacare.repository.AdministrateurRepository;
 import com.vane.ophthacare.repository.MaladieRepository;
+import com.vane.ophthacare.repository.MedecinRepository;
 import com.vane.ophthacare.repository.PatientRepository;
 
 @RestController
@@ -45,6 +47,9 @@ public class ExcelController {
 	
 	@Autowired
 	public MaladieRepository maladieRepository;
+	
+	@Autowired
+	public MedecinRepository medecinRepository;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ExcelController.class);
 	
@@ -132,6 +137,36 @@ public class ExcelController {
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
 		logger.info("GET -> /excel/downloadExcelMaladies - End - Caller ["+caller+"]");
+		return ResponseEntity
+				.ok()
+				.headers(headers)
+				.body(new InputStreamResource(test));
+	}
+	
+	@GetMapping(value="/downloadExcelMedecins", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> downloadExcelMedecins(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
+		
+		logger.info("GET -> /excel/downloadExcelMedecins - Start - Caller ["+caller+"]");
+		
+		Workbook workbook = null;
+		List<Medecin> medecinList = medecinRepository.findAll();
+
+		if(medecinList != null && medecinList.size() > 0) {
+			workbook =  ExcelBuilder.buildExcelMedecin(medecinList);
+		} 
+
+		if(workbook == null) {
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
+		}
+		
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		workbook.write(out);
+		ByteArrayInputStream test = new ByteArrayInputStream(out.toByteArray());
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
+
+		logger.info("GET -> /excel/downloadExcelMedecins - End - Caller ["+caller+"]");
 		return ResponseEntity
 				.ok()
 				.headers(headers)
