@@ -29,6 +29,9 @@ public class Maladie implements Serializable {
 	@Column(name = "description_maladie")
 	private String descMaladie;
 
+	@Column(name = "code_maladie")
+	private String codeMaladie;
+	
 	/**
 	 * @return the idMaladie
 	 */
@@ -69,6 +72,34 @@ public class Maladie implements Serializable {
 	 */
 	public void setDescMaladie(String descMaladie) {
 		this.descMaladie = descMaladie;
+	}
+	
+	/**
+	 * @return the idPatient
+	 */
+	public long getIdPatient() {
+		return idPatient;
+	}
+
+	/**
+	 * @param idPatient the idPatient to set
+	 */
+	public void setIdPatient(long idPatient) {
+		this.idPatient = idPatient;
+	}
+
+	/**
+	 * @return the codeMaladie
+	 */
+	public String getCodeMaladie() {
+		return codeMaladie;
+	}
+
+	/**
+	 * @param codeMaladie the codeMaladie to set
+	 */
+	public void setCodeMaladie(String codeMaladie) {
+		this.codeMaladie = codeMaladie;
 	}
 	
 }

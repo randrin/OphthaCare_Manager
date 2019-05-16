@@ -2,16 +2,18 @@ package com.vane.ophthacare.Exception;
 
 public enum ResponseCodes {
 	
-	//Italian response code for FE
-	OK_INSERT_PATIENT("OK","User added to DB"),
-	OK_DELETE_PATIENT("OK","User deleted from DB"),
-	OK_MODIFY_PATIENT("OK","User modified"),
+	/******************************
+	 * OK Response
+	 *****************************/
+	OK_INSERT_PATIENT("OK","Patient added to DB"),
+	OK_DELETE_PATIENT("OK","Patient deleted from DB"),
+	OK_MODIFY_PATIENT("OK","Patient modified"),
 	OK_INSERT_ADMIN("OK","Admin added to DB"),
 	OK_DELETE_ADMIN("OK","Admin deleted from DB"),
 	OK_MODIFY_ADMIN("OK","Admin modified"),
-	OK_INSERT_EMAIL("OK","Email added to DB"),
-	OK_MODIFY_EMAIL("OK","Email modified"),
-	OK_DELETE_EMAIL("OK","Email deleted from DB"),
+	OK_INSERT_MEDECIN("OK","Medecin added to DB"),
+	OK_MODIFY_MEDECIN("OK","Medecin modified"),
+	OK_DELETE_MEDECIN("OK","Medecin deleted from DB"),
 	OK_INSERT_SOP("OK","Alarm added to DB"),
 	OK_DELETE_SOP("OK","Alarm deleted from DB"),
 	OK_EXCEL_FILE_NOT_EXIST("OK","Monitoring card does not exist. Adding new"),
@@ -19,20 +21,21 @@ public enum ResponseCodes {
 	OK_CHECK_MONITORING_CARD("OK","Check passed"),
 	OK_INSERT_SKYDE("OK","SkyDE inserted on DB"),
 	
-	
-	
+	/******************************
+	 * ERROR Response
+	 *****************************/
 	ERROR_GENERIC("ERR0001","Generic Error"),
 	ERROR_PATIENT_NO_PERMISSION("ERR0002","User without permissions. Contact your administrator"),
 	ERROR_PATIENT_NOT_FOUND("ERR0003","User or Password not found on LDAP"),
-	ERROR_GET_PATIENTS_DB("ERR0004","Error getting users on DB"),
+	ERROR_GET_PATIENTS_DB("ERR0004","Error getting patients on DB"),
+	ERROR_GET_SPECIALISTES_DB("ERR0004","Error getting specialits on DB"),
+	ERROR_GET_DISEASES_DB("ERR0004","Error getting diseases on DB"),
 	ERROR_SET_PATIENT_DB("ERR0005","Error on insert user on DB"),
 	ERROR_DELETE_PATIENT_DB("ERR0006","Error on delete user on DB"),
 	ERROR_DELETE_ADMIN_DB("ERR0006","Error on delete admin on DB"),
 	ERROR_MODIFY_PATIENT_DB("ERR0007","Error on modify user on DB"),
 	ERROR_PARSE_OBJECT("ERR0008","Error on parsing JSON Data"),
 	ERROR_INVALID_INPUT("ERR0009","Invalid Parameters"),
-	
-	
 	ERROR_SET_EMAIL_DB("ERR0011","Error on insert email on DB"),
 	ERROR_GET_ASSETS_DB("ERR0012","Error getting assets on DB"),
 	ERROR_SET_SOP_DB("ERR0013","Error on insert Alarm on DB"),
@@ -83,7 +86,4 @@ public enum ResponseCodes {
 	public String toString() {
 		return this.getCode() + "-> Message: " + this.getMessage();
 	}
-	
-	
-
 }

@@ -7,11 +7,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.vane.ophthacare.excel.sheet.SheetAdministrateur;
 import com.vane.ophthacare.excel.sheet.SheetMaladie;
-import com.vane.ophthacare.excel.sheet.SheetMedecin;
 import com.vane.ophthacare.excel.sheet.SheetPatient;
+import com.vane.ophthacare.excel.sheet.SheetSpecialiste;
 import com.vane.ophthacare.model.Administrateur;
 import com.vane.ophthacare.model.Maladie;
-import com.vane.ophthacare.model.Medecin;
+import com.vane.ophthacare.model.Specialiste;
 import com.vane.ophthacare.model.Patient;
 
 public class ExcelBuilder {
@@ -43,10 +43,10 @@ public class ExcelBuilder {
 		return workbook;
 	}
 
-	public static Workbook buildExcelMedecin(List<Medecin> medecinList) {
+	public static Workbook buildExcelMedecin(List<Specialiste> medecinList) {
 		Workbook workbook = new XSSFWorkbook();
 
-		SheetMedecin sheetMedecin = new SheetMedecin(workbook, medecinList);
+		SheetSpecialiste sheetMedecin = new SheetSpecialiste(workbook, medecinList);
 		sheetMedecin.createSheet();
 		
 		return workbook;

@@ -26,12 +26,12 @@ import com.vane.ophthacare.Exception.ResponseCodes;
 import com.vane.ophthacare.excel.export.ExcelBuilder;
 import com.vane.ophthacare.model.Administrateur;
 import com.vane.ophthacare.model.Maladie;
-import com.vane.ophthacare.model.Medecin;
 import com.vane.ophthacare.model.Patient;
+import com.vane.ophthacare.model.Specialiste;
 import com.vane.ophthacare.repository.AdministrateurRepository;
 import com.vane.ophthacare.repository.MaladieRepository;
-import com.vane.ophthacare.repository.MedecinRepository;
 import com.vane.ophthacare.repository.PatientRepository;
+import com.vane.ophthacare.repository.SpecialisteRepository;
 
 @RestController
 @CrossOrigin
@@ -49,7 +49,7 @@ public class ExcelController {
 	public MaladieRepository maladieRepository;
 	
 	@Autowired
-	public MedecinRepository medecinRepository;
+	public SpecialisteRepository specialisteRepository;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ExcelController.class);
 	
@@ -143,13 +143,13 @@ public class ExcelController {
 				.body(new InputStreamResource(test));
 	}
 	
-	@GetMapping(value="/downloadExcelMedecins", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Object> downloadExcelMedecins(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
+	@GetMapping(value="/downloadExcelSpecialistes", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> downloadExcelSpecialistes(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
 		
-		logger.info("GET -> /excel/downloadExcelMedecins - Start - Caller ["+caller+"]");
+		logger.info("GET -> /excel/downloadExcelSpecialistes - Start - Caller ["+caller+"]");
 		
 		Workbook workbook = null;
-		List<Medecin> medecinList = medecinRepository.findAll();
+		List<Specialiste> medecinList = specialisteRepository.findAll();
 
 		if(medecinList != null && medecinList.size() > 0) {
 			workbook =  ExcelBuilder.buildExcelMedecin(medecinList);
@@ -166,7 +166,7 @@ public class ExcelController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
-		logger.info("GET -> /excel/downloadExcelMedecins - End - Caller ["+caller+"]");
+		logger.info("GET -> /excel/downloadExcelSpecialistes - End - Caller ["+caller+"]");
 		return ResponseEntity
 				.ok()
 				.headers(headers)
