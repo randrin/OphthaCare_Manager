@@ -93,7 +93,7 @@ public class PatientController {
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_PATIENT_DB), HttpStatus.OK);
 		}
 		
-		logger.info("INSERT -> patient/insert - End - Caller ["+caller+"]");
+		logger.info("INSERT -> /patient/insert - End - Caller ["+caller+"]");
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_INSERT_PATIENT), HttpStatus.OK);
 	}
 
@@ -132,7 +132,7 @@ public class PatientController {
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_PATIENT_DB), HttpStatus.OK);
 		}
 		
-		logger.info("UPDATE -> patient/update - End - Caller ["+caller+"]");
+		logger.info("UPDATE -> /patient/update - End - Caller ["+caller+"]");
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_MODIFY_PATIENT), HttpStatus.OK);
 	}
 	
@@ -168,7 +168,7 @@ public class PatientController {
 			}
 		}
 		
-		logger.info("DELETE -> patient/delete/{id} - End - Caller ["+caller+"]");
+		logger.info("DELETE -> /patient/delete/{id} - End - Caller ["+caller+"]");
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_DELETE_PATIENT), HttpStatus.OK);
 	}
 } 

@@ -3,37 +3,72 @@ package com.vane.ophthacare.Exception;
 public enum ResponseCodes {
 	
 	/******************************
-	 * OK Response
+	 *							  *
+	 *       OK RESPONSE		  *
+	 * 							  *
 	 *****************************/
+	// Patients
 	OK_INSERT_PATIENT("OK","Patient added to DB"),
 	OK_DELETE_PATIENT("OK","Patient deleted from DB"),
 	OK_MODIFY_PATIENT("OK","Patient modified"),
+	
+	// Administrateurs
 	OK_INSERT_ADMIN("OK","Admin added to DB"),
 	OK_DELETE_ADMIN("OK","Admin deleted from DB"),
 	OK_MODIFY_ADMIN("OK","Admin modified"),
-	OK_INSERT_MEDECIN("OK","Medecin added to DB"),
-	OK_MODIFY_MEDECIN("OK","Medecin modified"),
-	OK_DELETE_MEDECIN("OK","Medecin deleted from DB"),
-	OK_INSERT_SOP("OK","Alarm added to DB"),
-	OK_DELETE_SOP("OK","Alarm deleted from DB"),
+	
+	// Specialistes-Medecins
+	OK_INSERT_SPECIALIST("OK","Specialist added to DB"),
+	OK_MODIFY_SPECIALIST("OK","Specialist modified"),
+	OK_DELETE_SPECIALIST("OK","Specialist deleted from DB"),
+	
+	// Maladies
+	OK_INSERT_DISEASE("OK","Disease added to DB"),
+	OK_DELETE_DISEASE("OK","Disease deleted from DB"),
+	OK_MODIFY_DISEASE("OK","Disease modified"),
+	
+	// Others
 	OK_EXCEL_FILE_NOT_EXIST("OK","Monitoring card does not exist. Adding new"),
 	OK_INSERT_MONITORING_CARD("OK","Monitoring card inserted on DB"),
 	OK_CHECK_MONITORING_CARD("OK","Check passed"),
 	OK_INSERT_SKYDE("OK","SkyDE inserted on DB"),
 	
+	
 	/******************************
-	 * ERROR Response
+	 *							  *
+	 *       ERROR RESPONSE		  *
+	 * 							  *
 	 *****************************/
-	ERROR_GENERIC("ERR0001","Generic Error"),
+	// Patients
 	ERROR_PATIENT_NO_PERMISSION("ERR0002","User without permissions. Contact your administrator"),
-	ERROR_PATIENT_NOT_FOUND("ERR0003","User or Password not found on LDAP"),
+	ERROR_PATIENT_NOT_FOUND("ERR0003","User or Password not found on Clinic"),
 	ERROR_GET_PATIENTS_DB("ERR0004","Error getting patients on DB"),
-	ERROR_GET_SPECIALISTES_DB("ERR0004","Error getting specialits on DB"),
-	ERROR_GET_DISEASES_DB("ERR0004","Error getting diseases on DB"),
-	ERROR_SET_PATIENT_DB("ERR0005","Error on insert user on DB"),
-	ERROR_DELETE_PATIENT_DB("ERR0006","Error on delete user on DB"),
+	ERROR_SET_PATIENT_DB("ERR0005","Error on insert patient on DB"),
+	ERROR_DELETE_PATIENT_DB("ERR0006","Error on delete patient on DB"),
+	ERROR_MODIFY_PATIENT_DB("ERR0007","Error on modify patient on DB"),
+	
+	// Administrateurs
+	ERROR_GET_ADMINISTRATORS_DB("ERR0004","Error getting administrators on DB"),
+	ERROR_SET_ADMIN_DB("ERR0005","Error on insert admin on DB"),
 	ERROR_DELETE_ADMIN_DB("ERR0006","Error on delete admin on DB"),
-	ERROR_MODIFY_PATIENT_DB("ERR0007","Error on modify user on DB"),
+	ERROR_MODIFY_ADMIN_DB("ERR0007","Error on modify admin on DB"),
+	
+	// Specialistes-Medecins
+	ERROR_GET_SPECIALISTS_DB("ERR0004","Error getting specialists on DB"),
+	ERROR_SET_SPECIALISTS_DB("ERR0005","Error on insert specialist on DB"),
+	ERROR_DELETE_SPECIALIST_DB("ERR0006","Error on delete specialist on DB"),
+	ERROR_MODIFY_SPECIALIST_DB("ERR0007","Error on modify specialist on DB"),
+	
+	// Maladies
+	ERROR_GET_DISEASES_DB("ERR0004","Error getting diseases on DB"),
+	ERROR_SET_DISEASE_DB("ERR0005","Error on insert disease on DB"),
+	ERROR_DELETE_DISEASE_DB("ERR0006","Error on delete disease on DB"),
+	ERROR_MODIFY_DISEASE_DB("ERR0007","Error on modify disease on DB"),
+	
+	// Others
+	ERROR_GENERIC("ERR0001","Generic Error"),
+	
+	
 	ERROR_PARSE_OBJECT("ERR0008","Error on parsing JSON Data"),
 	ERROR_INVALID_INPUT("ERR0009","Invalid Parameters"),
 	ERROR_SET_EMAIL_DB("ERR0011","Error on insert email on DB"),
