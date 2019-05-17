@@ -1,6 +1,8 @@
 package com.vane.ophthacare.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +29,8 @@ import com.vane.ophthacare.Exception.Response;
 import com.vane.ophthacare.Exception.ResponseCodes;
 import com.vane.ophthacare.model.Administrateur;
 import com.vane.ophthacare.repository.AdministrateurRepository;
+import com.vane.ophthacare.utils.Constants;
+import com.vane.ophthacare.utils.Utils;
 
 @RestController
 @CrossOrigin
@@ -35,6 +41,8 @@ public class AdministrateurController {
 	private AdministrateurRepository administrateurRepository;
 	
 	public List<Administrateur> adminList = new ArrayList<>();
+	
+	SimpleDateFormat format = new SimpleDateFormat(Constants.FORMAT_DATETIME);
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdministrateurController.class);
 	
@@ -51,6 +59,82 @@ public class AdministrateurController {
 		
 		logger.info("GET -> /admin/getAllAdmins - End");
 		return new ResponseEntity<Object>(listAdmins, HttpStatus.OK);
+	}
+	
+	@PutMapping("/insert")
+	public ResponseEntity<Object> insertAdmin(@RequestBody Administrateur admin, 
+			@RequestHeader(value= "caller",required = false) String caller) {
+		
+		logger.info("INSERT -> /admin/insert - Start - Caller ["+caller+"]");
+		
+		if (StringUtils.isEmpty(caller)) {
+			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
+		}
+		
+		if(admin == null) {
+			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
+		}
+		
+		String erreur = Utils.checkAttributeFromObject(admin, false);
+		
+		logger.info("Erreur response: " +erreur);
+		
+		if (erreur != "OK") {
+			logger.error(ResponseCodes.ERROR_GENERIC.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
+		}
+		
+		//Set Model Admin
+		admin.setRegistrationAdmin(format.format(GregorianCalendar.getInstance().getTime()));
+		admin.setLastLoginAdmin(format.format(GregorianCalendar.getInstance().getTime()));
+		
+		Administrateur a = administrateurRepository.save(admin);
+		
+		if (a == null) {
+			logger.error(ResponseCodes.ERROR_SET_ADMIN_DB.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_ADMIN_DB), HttpStatus.OK);
+		}
+		
+		logger.info("INSERT -> /admin/insert - End - Caller ["+caller+"]");
+		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_INSERT_ADMIN), HttpStatus.OK);
+	}
+	
+	@PostMapping("/update")
+	public ResponseEntity<Object> updateAdmin(@RequestBody Administrateur admin, 
+			@RequestHeader(value= "caller",required = false) String caller) {
+		
+		logger.info("UPDATE -> /admin/update - Start - Caller ["+caller+"]");
+		
+		if (StringUtils.isEmpty(caller)) {
+			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
+		}
+		
+		if(admin == null) {
+			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
+		}
+		
+		String erreur = Utils.checkAttributeFromObject(admin, false);
+		
+		logger.info("Erreur response: " +erreur);
+		
+		if (erreur != "OK") {
+			logger.error(ResponseCodes.ERROR_GENERIC.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
+		}
+		
+		Administrateur a = administrateurRepository.save(admin);
+		
+		if (a == null) {
+			logger.error(ResponseCodes.ERROR_SET_ADMIN_DB.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_ADMIN_DB), HttpStatus.OK);
+		}
+		
+		logger.info("UPDATE -> /admin/update - End - Caller ["+caller+"]");
+		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_MODIFY_ADMIN), HttpStatus.OK);
 	}
 	
 	@PostMapping("/login")
