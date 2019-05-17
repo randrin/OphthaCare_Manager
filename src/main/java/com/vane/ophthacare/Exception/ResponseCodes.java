@@ -17,7 +17,7 @@ public enum ResponseCodes {
 	OK_DELETE_ADMIN("OK","Admin deleted from DB"),
 	OK_MODIFY_ADMIN("OK","Admin modified"),
 	
-	// Specialistes-Medecins
+	// Spécialités-Medecins
 	OK_INSERT_SPECIALIST("OK","Specialist added to DB"),
 	OK_MODIFY_SPECIALIST("OK","Specialist modified"),
 	OK_DELETE_SPECIALIST("OK","Specialist deleted from DB"),
@@ -53,7 +53,7 @@ public enum ResponseCodes {
 	ERROR_DELETE_ADMIN_DB("ERR0006","Error on delete admin on DB"),
 	ERROR_MODIFY_ADMIN_DB("ERR0007","Error on modify admin on DB"),
 	
-	// Specialistes-Medecins
+	// Spécialités-Medecins
 	ERROR_GET_SPECIALISTS_DB("ERR0004","Error getting specialists on DB"),
 	ERROR_SET_SPECIALISTS_DB("ERR0005","Error on insert specialist on DB"),
 	ERROR_DELETE_SPECIALIST_DB("ERR0006","Error on delete specialist on DB"),
