@@ -18,7 +18,7 @@ public class Maladie implements Serializable {
 	@Id
 	@Column(name = "id_maladie")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long idMaladie;
+	private Long idMaladie;
 
 	@Column(name="patient_maladies")
 	private long idPatient;
@@ -35,14 +35,14 @@ public class Maladie implements Serializable {
 	/**
 	 * @return the idMaladie
 	 */
-	public long getIdMaladie() {
+	public Long getIdMaladie() {
 		return idMaladie;
 	}
 
 	/**
 	 * @param idMaladie the idMaladie to set
 	 */
-	public void setIdMaladie(long idMaladie) {
+	public void setIdMaladie(Long idMaladie) {
 		this.idMaladie = idMaladie;
 	}
 
