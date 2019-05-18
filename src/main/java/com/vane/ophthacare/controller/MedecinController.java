@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +25,7 @@ import com.vane.ophthacare.Exception.Response;
 import com.vane.ophthacare.Exception.ResponseCodes;
 import com.vane.ophthacare.model.Medecin;
 import com.vane.ophthacare.repository.MedecinRepository;
+import com.vane.ophthacare.utils.Utils;
 
 @RestController
 @CrossOrigin
@@ -50,8 +54,87 @@ public class MedecinController {
 		return new ResponseEntity<Object>(listMedecins, HttpStatus.OK);
 	}
 	
+	@PutMapping("/insert")
+	public ResponseEntity<Object> insertMedecin(@RequestBody Medecin medecin, 
+			@RequestHeader(value= "caller",required = false) String caller) {
+		
+		logger.info("INSERT -> /medecin/insert - Start - Caller ["+caller+"]");
+		
+		if (StringUtils.isEmpty(caller)) {
+			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
+		}
+		
+		if(medecin == null) {
+			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
+		}
+		
+		String erreur = Utils.checkAttributeFromObject(medecin, false);
+		
+		logger.info("Erreur response: " +erreur);
+		
+		if (erreur != "OK") {
+			logger.error(ResponseCodes.ERROR_GENERIC.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
+		}
+		
+		//Set Model Medecin
+		medecin.setMatriculeMedecin(Utils.matriculeMedecin(medecin.getProfessionMedecin(), medecin.getDateNaisMedecin()));
+		medecin.setAgeMedecin(Utils.calculAgePatient(medecin.getDateNaisMedecin()));
+		
+		Medecin m = medecinRepository.save(medecin);
+		
+		if (m == null) {
+			logger.error(ResponseCodes.ERROR_SET_MEDECINS_DB.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_MEDECINS_DB), HttpStatus.OK);
+		}
+		
+		logger.info("INSERT -> /medecin/insert - End - Caller ["+caller+"]");
+		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_INSERT_MEDECIN), HttpStatus.OK);
+	}
+
+	@PostMapping("/update")
+	public ResponseEntity<Object> updateMedecin(@RequestBody Medecin medecin, 
+			@RequestHeader(value= "caller",required = false) String caller) {
+		
+		logger.info("UPDATE -> /medecin/update - Start - Caller ["+caller+"]");
+		
+		if (StringUtils.isEmpty(caller)) {
+			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
+		}
+		
+		if(medecin == null) {
+			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
+		}
+		
+		String erreur = Utils.checkAttributeFromObject(medecin, false);
+		
+		logger.info("Erreur response: " +erreur);
+		
+		if (erreur != "OK") {
+			logger.error(ResponseCodes.ERROR_GENERIC.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
+		}
+		
+		//Set Model Medecin
+		medecin.setAgeMedecin(Utils.calculAgePatient(medecin.getDateNaisMedecin()));
+		
+		Medecin m = medecinRepository.save(medecin);
+		
+		if (m == null) {
+			logger.error(ResponseCodes.ERROR_SET_MEDECINS_DB.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_MEDECINS_DB), HttpStatus.OK);
+		}
+		
+		logger.info("UPDATE -> /medecin/update - End - Caller ["+caller+"]");
+		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_MODIFY_MEDECIN), HttpStatus.OK);
+	}
+	
 	@DeleteMapping(path = {"/delete/{id}"})
-	public ResponseEntity<Object> deleteSpecialiste (@PathVariable("id") String id,
+	public ResponseEntity<Object> deleteMedecin (@PathVariable("id") String id,
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
 		logger.info("DELETE -> /medecin/delete/{id} - Start - Caller ["+caller+"]");

@@ -1,6 +1,7 @@
 package com.vane.ophthacare.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.vane.ophthacare.excel.export.ExcelField;
 
 @Entity
 @Table(name="Medecins")
@@ -26,8 +29,14 @@ public class Medecin implements Serializable {
 	@Column(name="prenom_medecin")
 	private String prenomMedecin;
 	
-	@Column(name="pseudo_medecin")
-	private String pseudoMedecin;
+	@Column(name="date_medecin_patient")
+	private String dateNaisMedecin;
+	
+	@Column(name="age_medecin")
+	private int ageMedecin;
+	
+	@Column(name="sexe_medecin")
+	private String sexeMedecin;
 	
 	@Column(name="matricule_medecin")
 	private String matriculeMedecin;
@@ -35,6 +44,15 @@ public class Medecin implements Serializable {
 	@Column(name="profession_medecin")
 	private String professionMedecin;
 
+	@Column(name="email_medecin", length = 25)
+	private String emailMedecin;
+	
+	@Column(name="numTel_medecin")
+	private BigInteger numTelMedecin;
+	
+	@Column(name="numFixe_medecin")
+	private BigInteger numFixeMedecin;
+	
 	/**
 	 * @return the idMedecin
 	 */
@@ -52,6 +70,7 @@ public class Medecin implements Serializable {
 	/**
 	 * @return the nomMedecin
 	 */
+	@ExcelField(field = "Nom", position = 0)
 	public String getNomMedecin() {
 		return nomMedecin;
 	}
@@ -59,6 +78,7 @@ public class Medecin implements Serializable {
 	/**
 	 * @param nomMedecin the nomMedecin to set
 	 */
+	@ExcelField(field = "Nom", position = 0)
 	public void setNomMedecin(String nomMedecin) {
 		this.nomMedecin = nomMedecin;
 	}
@@ -66,6 +86,7 @@ public class Medecin implements Serializable {
 	/**
 	 * @return the prenomMedecin
 	 */
+	@ExcelField(field = "Prènom", position = 1)
 	public String getPrenomMedecin() {
 		return prenomMedecin;
 	}
@@ -73,27 +94,63 @@ public class Medecin implements Serializable {
 	/**
 	 * @param prenomMedecin the prenomMedecin to set
 	 */
+	@ExcelField(field = "Prènom", position = 1)
 	public void setPrenomMedecin(String prenomMedecin) {
 		this.prenomMedecin = prenomMedecin;
 	}
 
 	/**
-	 * @return the pseudoMedecin
+	 * @return the dateNaisMedecin
 	 */
-	public String getPseudoMedecin() {
-		return pseudoMedecin;
+	@ExcelField(field = "Date de Naissance", position = 4)
+	public String getDateNaisMedecin() {
+		return dateNaisMedecin;
 	}
 
 	/**
-	 * @param pseudoMedecin the pseudoMedecin to set
+	 * @param dateNaisMedecin the dateNaisMedecin to set
 	 */
-	public void setPseudoMedecin(String pseudoMedecin) {
-		this.pseudoMedecin = pseudoMedecin;
+	@ExcelField(field = "Date de Naissance", position = 4)
+	public void setDateNaisMedecin(String dateNaisMedecin) {
+		this.dateNaisMedecin = dateNaisMedecin;
+	}
+
+	/**
+	 * @return the ageMedecin
+	 */
+	@ExcelField(field = "Age", position = 5)
+	public int getAgeMedecin() {
+		return ageMedecin;
+	}
+
+	/**
+	 * @param ageMedecin the ageMedecin to set
+	 */
+	@ExcelField(field = "Age", position = 5)
+	public void setAgeMedecin(int ageMedecin) {
+		this.ageMedecin = ageMedecin;
+	}
+
+	/**
+	 * @return the sexeMedecin
+	 */
+	@ExcelField(field = "Sexe", position = 6)
+	public String getSexeMedecin() {
+		return sexeMedecin;
+	}
+
+	/**
+	 * @param sexeMedecin the sexeMedecin to set
+	 */
+	@ExcelField(field = "Sexe", position = 6)
+	public void setSexeMedecin(String sexeMedecin) {
+		this.sexeMedecin = sexeMedecin;
 	}
 
 	/**
 	 * @return the matriculeMedecin
 	 */
+	@ExcelField(field = "Matricule", position = 3)
 	public String getMatriculeMedecin() {
 		return matriculeMedecin;
 	}
@@ -101,6 +158,7 @@ public class Medecin implements Serializable {
 	/**
 	 * @param matriculeMedecin the matriculeMedecin to set
 	 */
+	@ExcelField(field = "Matricule", position = 3)
 	public void setMatriculeMedecin(String matriculeMedecin) {
 		this.matriculeMedecin = matriculeMedecin;
 	}
@@ -108,6 +166,7 @@ public class Medecin implements Serializable {
 	/**
 	 * @return the professionMedecin
 	 */
+	@ExcelField(field = "Profession", position = 2)
 	public String getProfessionMedecin() {
 		return professionMedecin;
 	}
@@ -115,7 +174,57 @@ public class Medecin implements Serializable {
 	/**
 	 * @param professionMedecin the professionMedecin to set
 	 */
+	@ExcelField(field = "Profession", position = 2)
 	public void setProfessionMedecin(String professionMedecin) {
 		this.professionMedecin = professionMedecin;
 	}
+
+	/**
+	 * @return the emailMedecin
+	 */
+	@ExcelField(field = "Email", position = 7)
+	public String getEmailMedecin() {
+		return emailMedecin;
+	}
+
+	/**
+	 * @param emailMedecin the emailMedecin to set
+	 */
+	@ExcelField(field = "Email", position = 7)
+	public void setEmailMedecin(String emailMedecin) {
+		this.emailMedecin = emailMedecin;
+	}
+
+	/**
+	 * @return the numTelMedecin
+	 */
+	@ExcelField(field = "Numèro Télephone", position = 8)
+	public BigInteger getNumTelMedecin() {
+		return numTelMedecin;
+	}
+
+	/**
+	 * @param numTelMedecin the numTelMedecin to set
+	 */
+	@ExcelField(field = "Numèro Télephone", position = 8)
+	public void setNumTelMedecin(BigInteger numTelMedecin) {
+		this.numTelMedecin = numTelMedecin;
+	}
+
+	/**
+	 * @return the numFixeMedecin
+	 */
+	@ExcelField(field = "Numèro Fixe", position = 9)
+	public BigInteger getNumFixeMedecin() {
+		return numFixeMedecin;
+	}
+
+	/**
+	 * @param numFixeMedecin the numFixeMedecin to set
+	 */
+	@ExcelField(field = "Numèro Fixe", position = 9)
+	public void setNumFixeMedecin(BigInteger numFixeMedecin) {
+		this.numFixeMedecin = numFixeMedecin;
+	}
+	
 }

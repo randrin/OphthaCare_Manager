@@ -143,10 +143,10 @@ public class ExcelController {
 				.body(new InputStreamResource(test));
 	}
 	
-	@GetMapping(value="/downloadExcelSpecialistes", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Object> downloadExcelSpecialistes(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
+	@GetMapping(value="/downloadExcelMedecins", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> downloadExcelMedecins(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
 		
-		logger.info("GET -> /excel/downloadExcelSpecialistes - Start - Caller ["+caller+"]");
+		logger.info("GET -> /excel/downloadExcelMedecins - Start - Caller ["+caller+"]");
 		
 		Workbook workbook = null;
 		List<Medecin> medecinList = medecinRepository.findAll();
@@ -166,7 +166,7 @@ public class ExcelController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
-		logger.info("GET -> /excel/downloadExcelSpecialistes - End - Caller ["+caller+"]");
+		logger.info("GET -> /excel/downloadExcelMedecins - End - Caller ["+caller+"]");
 		return ResponseEntity
 				.ok()
 				.headers(headers)
