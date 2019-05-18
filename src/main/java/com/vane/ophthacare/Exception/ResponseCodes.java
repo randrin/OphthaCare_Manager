@@ -17,10 +17,10 @@ public enum ResponseCodes {
 	OK_DELETE_ADMIN("OK","Admin deleted from DB"),
 	OK_MODIFY_ADMIN("OK","Admin modified"),
 	
-	// Spécialités-Medecins
-	OK_INSERT_SPECIALIST("OK","Specialist added to DB"),
-	OK_MODIFY_SPECIALIST("OK","Specialist modified"),
-	OK_DELETE_SPECIALIST("OK","Specialist deleted from DB"),
+	// Specialistes-Medecins
+	OK_INSERT_MEDECIN("OK","Specialist added to DB"),
+	OK_MODIFY_MEDECIN("OK","Specialist modified"),
+	OK_DELETE_MEDECIN("OK","Specialist deleted from DB"),
 	
 	// Maladies
 	OK_INSERT_DISEASE("OK","Disease added to DB"),
@@ -54,10 +54,10 @@ public enum ResponseCodes {
 	ERROR_MODIFY_ADMIN_DB("ERR0007","Error on modify admin on DB"),
 	
 	// Spécialités-Medecins
-	ERROR_GET_SPECIALISTS_DB("ERR0004","Error getting specialists on DB"),
-	ERROR_SET_SPECIALISTS_DB("ERR0005","Error on insert specialist on DB"),
-	ERROR_DELETE_SPECIALIST_DB("ERR0006","Error on delete specialist on DB"),
-	ERROR_MODIFY_SPECIALIST_DB("ERR0007","Error on modify specialist on DB"),
+	ERROR_GET_MEDECINS_DB("ERR0004","Error getting specialists on DB"),
+	ERROR_SET_MEDECINS_DB("ERR0005","Error on insert specialist on DB"),
+	ERROR_DELETE_MEDECIN_DB("ERR0006","Error on delete specialist on DB"),
+	ERROR_MODIFY_MEDECIN_DB("ERR0007","Error on modify specialist on DB"),
 	
 	// Maladies
 	ERROR_GET_DISEASES_DB("ERR0004","Error getting diseases on DB"),

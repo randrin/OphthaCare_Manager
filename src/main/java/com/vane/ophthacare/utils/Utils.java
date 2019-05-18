@@ -2,11 +2,9 @@ package com.vane.ophthacare.utils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.sql.Date;
 import java.util.Calendar;
-import java.util.Random;
+import java.util.Random;	
 
-import org.apache.poi.util.SystemOutLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;

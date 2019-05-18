@@ -27,11 +27,11 @@ import com.vane.ophthacare.excel.export.ExcelBuilder;
 import com.vane.ophthacare.model.Administrateur;
 import com.vane.ophthacare.model.Maladie;
 import com.vane.ophthacare.model.Patient;
-import com.vane.ophthacare.model.Specialiste;
+import com.vane.ophthacare.model.Medecin;
 import com.vane.ophthacare.repository.AdministrateurRepository;
 import com.vane.ophthacare.repository.MaladieRepository;
 import com.vane.ophthacare.repository.PatientRepository;
-import com.vane.ophthacare.repository.SpecialisteRepository;
+import com.vane.ophthacare.repository.MedecinRepository;
 
 @RestController
 @CrossOrigin
@@ -49,7 +49,7 @@ public class ExcelController {
 	public MaladieRepository maladieRepository;
 	
 	@Autowired
-	public SpecialisteRepository specialisteRepository;
+	public MedecinRepository medecinRepository;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ExcelController.class);
 	
@@ -149,7 +149,7 @@ public class ExcelController {
 		logger.info("GET -> /excel/downloadExcelSpecialistes - Start - Caller ["+caller+"]");
 		
 		Workbook workbook = null;
-		List<Specialiste> medecinList = specialisteRepository.findAll();
+		List<Medecin> medecinList = medecinRepository.findAll();
 
 		if(medecinList != null && medecinList.size() > 0) {
 			workbook =  ExcelBuilder.buildExcelMedecin(medecinList);

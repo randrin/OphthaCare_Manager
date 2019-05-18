@@ -20,34 +20,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vane.ophthacare.Exception.Response;
 import com.vane.ophthacare.Exception.ResponseCodes;
-import com.vane.ophthacare.model.Specialiste;
-import com.vane.ophthacare.model.Patient;
-import com.vane.ophthacare.repository.SpecialisteRepository;
+import com.vane.ophthacare.model.Medecin;
+import com.vane.ophthacare.repository.MedecinRepository;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/specialiste")
-public class SpecialisteController {
+@RequestMapping("/medecin")
+public class MedecinController {
 
-	public static final Logger logger = LoggerFactory.getLogger(SpecialisteController.class);
+	public static final Logger logger = LoggerFactory.getLogger(MedecinController.class);
 	
 	@Autowired
-	private SpecialisteRepository specialisteRepository;
+	private MedecinRepository medecinRepository;
 	
-	public List<Specialiste> specialisteList = new ArrayList<>();
+	public List<Medecin> specialisteList = new ArrayList<>();
 	
-	@GetMapping("/getAllSpecialistes")
-	public ResponseEntity<Object> getAllSpecialistes () {
-		logger.info("GET -> /specialiste/getAllSpecialistes - Start");
+	@GetMapping("/getAllMedecins")
+	public ResponseEntity<Object> getAllMedecins () {
+		logger.info("GET -> /medecin/getAllMedecins - Start");
 		
-		List<Specialiste> listMedecins = specialisteRepository.findAll();
+		List<Medecin> listMedecins = medecinRepository.findAll();
 		
 		if (listMedecins == null) {
-			logger.error(ResponseCodes.ERROR_GET_SPECIALISTS_DB.toString());
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GET_SPECIALISTS_DB), HttpStatus.OK);
+			logger.error(ResponseCodes.ERROR_GET_MEDECINS_DB.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GET_MEDECINS_DB), HttpStatus.OK);
 		}
 		
-		logger.info("GET -> /specialiste/getAllSpecialistes - End");
+		logger.info("GET -> /medecin/getAllMedecins - End");
 		return new ResponseEntity<Object>(listMedecins, HttpStatus.OK);
 	}
 	
@@ -55,7 +54,7 @@ public class SpecialisteController {
 	public ResponseEntity<Object> deleteSpecialiste (@PathVariable("id") String id,
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("DELETE -> /specialiste/delete/{id} - Start - Caller ["+caller+"]");
+		logger.info("DELETE -> /medecin/delete/{id} - Start - Caller ["+caller+"]");
 		
 		if(id == null) {
 			logger.error(ResponseCodes.ERROR_INVALID_INPUT.toString());
@@ -68,23 +67,23 @@ public class SpecialisteController {
 		}
 		
 		try {
-			specialisteRepository.deleteById(Integer.parseInt(id));
+			medecinRepository.deleteById(Integer.parseInt(id));
 		} catch (Exception e) {
-			logger.error(ResponseCodes.ERROR_DELETE_SPECIALIST_DB.toString());
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_DELETE_SPECIALIST_DB), HttpStatus.OK);
+			logger.error(ResponseCodes.ERROR_DELETE_MEDECIN_DB.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_DELETE_MEDECIN_DB), HttpStatus.OK);
 		}
 		
-		Iterator<Specialiste> iter = specialisteList.iterator();
+		Iterator<Medecin> iter = specialisteList.iterator();
 
 		while (iter.hasNext()) {
-			Specialiste specialist = iter.next();
-			if(specialist.getIdMedecin().equals(Integer.parseInt(id))) {	
+			Medecin medecinList = iter.next();
+			if(medecinList.getIdMedecin().equals(Integer.parseInt(id))) {	
 				iter.remove();
 			}
 		}
 		
-		logger.info("DELETE -> /specialiste/delete/{id} - End - Caller ["+caller+"]");
-		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_DELETE_SPECIALIST), HttpStatus.OK);
+		logger.info("DELETE -> /medecin/delete/{id} - End - Caller ["+caller+"]");
+		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_DELETE_MEDECIN), HttpStatus.OK);
 	}
 	
 }
