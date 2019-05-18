@@ -107,4 +107,9 @@ public class Utils {
 		}
 		return Constants.OK;
 	}
+
+	public static String matriculeMedecin(String professionMedecin, String dateNaisMedecin) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
