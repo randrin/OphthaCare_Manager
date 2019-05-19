@@ -18,15 +18,20 @@ public enum ResponseCodes {
 	OK_MODIFY_ADMIN("OK","Admin modified"),
 	
 	// Specialistes-Medecins
-	OK_INSERT_MEDECIN("OK","Specialist added to DB"),
-	OK_MODIFY_MEDECIN("OK","Specialist modified"),
-	OK_DELETE_MEDECIN("OK","Specialist deleted from DB"),
+	OK_INSERT_MEDECIN("OK","Medecin added to DB"),
+	OK_MODIFY_MEDECIN("OK","Medecin modified"),
+	OK_DELETE_MEDECIN("OK","Medecin deleted from DB"),
 	
 	// Maladies
 	OK_INSERT_DISEASE("OK","Disease added to DB"),
 	OK_DELETE_DISEASE("OK","Disease deleted from DB"),
 	OK_MODIFY_DISEASE("OK","Disease modified"),
 	
+	// Profession Medecins
+	OK_INSERT_PROFESSION("OK","Profession Medecin added to DB"),
+	OK_MODIFY_PROFESSION("OK","Profession Medecin modified"),
+	OK_DELETE_PROFESSION("OK","Profession Medecin deleted from DB"),
+		
 	// Others
 	OK_EXCEL_FILE_NOT_EXIST("OK","Monitoring card does not exist. Adding new"),
 	OK_INSERT_MONITORING_CARD("OK","Monitoring card inserted on DB"),
@@ -53,17 +58,23 @@ public enum ResponseCodes {
 	ERROR_DELETE_ADMIN_DB("ERR0006","Error on delete admin on DB"),
 	ERROR_MODIFY_ADMIN_DB("ERR0007","Error on modify admin on DB"),
 	
-	// Spécialités-Medecins
-	ERROR_GET_MEDECINS_DB("ERR0004","Error getting specialists on DB"),
-	ERROR_SET_MEDECINS_DB("ERR0005","Error on insert specialist on DB"),
-	ERROR_DELETE_MEDECIN_DB("ERR0006","Error on delete specialist on DB"),
-	ERROR_MODIFY_MEDECIN_DB("ERR0007","Error on modify specialist on DB"),
+	// Profession Medecins
+	ERROR_GET_PROFESSIONS_DB("ERR0004","Error getting Professions Medecins on DB"),
+	ERROR_SET_PROFESSIONS_DB("ERR0005","Error on insert Profession Medecin on DB"),
+	ERROR_DELETE_PROFESSION_DB("ERR0006","Error on delete Profession Medecin on DB"),
+	ERROR_MODIFY_PROFSSION_DB("ERR0007","Error on modify Profession Medecin on DB"),
 	
 	// Maladies
 	ERROR_GET_DISEASES_DB("ERR0004","Error getting diseases on DB"),
 	ERROR_SET_DISEASE_DB("ERR0005","Error on insert disease on DB"),
 	ERROR_DELETE_DISEASE_DB("ERR0006","Error on delete disease on DB"),
 	ERROR_MODIFY_DISEASE_DB("ERR0007","Error on modify disease on DB"),
+	
+	// Spécialités-Medecins
+	ERROR_GET_MEDECINS_DB("ERR0004","Error getting medecins on DB"),
+	ERROR_SET_MEDECINS_DB("ERR0005","Error on insert medecins on DB"),
+	ERROR_DELETE_MEDECIN_DB("ERR0006","Error on delete medecin on DB"),
+	ERROR_MODIFY_MEDECIN_DB("ERR0007","Error on modify medecin on DB"),
 	
 	// Others
 	ERROR_GENERIC("ERR0001","Generic Error"),
