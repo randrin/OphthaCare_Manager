@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.vane.ophthacare.excel.export.ExcelField;
+
 @Entity
 @Table(name="Professions")
 public class ProfessionMedecin implements Serializable {
@@ -23,7 +25,7 @@ public class ProfessionMedecin implements Serializable {
 	@Column(name="nom_profession")
 	private String nomProfession;
 	
-	@Column(name="desc_profession")
+	@Column(name="desc_profession", length = 1000)
 	private String descProfession;
 	
 	@Column(name="code_profession")
@@ -46,6 +48,7 @@ public class ProfessionMedecin implements Serializable {
 	/**
 	 * @return the nomProfession
 	 */
+	@ExcelField(field = "Nom Profession", position = 1)
 	public String getNomProfession() {
 		return nomProfession;
 	}
@@ -53,6 +56,7 @@ public class ProfessionMedecin implements Serializable {
 	/**
 	 * @param nomProfession the nomProfession to set
 	 */
+	@ExcelField(field = "Nom Profession", position = 1)
 	public void setNomProfession(String nomProfession) {
 		this.nomProfession = nomProfession;
 	}
@@ -60,6 +64,7 @@ public class ProfessionMedecin implements Serializable {
 	/**
 	 * @return the descProfession
 	 */
+	@ExcelField(field = "Description Profession", position = 2)
 	public String getDescProfession() {
 		return descProfession;
 	}
@@ -67,6 +72,7 @@ public class ProfessionMedecin implements Serializable {
 	/**
 	 * @param descProfession the descProfession to set
 	 */
+	@ExcelField(field = "Description Profession", position = 2)
 	public void setDescProfession(String descProfession) {
 		this.descProfession = descProfession;
 	}
@@ -74,6 +80,7 @@ public class ProfessionMedecin implements Serializable {
 	/**
 	 * @return the codeProfession
 	 */
+	@ExcelField(field = "Code Profession", position = 0)
 	public String getCodeProfession() {
 		return codeProfession;
 	}
@@ -81,6 +88,7 @@ public class ProfessionMedecin implements Serializable {
 	/**
 	 * @param codeProfession the codeProfession to set
 	 */
+	@ExcelField(field = "Code Profession", position = 0)
 	public void setCodeProfession(String codeProfession) {
 		this.codeProfession = codeProfession;
 	}

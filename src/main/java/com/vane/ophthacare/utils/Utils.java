@@ -84,7 +84,7 @@ public class Utils {
     
     private static String getOnlyRandomCharacter() {
         Random r = new Random();
-        return String.valueOf((char)(r.nextInt(26)+'a'));
+        return String.valueOf((char)(r.nextInt(26) + 'a'));
     }
     
 	public static String checkAttributeFromObject(Object cvb,boolean checkAllFields) {	
@@ -93,11 +93,11 @@ public class Utils {
 		for(Field obj : fieldCvb){
 			obj.setAccessible(true);
 			try {
-				if(obj.get(cvb)==null || StringUtils.isEmpty(obj.get(cvb).toString())){
+				if(obj.get(cvb) == null || StringUtils.isEmpty(obj.get(cvb).toString())){
 					
 					 if (!checkAllFields && Modifier.isPrivate(obj.getModifiers())) {
 					       continue;
-					   }else{
+					   } else {
 						   return "Campo "+ obj.getName()+" vuoto" ;		   
 					   }
 				}
@@ -111,5 +111,9 @@ public class Utils {
 	public static String matriculeMedecin(String professionMedecin, String dateNaisMedecin) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public static String codeProfessionMedecin(String nomProfession) {
+		return nomProfession.substring(0, 3).toUpperCase();
 	}
 }
