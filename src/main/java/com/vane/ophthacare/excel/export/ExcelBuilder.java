@@ -9,10 +9,12 @@ import com.vane.ophthacare.excel.sheet.SheetAdministrateur;
 import com.vane.ophthacare.excel.sheet.SheetMaladie;
 import com.vane.ophthacare.excel.sheet.SheetMedecin;
 import com.vane.ophthacare.excel.sheet.SheetPatient;
+import com.vane.ophthacare.excel.sheet.SheetProfessionMedecin;
 import com.vane.ophthacare.model.Administrateur;
 import com.vane.ophthacare.model.Maladie;
 import com.vane.ophthacare.model.Medecin;
 import com.vane.ophthacare.model.Patient;
+import com.vane.ophthacare.model.ProfessionMedecin;
 
 public class ExcelBuilder {
 
@@ -48,6 +50,15 @@ public class ExcelBuilder {
 
 		SheetMedecin sheetMedecin = new SheetMedecin(workbook, medecinList);
 		sheetMedecin.createSheet();
+		
+		return workbook;
+	}
+
+	public static Workbook buildExcelProfessionMedecin(List<ProfessionMedecin> professionMedecinList) {
+		Workbook workbook = new XSSFWorkbook();
+
+		SheetProfessionMedecin sheetProfessionMedecin = new SheetProfessionMedecin(workbook, professionMedecinList);
+		sheetProfessionMedecin.createSheet();
 		
 		return workbook;
 	}

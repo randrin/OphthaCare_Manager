@@ -27,10 +27,12 @@ import com.vane.ophthacare.excel.export.ExcelBuilder;
 import com.vane.ophthacare.model.Administrateur;
 import com.vane.ophthacare.model.Maladie;
 import com.vane.ophthacare.model.Patient;
+import com.vane.ophthacare.model.ProfessionMedecin;
 import com.vane.ophthacare.model.Medecin;
 import com.vane.ophthacare.repository.AdministrateurRepository;
 import com.vane.ophthacare.repository.MaladieRepository;
 import com.vane.ophthacare.repository.PatientRepository;
+import com.vane.ophthacare.repository.ProfessionMedecinRepository;
 import com.vane.ophthacare.repository.MedecinRepository;
 
 @RestController
@@ -50,6 +52,9 @@ public class ExcelController {
 	
 	@Autowired
 	public MedecinRepository medecinRepository;
+	
+	@Autowired
+	public ProfessionMedecinRepository professionMedecinRepository;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ExcelController.class);
 	
@@ -167,6 +172,36 @@ public class ExcelController {
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
 		logger.info("GET -> /excel/downloadExcelMedecins - End - Caller ["+caller+"]");
+		return ResponseEntity
+				.ok()
+				.headers(headers)
+				.body(new InputStreamResource(test));
+	}
+	
+	@GetMapping(value="/downloadExcelProfessionsMedecins", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> downloadExcelProfessionsMedecins(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
+		
+		logger.info("GET -> /excel/downloadExcelProfessionsMedecins - Start - Caller ["+caller+"]");
+		
+		Workbook workbook = null;
+		List<ProfessionMedecin> professionMedecinList = professionMedecinRepository.findAll();
+
+		if(professionMedecinList != null && professionMedecinList.size() > 0) {
+			workbook =  ExcelBuilder.buildExcelProfessionMedecin(professionMedecinList);
+		} 
+
+		if(workbook == null) {
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
+		}
+		
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		workbook.write(out);
+		ByteArrayInputStream test = new ByteArrayInputStream(out.toByteArray());
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
+
+		logger.info("GET -> /excel/downloadExcelProfessionsMedecins - End - Caller ["+caller+"]");
 		return ResponseEntity
 				.ok()
 				.headers(headers)
