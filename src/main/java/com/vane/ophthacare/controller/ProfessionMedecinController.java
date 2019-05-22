@@ -138,7 +138,7 @@ public static final Logger logger = LoggerFactory.getLogger(ProfessionMedecinCon
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
 		logger.info("DELETE -> /profession/delete/{id} - Start - Caller ["+caller+"]");
-		logger.info("DELETE -> /profession/delete/"+id+ "- Start - Caller ["+caller+"]");
+
 		if(id == null) {
 			logger.error(ResponseCodes.ERROR_INVALID_INPUT.toString());
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_INVALID_INPUT), HttpStatus.OK);

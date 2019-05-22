@@ -3,18 +3,19 @@ package com.vane.ophthacare.utils;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;	
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
+import com.vane.ophthacare.model.ProfessionMedecin;
 
 public class Utils {
 
 	private static final Logger logger = LoggerFactory.getLogger(Utils.class);
 	
-	
-	// Créastion du code du patient au format: NNN-PPP-YY-X-DD
+	// Création du code du patient au format: NNN-PPP-YY-X-DD
     // Où NNN: 3 premiers lettres du nom, PPP: 3 premiers lettres du prénom, 
 	// YY: 2 chiffres de l'année de naissance, X: une lettres aléatoire et DD: 2 chiffres du jour de naissance
 	public static String codePatient (String firstName, String lastName, String year) {
@@ -115,5 +116,31 @@ public class Utils {
 
 	public static String codeProfessionMedecin(String nomProfession) {
 		return nomProfession.substring(0, 3).toUpperCase();
+	}
+
+	// Création du matricule du médecin au format: NNNPPDD
+    // Où NNN: code profession, PP: 3 lettre du nom et prénom, DD: 2 chiffres du jour de naissance
+	public static String matriculeMedecin(List<ProfessionMedecin> professionMedecinList, String professionMedecin, String nomMedecin, String prenomMedecin,
+			String dateNaisMedecin) {
+
+		String matriculeMedecin = "";
+		
+		logger.info("Start Calcul matriculeMedecin");
+	
+		if (professionMedecinList != null) {
+			for (ProfessionMedecin profession : professionMedecinList) {
+				if (profession.getNomProfession().equals(professionMedecin)) {
+					matriculeMedecin += profession.getCodeProfession();
+				}
+			}
+		}
+		
+		matriculeMedecin += nomMedecin.substring(0, 1).toUpperCase();
+		matriculeMedecin += prenomMedecin.substring(0, 1).toUpperCase();
+		matriculeMedecin += dateNaisMedecin.substring((dateNaisMedecin.length() -2), dateNaisMedecin.length());
+		
+		logger.info("End Calcul matriculeMedecin: Médedcin " +nomMedecin+ " " +prenomMedecin+ " avec le matricule d'enregistrement: " +matriculeMedecin.toUpperCase());
+		
+		return matriculeMedecin;
 	}
 }
