@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vane.ophthacare.Exception.Response;
 import com.vane.ophthacare.Exception.ResponseCodes;
 import com.vane.ophthacare.model.Medecin;
+import com.vane.ophthacare.model.ProfessionMedecin;
 import com.vane.ophthacare.repository.MedecinRepository;
+import com.vane.ophthacare.repository.ProfessionMedecinRepository;
 import com.vane.ophthacare.utils.Utils;
 
 @RestController
@@ -37,13 +39,18 @@ public class MedecinController {
 	@Autowired
 	private MedecinRepository medecinRepository;
 	
+	@Autowired
+	private ProfessionMedecinRepository professionMedecinRepository;
+	
 	public List<Medecin> specialisteList = new ArrayList<>();
+	public List<ProfessionMedecin> professionMedecinList = new ArrayList<>();
 	
 	@GetMapping("/getAllMedecins")
 	public ResponseEntity<Object> getAllMedecins () {
 		logger.info("GET -> /medecin/getAllMedecins - Start");
 		
 		List<Medecin> listMedecins = medecinRepository.findAll();
+		professionMedecinList = professionMedecinRepository.findAll();
 		
 		if (listMedecins == null) {
 			logger.error(ResponseCodes.ERROR_GET_MEDECINS_DB.toString());
@@ -80,7 +87,7 @@ public class MedecinController {
 		}
 		
 		//Set Model Medecin
-		medecin.setMatriculeMedecin(Utils.matriculeMedecin(medecin.getProfessionMedecin(), medecin.getDateNaisMedecin()));
+		medecin.setMatriculeMedecin(Utils.matriculeMedecin(professionMedecinList, medecin.getProfessionMedecin(), medecin.getNomMedecin(), medecin.getPrenomMedecin(), medecin.getDateNaisMedecin()));
 		medecin.setAgeMedecin(Utils.calculAgePatient(medecin.getDateNaisMedecin()));
 		
 		Medecin m = medecinRepository.save(medecin);
