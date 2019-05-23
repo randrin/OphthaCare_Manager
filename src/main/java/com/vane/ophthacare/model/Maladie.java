@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.vane.ophthacare.excel.export.ExcelField;
+
 @Entity
 @Table(name="Maladies")
 public class Maladie implements Serializable {
@@ -19,18 +21,18 @@ public class Maladie implements Serializable {
 	@Column(name = "id_maladie")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idMaladie;
-
-	@Column(name="patient_maladies")
-	private long idPatient;
 	
 	@Column(name = "nom_maladie")
 	private String nomMaladie;
 	
-	@Column(name = "description_maladie")
+	@Column(name = "description_maladie", length = 1000)
 	private String descMaladie;
 
 	@Column(name = "code_maladie")
 	private String codeMaladie;
+	
+	@Column(name = "medecin_maladie")
+	private String medecinMaladie;
 	
 	/**
 	 * @return the idMaladie
@@ -49,6 +51,7 @@ public class Maladie implements Serializable {
 	/**
 	 * @return the nomMaladie
 	 */
+	@ExcelField(field = "Nom Maladie", position = 1)
 	public String getNomMaladie() {
 		return nomMaladie;
 	}
@@ -56,6 +59,7 @@ public class Maladie implements Serializable {
 	/**
 	 * @param nomMaladie the nomMaladie to set
 	 */
+	@ExcelField(field = "Nom Maladie", position = 1)
 	public void setNomMaladie(String nomMaladie) {
 		this.nomMaladie = nomMaladie;
 	}
@@ -63,6 +67,7 @@ public class Maladie implements Serializable {
 	/**
 	 * @return the descMaladie
 	 */
+	@ExcelField(field = "Description Maladie", position = 2)
 	public String getDescMaladie() {
 		return descMaladie;
 	}
@@ -70,27 +75,15 @@ public class Maladie implements Serializable {
 	/**
 	 * @param descMaladie the descMaladie to set
 	 */
+	@ExcelField(field = "Description Maladie", position = 2)
 	public void setDescMaladie(String descMaladie) {
 		this.descMaladie = descMaladie;
-	}
-	
-	/**
-	 * @return the idPatient
-	 */
-	public long getIdPatient() {
-		return idPatient;
-	}
-
-	/**
-	 * @param idPatient the idPatient to set
-	 */
-	public void setIdPatient(long idPatient) {
-		this.idPatient = idPatient;
 	}
 
 	/**
 	 * @return the codeMaladie
 	 */
+	@ExcelField(field = "Code Maladie", position = 0)
 	public String getCodeMaladie() {
 		return codeMaladie;
 	}
@@ -98,8 +91,24 @@ public class Maladie implements Serializable {
 	/**
 	 * @param codeMaladie the codeMaladie to set
 	 */
+	@ExcelField(field = "Code Maladie", position = 0)
 	public void setCodeMaladie(String codeMaladie) {
 		this.codeMaladie = codeMaladie;
 	}
-	
+
+	/**
+	 * @return the medecinMaladie
+	 */
+	@ExcelField(field = "Spécialiste Maladie", position = 3)
+	public String getMedecinMaladie() {
+		return medecinMaladie;
+	}
+
+	/**
+	 * @param medecinMaladie the medecinMaladie to set
+	 */
+	@ExcelField(field = "Description Maladie", position = 2)
+	public void setMedecinMaladie(String medecinMaladie) {
+		this.medecinMaladie = medecinMaladie;
+	}
 }
