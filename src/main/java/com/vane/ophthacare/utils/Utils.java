@@ -143,4 +143,8 @@ public class Utils {
 		
 		return matriculeMedecin;
 	}
+
+	public static String codeMaladie(String nomMaladie) {
+		return nomMaladie.substring(0,3).toUpperCase();
+	}
 }
