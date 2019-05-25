@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -23,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vane.ophthacare.Exception.Response;
 import com.vane.ophthacare.Exception.ResponseCodes;
 import com.vane.ophthacare.model.Maladie;
-import com.vane.ophthacare.model.Medecin;
 import com.vane.ophthacare.repository.MaladieRepository;
 import com.vane.ophthacare.utils.Utils;
 
@@ -93,8 +93,47 @@ public static final Logger logger = LoggerFactory.getLogger(MaladieController.cl
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_INSERT_DISEASE), HttpStatus.OK);
 	}
 	
+	@PostMapping("/update")
+	public ResponseEntity<Object> updateMaladie(@RequestBody Maladie maladie, 
+			@RequestHeader(value= "caller",required = false) String caller) {
+		
+		logger.info("UPDATE -> /maladie/update - Start - Caller ["+caller+"]");
+		
+		if (StringUtils.isEmpty(caller)) {
+			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
+		}
+		
+		if(maladie == null) {
+			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
+		}
+		
+		String erreur = Utils.checkAttributeFromObject(maladie, false);
+		
+		logger.info("Erreur response: " +erreur);
+		
+		if (erreur != "OK") {
+			logger.error(ResponseCodes.ERROR_GENERIC.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
+		}
+		
+		//Set Model Maladie
+		maladie.setCodeMaladie(Utils.codeMaladie(maladie.getNomMaladie()));
+		
+		Maladie m = maladieRepository.save(maladie);
+		
+		if (m == null) {
+			logger.error(ResponseCodes.ERROR_SET_DISEASE_DB.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_DISEASE_DB), HttpStatus.OK);
+		}
+		
+		logger.info("UPDATE -> /maladie/update - End - Caller ["+caller+"]");
+		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_MODIFY_DISEASE), HttpStatus.OK);
+	}
+	
 	@DeleteMapping(path = {"/delete/{id}"})
-	public ResponseEntity<Object> deleteSpecialiste (@PathVariable("id") String id,
+	public ResponseEntity<Object> deleteMaladie (@PathVariable("id") String id,
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
 		logger.info("DELETE -> /maladie/delete/{id} - Start - Caller ["+caller+"]");
