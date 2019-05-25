@@ -20,7 +20,7 @@ public class Maladie implements Serializable {
 	@Id
 	@Column(name = "id_maladie")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long idMaladie;
+	private Integer idMaladie;
 	
 	@Column(name = "nom_maladie")
 	private String nomMaladie;
@@ -37,14 +37,14 @@ public class Maladie implements Serializable {
 	/**
 	 * @return the idMaladie
 	 */
-	public Long getIdMaladie() {
+	public Integer getIdMaladie() {
 		return idMaladie;
 	}
 
 	/**
 	 * @param idMaladie the idMaladie to set
 	 */
-	public void setIdMaladie(Long idMaladie) {
+	public void setIdMaladie(Integer idMaladie) {
 		this.idMaladie = idMaladie;
 	}
 
