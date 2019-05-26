@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vane.ophthacare.Exception.Response;
-import com.vane.ophthacare.Exception.ResponseCodes;
+import com.vane.ophthacare.exception.Response;
+import com.vane.ophthacare.exception.ResponseCodes;
 import com.vane.ophthacare.model.ProfessionMedecin;
 import com.vane.ophthacare.repository.ProfessionMedecinRepository;
 import com.vane.ophthacare.utils.Utils;
