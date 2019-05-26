@@ -1,4 +1,4 @@
-package com.vane.ophthacare.Exception;
+package com.vane.ophthacare.exception;
 
 public class Response {
 

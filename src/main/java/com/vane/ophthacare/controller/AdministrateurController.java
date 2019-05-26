@@ -24,10 +24,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vane.ophthacare.Exception.ExceptionCodes;
-import com.vane.ophthacare.Exception.Response;
-import com.vane.ophthacare.Exception.ResponseCodes;
+import com.vane.ophthacare.exception.ExceptionCodes;
+import com.vane.ophthacare.exception.Response;
+import com.vane.ophthacare.exception.ResponseCodes;
 import com.vane.ophthacare.model.Administrateur;
+import com.vane.ophthacare.operations.UserOperations;
+import com.vane.ophthacare.operations.UserOperationsCodes;
 import com.vane.ophthacare.repository.AdministrateurRepository;
 import com.vane.ophthacare.utils.Constants;
 import com.vane.ophthacare.utils.Utils;
@@ -39,6 +41,9 @@ public class AdministrateurController {
 
 	@Autowired
 	private AdministrateurRepository administrateurRepository;
+	
+	@Autowired
+	private UserOperations userOperations;
 	
 	public List<Administrateur> adminList = new ArrayList<>();
 	
@@ -98,6 +103,7 @@ public class AdministrateurController {
 		}
 		
 		logger.info("INSERT -> /admin/insert - End - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(admin.getIdAdmin()), admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_INSERT);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_INSERT_ADMIN), HttpStatus.OK);
 	}
 	

@@ -1,4 +1,4 @@
-package com.vane.ophthacare.Exception;
+package com.vane.ophthacare.exception;
 
 public enum ResponseCodes {
 	
@@ -75,6 +75,10 @@ public enum ResponseCodes {
 	ERROR_SET_MEDECINS_DB("ERR0005","Error on insert medecins on DB"),
 	ERROR_DELETE_MEDECIN_DB("ERR0006","Error on delete medecin on DB"),
 	ERROR_MODIFY_MEDECIN_DB("ERR0007","Error on modify medecin on DB"),
+	
+	
+	// Report
+	ERROR_GET_REPORTS_DB("ERR0008","Error getting Reports on DB"),
 	
 	// Others
 	ERROR_GENERIC("ERR0001","Generic Error"),
