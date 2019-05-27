@@ -202,6 +202,7 @@ public class AdministrateurController {
 		}
 		
 		logger.info("DELETE -> admin/delete/{id} - End - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(id), caller, UserOperationsCodes.ADMIN_REPORT_DELETE);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_DELETE_ADMIN), HttpStatus.OK);
 	}
 }
