@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.vane.ophthacare.excel.export.ExcelField;
+
 @Entity
 @Table(name="Reports")
 public class Report implements Serializable {
@@ -49,6 +51,7 @@ public class Report implements Serializable {
 	/**
 	 * @return the userReport
 	 */
+	@ExcelField(field = "Nom Utilisateur", position = 0)
 	public String getUserReport() {
 		return userReport;
 	}
@@ -56,6 +59,7 @@ public class Report implements Serializable {
 	/**
 	 * @param userReport the userReport to set
 	 */
+	@ExcelField(field = "Nom Utilisateur", position = 0)
 	public void setUserReport(String userReport) {
 		this.userReport = userReport;
 	}
@@ -63,6 +67,7 @@ public class Report implements Serializable {
 	/**
 	 * @return the actionReport
 	 */
+	@ExcelField(field = "Opération Utilisateur", position = 1)
 	public String getActionReport() {
 		return actionReport;
 	}
@@ -70,6 +75,7 @@ public class Report implements Serializable {
 	/**
 	 * @param actionReport the actionReport to set
 	 */
+	@ExcelField(field = "Opération Utilisateur", position = 1)
 	public void setActionReport(String actionReport) {
 		this.actionReport = actionReport;
 	}
@@ -77,6 +83,7 @@ public class Report implements Serializable {
 	/**
 	 * @return the resultReport
 	 */
+	@ExcelField(field = "Resultat Opération", position = 2)
 	public String getResultReport() {
 		return resultReport;
 	}
@@ -84,6 +91,7 @@ public class Report implements Serializable {
 	/**
 	 * @param resultReport the resultReport to set
 	 */
+	@ExcelField(field = "Resultat Opération", position = 2)
 	public void setResultReport(String resultReport) {
 		this.resultReport = resultReport;
 	}
@@ -91,6 +99,7 @@ public class Report implements Serializable {
 	/**
 	 * @return the dateReport
 	 */
+	@ExcelField(field = "Date Opération", position = 3)
 	public String getDateReport() {
 		return dateReport;
 	}
@@ -98,6 +107,7 @@ public class Report implements Serializable {
 	/**
 	 * @param dateReport the dateReport to set
 	 */
+	@ExcelField(field = "Date Opération", position = 3)
 	public void setDateReport(String dateReport) {
 		this.dateReport = dateReport;
 	}

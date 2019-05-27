@@ -28,11 +28,13 @@ import com.vane.ophthacare.model.Administrateur;
 import com.vane.ophthacare.model.Maladie;
 import com.vane.ophthacare.model.Patient;
 import com.vane.ophthacare.model.ProfessionMedecin;
+import com.vane.ophthacare.model.Report;
 import com.vane.ophthacare.model.Medecin;
 import com.vane.ophthacare.repository.AdministrateurRepository;
 import com.vane.ophthacare.repository.MaladieRepository;
 import com.vane.ophthacare.repository.PatientRepository;
 import com.vane.ophthacare.repository.ProfessionMedecinRepository;
+import com.vane.ophthacare.repository.ReportRepository;
 import com.vane.ophthacare.repository.MedecinRepository;
 
 @RestController
@@ -55,6 +57,9 @@ public class ExcelController {
 	
 	@Autowired
 	public ProfessionMedecinRepository professionMedecinRepository;
+	
+	@Autowired
+	public ReportRepository reportRepository;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ExcelController.class);
 	
@@ -202,6 +207,36 @@ public class ExcelController {
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
 		logger.info("GET -> /excel/downloadExcelProfessionsMedecins - End - Caller ["+caller+"]");
+		return ResponseEntity
+				.ok()
+				.headers(headers)
+				.body(new InputStreamResource(test));
+	}
+	
+	@GetMapping(value="/downloadExcelReports", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<Object> downloadExcelReports(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
+		
+		logger.info("GET -> /excel/downloadExcelRports - Start - Caller ["+caller+"]");
+		
+		Workbook workbook = null;
+		List<Report> reportList = reportRepository.findAll();
+
+		if(reportList != null && reportList.size() > 0) {
+			workbook =  ExcelBuilder.buildExcelReport(reportList);
+		} 
+
+		if(workbook == null) {
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
+		}
+		
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		workbook.write(out);
+		ByteArrayInputStream test = new ByteArrayInputStream(out.toByteArray());
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
+
+		logger.info("GET -> /excel/downloadExcelReports - End - Caller ["+caller+"]");
 		return ResponseEntity
 				.ok()
 				.headers(headers)
