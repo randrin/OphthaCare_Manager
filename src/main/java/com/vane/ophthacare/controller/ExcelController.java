@@ -124,6 +124,7 @@ public class ExcelController {
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
 		logger.info(Constants.END +" GET -> /excel/downloadExcelAdministrateurs - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(adminList.get(0).getNomAdmin()), caller, UserOperationsCodes.EXCEL_EXPORT_ADMINISTRATEURS);
 		return ResponseEntity
 				.ok()
 				.headers(headers)
