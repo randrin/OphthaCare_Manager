@@ -57,4 +57,16 @@ public class UserOperations {
 		logger.info(entity.toString());
 		reportRepository.save(entity);
 	}
+	
+	public void saveOperationReport(String status, String caller, UserOperationsCodes enumOperations) {
+
+		Report entity = new Report();
+		entity.setActionReport(String.format(enumOperations.getMessage()));
+		entity.setUserReport(caller);
+		entity.setResultReport(status);
+		entity.setDateReport(format.format(new Date()));
+
+		logger.info(entity.toString());
+		reportRepository.save(entity);
+	}
 }

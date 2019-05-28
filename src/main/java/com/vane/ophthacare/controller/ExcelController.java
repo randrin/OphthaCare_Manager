@@ -29,12 +29,15 @@ import com.vane.ophthacare.model.Maladie;
 import com.vane.ophthacare.model.Patient;
 import com.vane.ophthacare.model.ProfessionMedecin;
 import com.vane.ophthacare.model.Report;
+import com.vane.ophthacare.operations.UserOperations;
+import com.vane.ophthacare.operations.UserOperationsCodes;
 import com.vane.ophthacare.model.Medecin;
 import com.vane.ophthacare.repository.AdministrateurRepository;
 import com.vane.ophthacare.repository.MaladieRepository;
 import com.vane.ophthacare.repository.PatientRepository;
 import com.vane.ophthacare.repository.ProfessionMedecinRepository;
 import com.vane.ophthacare.repository.ReportRepository;
+import com.vane.ophthacare.utils.Constants;
 import com.vane.ophthacare.repository.MedecinRepository;
 
 @RestController
@@ -60,6 +63,9 @@ public class ExcelController {
 	
 	@Autowired
 	public ReportRepository reportRepository;
+	
+	@Autowired
+	private UserOperations userOperations;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ExcelController.class);
 	
@@ -96,7 +102,7 @@ public class ExcelController {
 	@GetMapping(value="/downloadExcelAdministrateurs", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Object> downloadExcelAdministrateurs(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
 		
-		logger.info("GET -> /excel/downloadExcelAdministrateurs - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" GET -> /excel/downloadExcelAdministrateurs - Caller ["+caller+"]");
 		
 		Workbook workbook = null;
 		List<Administrateur> adminList = administrateurRepository.findAll();
@@ -106,6 +112,7 @@ public class ExcelController {
 		} 
 
 		if(workbook == null) {
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
 		}
 		
@@ -116,7 +123,7 @@ public class ExcelController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
-		logger.info("GET -> /excel/downloadExcelAdministrateurs - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" GET -> /excel/downloadExcelAdministrateurs - Caller ["+caller+"]");
 		return ResponseEntity
 				.ok()
 				.headers(headers)

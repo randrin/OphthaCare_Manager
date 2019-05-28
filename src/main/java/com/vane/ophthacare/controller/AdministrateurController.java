@@ -52,17 +52,19 @@ public class AdministrateurController {
 	private static final Logger logger = LoggerFactory.getLogger(AdministrateurController.class);
 	
 	@GetMapping("/getAllAdmins")
-	public ResponseEntity<Object> getAllAdmins() {
+	public ResponseEntity<Object> getAllAdmins(@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("GET -> /admin/getAllAdmins - Start");
+		logger.info(Constants.BEGIN +" GET -> /admin/getAllAdmins - Caller ["+caller+"]");
 		
 		List<Administrateur> listAdmins = administrateurRepository.findAll();
 		
 		if (listAdmins == null) {
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ADMIN_GET_ALL);
 			return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_ADMIN_NO_PERMISSION), HttpStatus.OK);
 		}
 		
-		logger.info("GET -> /admin/getAllAdmins - End");
+		logger.info(Constants.END +" GET -> /admin/getAllAdmins - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, caller, UserOperationsCodes.ADMIN_GET_ALL);
 		return new ResponseEntity<Object>(listAdmins, HttpStatus.OK);
 	}
 	
@@ -70,15 +72,17 @@ public class AdministrateurController {
 	public ResponseEntity<Object> insertAdmin(@RequestBody Administrateur admin, 
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("INSERT -> /admin/insert - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" INSERT -> /admin/insert - Caller ["+caller+"]");
 		
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(admin.getIdAdmin()), admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
 		
 		if(admin == null) {
 			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(admin.getIdAdmin()), admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
 		}
 		
@@ -88,6 +92,7 @@ public class AdministrateurController {
 		
 		if (erreur != "OK") {
 			logger.error(ResponseCodes.ERROR_GENERIC.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(admin.getIdAdmin()), admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
 		}
 		
@@ -99,11 +104,12 @@ public class AdministrateurController {
 		
 		if (a == null) {
 			logger.error(ResponseCodes.ERROR_SET_ADMIN_DB.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(admin.getIdAdmin()), admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_ADMIN_DB), HttpStatus.OK);
 		}
 		
-		logger.info("INSERT -> /admin/insert - End - Caller ["+caller+"]");
-		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(admin.getIdAdmin()), admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_INSERT);
+		logger.info(Constants.END +" INSERT -> /admin/insert - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.FAILED, String.valueOf(admin.getIdAdmin()), admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_INSERT);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_INSERT_ADMIN), HttpStatus.OK);
 	}
 	
@@ -111,15 +117,17 @@ public class AdministrateurController {
 	public ResponseEntity<Object> updateAdmin(@RequestBody Administrateur admin, 
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("UPDATE -> /admin/update - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" UPDATE -> /admin/update - Caller ["+caller+"]");
 		
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(admin.getIdAdmin()), admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
 		
 		if(admin == null) {
 			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(admin.getIdAdmin()), admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
 		}
 		
@@ -129,6 +137,7 @@ public class AdministrateurController {
 		
 		if (erreur != "OK") {
 			logger.error(ResponseCodes.ERROR_GENERIC.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(admin.getIdAdmin()), admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
 		}
 		
@@ -136,10 +145,12 @@ public class AdministrateurController {
 		
 		if (a == null) {
 			logger.error(ResponseCodes.ERROR_SET_ADMIN_DB.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(admin.getIdAdmin()), admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_ADMIN_DB), HttpStatus.OK);
 		}
 		
-		logger.info("UPDATE -> /admin/update - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" UPDATE -> /admin/update - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(admin.getIdAdmin()), admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_UPDATE);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_MODIFY_ADMIN), HttpStatus.OK);
 	}
 	
@@ -148,8 +159,7 @@ public class AdministrateurController {
 			@RequestParam("username") String username, 
 			@RequestParam("password") String password) {
 		
-		logger.info("POST -> /admin/login - Start");
-		logger.info("Start logging administrateur");
+		logger.info(Constants.END +" POST -> /admin/login");
 		logger.info("Username/Pseudo administrateur: " +username);
 		logger.info("Password administrateur: " +password);
 		
@@ -161,10 +171,10 @@ public class AdministrateurController {
 		} else {
 			if (admin.getActiveAdmin().equals("true")) {
 				logger.info("Admin : [" +admin.getNomAdmin()+ " "+admin.getPrenomAdmin()+ "] is activated? " +admin.getActiveAdmin());
-				logger.info("POST -> /admin/login - End");
+				logger.info(Constants.END +" POST -> /admin/login");
 				return new ResponseEntity<Object>(admin, HttpStatus.OK);
 			} else {
-				logger.info("POST -> /admin/login - End");
+				logger.info(Constants.END +" POST -> /admin/login");
 				return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_ADMIN_NO_PERMISSION), HttpStatus.OK);
 			}
 		}
@@ -173,15 +183,17 @@ public class AdministrateurController {
 	public ResponseEntity<Object> deleteAdministrateur (@PathVariable("id") String id,
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("DELETE -> /admin/delete/{id} - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" DELETE -> /admin/delete/{id} - Caller ["+caller+"]");
 		
 		if(id == null) { 
 			logger.error(ResponseCodes.ERROR_INVALID_INPUT.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller, UserOperationsCodes.ADMIN_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_INVALID_INPUT), HttpStatus.OK);
 		}
 				
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller, UserOperationsCodes.ADMIN_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
 		
@@ -189,6 +201,7 @@ public class AdministrateurController {
 			administrateurRepository.deleteById(Integer.parseInt(id));
 		} catch (Exception e) {
 			logger.error(ResponseCodes.ERROR_DELETE_ADMIN_DB.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller, UserOperationsCodes.ADMIN_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_DELETE_ADMIN_DB), HttpStatus.OK);
 		}
 		
@@ -201,7 +214,7 @@ public class AdministrateurController {
 			}
 		}
 		
-		logger.info("DELETE -> admin/delete/{id} - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" DELETE -> /admin/delete/{id} - Caller ["+caller+"]");
 		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(id), caller, UserOperationsCodes.ADMIN_REPORT_DELETE);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_DELETE_ADMIN), HttpStatus.OK);
 	}
