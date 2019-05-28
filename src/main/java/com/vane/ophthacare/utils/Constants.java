@@ -8,7 +8,7 @@ public class Constants {
 	public static final String SUCCESS = "Success";
 	public static final String FAILED = "Failed";
 	public static final String BEGIN = "PROCESSING ...";
-	public static final String END = "END";
+	public static final String END = "END ...";
 	public static final String NEW_ID = "NEW";
 	public static final String MODEL_UNKNOWN = "Unknown";
 }
