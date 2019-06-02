@@ -72,7 +72,7 @@ public class ExcelController {
 	@GetMapping(value="/downloadExcelPatients", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Object> downloadExcelPatients(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
 		
-		logger.info("GET -> /excel/downloadExcelPatients - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" GET -> /excel/downloadExcelPatients - Caller ["+caller+"]");
 		
 		Workbook workbook = null;
 		List<Patient> patientList = patientRepository.findAll();
@@ -82,6 +82,7 @@ public class ExcelController {
 		} 
 
 		if(workbook == null) {
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
 		}
 		
@@ -92,7 +93,8 @@ public class ExcelController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
-		logger.info("GET -> /excel/downloadExcelPatients - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" GET -> /excel/downloadExcelPatients - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller, UserOperationsCodes.EXCEL_EXPORT_PATIENTS);
 		return ResponseEntity
 				.ok()
 				.headers(headers)
@@ -124,7 +126,7 @@ public class ExcelController {
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
 		logger.info(Constants.END +" GET -> /excel/downloadExcelAdministrateurs - Caller ["+caller+"]");
-		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(adminList.get(0).getNomAdmin()), caller, UserOperationsCodes.EXCEL_EXPORT_ADMINISTRATEURS);
+		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller, UserOperationsCodes.EXCEL_EXPORT_ADMINISTRATEURS);
 		return ResponseEntity
 				.ok()
 				.headers(headers)
@@ -134,7 +136,7 @@ public class ExcelController {
 	@GetMapping(value="/downloadExcelMaladies", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Object> downloadExcelMaladies(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
 		
-		logger.info("GET -> /excel/downloadExcelMaladies - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" GET -> /excel/downloadExcelMaladies - Caller ["+caller+"]");
 		
 		Workbook workbook = null;
 		List<Maladie> maladieList = maladieRepository.findAll();
@@ -144,6 +146,7 @@ public class ExcelController {
 		} 
 
 		if(workbook == null) {
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
 		}
 		
@@ -154,7 +157,8 @@ public class ExcelController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
-		logger.info("GET -> /excel/downloadExcelMaladies - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" GET -> /excel/downloadExcelMaladies - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller, UserOperationsCodes.EXCEL_EXPORT_DISEASES);
 		return ResponseEntity
 				.ok()
 				.headers(headers)
@@ -164,7 +168,7 @@ public class ExcelController {
 	@GetMapping(value="/downloadExcelMedecins", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Object> downloadExcelMedecins(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
 		
-		logger.info("GET -> /excel/downloadExcelMedecins - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" GET -> /excel/downloadExcelMedecins - Caller ["+caller+"]");
 		
 		Workbook workbook = null;
 		List<Medecin> medecinList = medecinRepository.findAll();
@@ -174,6 +178,7 @@ public class ExcelController {
 		} 
 
 		if(workbook == null) {
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
 		}
 		
@@ -184,7 +189,8 @@ public class ExcelController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
-		logger.info("GET -> /excel/downloadExcelMedecins - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" GET -> /excel/downloadExcelMedecins - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller, UserOperationsCodes.EXCEL_EXPORT_MEDECINS);
 		return ResponseEntity
 				.ok()
 				.headers(headers)
@@ -194,7 +200,7 @@ public class ExcelController {
 	@GetMapping(value="/downloadExcelProfessionsMedecins", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Object> downloadExcelProfessionsMedecins(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
 		
-		logger.info("GET -> /excel/downloadExcelProfessionsMedecins - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" GET -> /excel/downloadExcelProfessionsMedecins - Caller ["+caller+"]");
 		
 		Workbook workbook = null;
 		List<ProfessionMedecin> professionMedecinList = professionMedecinRepository.findAll();
@@ -204,6 +210,7 @@ public class ExcelController {
 		} 
 
 		if(workbook == null) {
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
 		}
 		
@@ -214,7 +221,8 @@ public class ExcelController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
-		logger.info("GET -> /excel/downloadExcelProfessionsMedecins - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" GET -> /excel/downloadExcelProfessionsMedecins - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller, UserOperationsCodes.EXCEL_EXPORT_PROFESSIONS);
 		return ResponseEntity
 				.ok()
 				.headers(headers)
@@ -224,7 +232,7 @@ public class ExcelController {
 	@GetMapping(value="/downloadExcelReports", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<Object> downloadExcelReports(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
 		
-		logger.info("GET -> /excel/downloadExcelRports - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" GET -> /excel/downloadExcelReports - Caller ["+caller+"]");
 		
 		Workbook workbook = null;
 		List<Report> reportList = reportRepository.findAll();
@@ -234,6 +242,7 @@ public class ExcelController {
 		} 
 
 		if(workbook == null) {
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
 		}
 		
@@ -244,7 +253,8 @@ public class ExcelController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
-		logger.info("GET -> /excel/downloadExcelReports - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" GET -> /excel/downloadExcelReports - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller, UserOperationsCodes.EXCEL_EXPORT_REPORTS);
 		return ResponseEntity
 				.ok()
 				.headers(headers)
