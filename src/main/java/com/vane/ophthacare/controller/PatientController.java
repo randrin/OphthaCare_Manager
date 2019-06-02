@@ -27,7 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vane.ophthacare.exception.Response;
 import com.vane.ophthacare.exception.ResponseCodes;
 import com.vane.ophthacare.model.Patient;
+import com.vane.ophthacare.operations.UserOperations;
+import com.vane.ophthacare.operations.UserOperationsCodes;
 import com.vane.ophthacare.repository.PatientRepository;
+import com.vane.ophthacare.utils.Constants;
 import com.vane.ophthacare.utils.Utils;
 
 @RestController
@@ -40,20 +43,24 @@ public class PatientController {
 	@Autowired
 	private PatientRepository patientRepository;
 	
+	@Autowired
+	private UserOperations userOperations;
+	
 	public List<Patient> patientList = new ArrayList<>();
 	
 	@GetMapping("/getAllPatients")
-	public ResponseEntity<Object> getAllPatients () {
-		logger.info("GET -> /patient/getAllPatients - Start");
+	public ResponseEntity<Object> getAllPatients(@RequestHeader(value= "caller",required = false) String caller) {
+		
+		logger.info(Constants.BEGIN +" GET -> /patient/getAllPatients - Caller ["+caller+"]");
 		
 		List<Patient> listPatients = patientRepository.findAll();
 		
 		if (listPatients == null) {
-			logger.error(ResponseCodes.ERROR_GET_PATIENTS_DB.toString());
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.PATIENT_GET_ALL);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GET_PATIENTS_DB), HttpStatus.OK);
 		}
 		
-		logger.info("GET -> /patient/getAllPatients - End");
+		logger.info(Constants.END +" GET -> /patient/getAllPatients - Caller ["+caller+"]");
 		return new ResponseEntity<Object>(listPatients, HttpStatus.OK);
 	}
 	
@@ -61,15 +68,17 @@ public class PatientController {
 	public ResponseEntity<Object> insertPatient(@RequestBody Patient patient, 
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("INSERT -> /patient/insert - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" INSERT -> /patient/insert - Caller ["+caller+"]");
 		
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(patient.getIdPatient()), patient.getNomPatient(), caller, UserOperationsCodes.PATIENT_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
 		
 		if(patient == null) {
 			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(patient.getIdPatient()), patient.getNomPatient(), caller, UserOperationsCodes.PATIENT_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
 		}
 		
@@ -79,6 +88,7 @@ public class PatientController {
 		
 		if (erreur != "OK") {
 			logger.error(ResponseCodes.ERROR_GENERIC.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(patient.getIdPatient()), patient.getNomPatient(), caller, UserOperationsCodes.PATIENT_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
 		}
 		
@@ -90,10 +100,12 @@ public class PatientController {
 		
 		if (p == null) {
 			logger.error(ResponseCodes.ERROR_SET_PATIENT_DB.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(patient.getIdPatient()), patient.getNomPatient(), caller, UserOperationsCodes.PATIENT_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_PATIENT_DB), HttpStatus.OK);
 		}
 		
-		logger.info("INSERT -> /patient/insert - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" INSERT -> /patient/insert - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(patient.getIdPatient()), patient.getNomPatient(), caller, UserOperationsCodes.PATIENT_REPORT_INSERT);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_INSERT_PATIENT), HttpStatus.OK);
 	}
 
@@ -101,15 +113,17 @@ public class PatientController {
 	public ResponseEntity<Object> updatePatient(@RequestBody Patient patient, 
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("UPDATE -> /patient/update - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" UPDATE -> /patient/update - Caller ["+caller+"]");
 		
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(patient.getIdPatient()), patient.getNomPatient(), caller, UserOperationsCodes.PATIENT_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
 		
 		if(patient == null) {
 			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(patient.getIdPatient()), patient.getNomPatient(), caller, UserOperationsCodes.PATIENT_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
 		}
 		
@@ -119,6 +133,7 @@ public class PatientController {
 		
 		if (erreur != "OK") {
 			logger.error(ResponseCodes.ERROR_GENERIC.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(patient.getIdPatient()), patient.getNomPatient(), caller, UserOperationsCodes.PATIENT_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
 		}
 		
@@ -129,10 +144,12 @@ public class PatientController {
 		
 		if (p == null) {
 			logger.error(ResponseCodes.ERROR_SET_PATIENT_DB.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(patient.getIdPatient()), patient.getNomPatient(), caller, UserOperationsCodes.PATIENT_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_PATIENT_DB), HttpStatus.OK);
 		}
 		
-		logger.info("UPDATE -> /patient/update - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" UPDATE -> /patient/update - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(patient.getIdPatient()), patient.getNomPatient(), caller, UserOperationsCodes.PATIENT_REPORT_UPDATE);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_MODIFY_PATIENT), HttpStatus.OK);
 	}
 	
@@ -140,15 +157,17 @@ public class PatientController {
 	public ResponseEntity<Object> deletePatient (@PathVariable("id") String id,
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("DELETE -> /patient/delete/{id} - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" DELETE -> /patient/delete/{id} - Caller ["+caller+"]");
 		
 		if(id == null) {
 			logger.error(ResponseCodes.ERROR_INVALID_INPUT.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller, UserOperationsCodes.PATIENT_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_INVALID_INPUT), HttpStatus.OK);
 		}
 				
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller, UserOperationsCodes.PATIENT_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
 		
@@ -156,6 +175,7 @@ public class PatientController {
 			patientRepository.deleteById(Integer.parseInt(id));
 		} catch (Exception e) {
 			logger.error(ResponseCodes.ERROR_DELETE_PATIENT_DB.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller, UserOperationsCodes.PATIENT_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_DELETE_PATIENT_DB), HttpStatus.OK);
 		}
 		
@@ -168,7 +188,8 @@ public class PatientController {
 			}
 		}
 		
-		logger.info("DELETE -> /patient/delete/{id} - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" DELETE -> /patient/delete/{id} - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(id), caller, UserOperationsCodes.PATIENT_REPORT_DELETE);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_DELETE_PATIENT), HttpStatus.OK);
 	}
 } 

@@ -60,7 +60,7 @@ public class AdministrateurController {
 		
 		if (listAdmins == null) {
 			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ADMIN_GET_ALL);
-			return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_ADMIN_NO_PERMISSION), HttpStatus.OK);
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GET_ADMINISTRATORS_DB), HttpStatus.OK);
 		}
 		
 		logger.info(Constants.END +" GET -> /admin/getAllAdmins - Caller ["+caller+"]");
@@ -109,7 +109,7 @@ public class AdministrateurController {
 		}
 		
 		logger.info(Constants.END +" INSERT -> /admin/insert - Caller ["+caller+"]");
-		userOperations.saveOperationReport(Constants.FAILED, String.valueOf(admin.getIdAdmin()), admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_INSERT);
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(admin.getIdAdmin()), admin.getPseudoAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_INSERT);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_INSERT_ADMIN), HttpStatus.OK);
 	}
 	
@@ -150,7 +150,7 @@ public class AdministrateurController {
 		}
 		
 		logger.info(Constants.END +" UPDATE -> /admin/update - Caller ["+caller+"]");
-		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(admin.getIdAdmin()), admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_UPDATE);
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(admin.getIdAdmin()), admin.getPseudoAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_UPDATE);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_MODIFY_ADMIN), HttpStatus.OK);
 	}
 	
