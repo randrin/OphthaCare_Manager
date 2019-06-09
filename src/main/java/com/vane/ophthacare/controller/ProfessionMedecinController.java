@@ -24,7 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vane.ophthacare.exception.Response;
 import com.vane.ophthacare.exception.ResponseCodes;
 import com.vane.ophthacare.model.ProfessionMedecin;
+import com.vane.ophthacare.operations.UserOperations;
+import com.vane.ophthacare.operations.UserOperationsCodes;
 import com.vane.ophthacare.repository.ProfessionMedecinRepository;
+import com.vane.ophthacare.utils.Constants;
 import com.vane.ophthacare.utils.Utils;
 
 
@@ -38,20 +41,25 @@ public static final Logger logger = LoggerFactory.getLogger(ProfessionMedecinCon
 	@Autowired
 	private ProfessionMedecinRepository professionMedecinRepository;
 	
+	@Autowired
+	private UserOperations userOperations;
+	
 	public List<ProfessionMedecin> professionMedecinList = new ArrayList<>();
 	
 	@GetMapping("/getAllProfessionsMedecins")
-	public ResponseEntity<Object> getAllProfessionsMedecins() {
-		logger.info("GET -> /profession/getAllProfessionsMedecins - Start");
+	public ResponseEntity<Object> getAllProfessionsMedecins(@RequestHeader(value= "caller",required = false) String caller) {
+		
+		logger.info(Constants.BEGIN +" GET -> /profession/getAllProfessionsMedecins - Caller ["+caller+"]");
 		
 		List<ProfessionMedecin> listProfessionMedecins = professionMedecinRepository.findAll();
 		
 		if (listProfessionMedecins == null) {
 			logger.error(ResponseCodes.ERROR_GET_PROFESSIONS_DB.toString());
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.PROFESSION_GET_ALL);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GET_PROFESSIONS_DB), HttpStatus.OK);
 		}
 		
-		logger.info("GET -> /profession/getAllProfessionsMedecins - End");
+		logger.info(Constants.END +" GET -> /profession/getAllProfessionsMedecins - Caller ["+caller+"]");
 		return new ResponseEntity<Object>(listProfessionMedecins, HttpStatus.OK);
 	}
 	
@@ -59,15 +67,17 @@ public static final Logger logger = LoggerFactory.getLogger(ProfessionMedecinCon
 	public ResponseEntity<Object> insertProfessionMedecin(@RequestBody ProfessionMedecin professionMedecin, 
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("INSERT -> /profession/insert - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" INSERT -> /profession/insert - Caller ["+caller+"]");
 		
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(professionMedecin.getIdProfession()), professionMedecin.getNomProfession(), caller, UserOperationsCodes.PROFESSION_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
 		
 		if(professionMedecin == null) {
 			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(professionMedecin.getIdProfession()), professionMedecin.getNomProfession(), caller, UserOperationsCodes.PROFESSION_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
 		}
 		
@@ -77,6 +87,7 @@ public static final Logger logger = LoggerFactory.getLogger(ProfessionMedecinCon
 		
 		if (erreur != "OK") {
 			logger.error(ResponseCodes.ERROR_GENERIC.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(professionMedecin.getIdProfession()), professionMedecin.getNomProfession(), caller, UserOperationsCodes.PROFESSION_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
 		}
 		
@@ -87,10 +98,12 @@ public static final Logger logger = LoggerFactory.getLogger(ProfessionMedecinCon
 		
 		if (pm == null) {
 			logger.error(ResponseCodes.ERROR_SET_PROFESSIONS_DB.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(professionMedecin.getIdProfession()), professionMedecin.getNomProfession(), caller, UserOperationsCodes.PROFESSION_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_PROFESSIONS_DB), HttpStatus.OK);
 		}
 		
-		logger.info("INSERT -> /profession/insert - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" INSERT -> /profession/insert - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(professionMedecin.getIdProfession()), professionMedecin.getNomProfession(), caller, UserOperationsCodes.PROFESSION_REPORT_INSERT);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_INSERT_PROFESSION), HttpStatus.OK);
 	}
 
@@ -98,15 +111,17 @@ public static final Logger logger = LoggerFactory.getLogger(ProfessionMedecinCon
 	public ResponseEntity<Object> updateProfessionMedecin(@RequestBody ProfessionMedecin professionMedecin, 
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("UPDATE -> /profession/update - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" UPDATE -> /profession/update - Caller ["+caller+"]");
 		
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(professionMedecin.getIdProfession()), professionMedecin.getNomProfession(), caller, UserOperationsCodes.PROFESSION_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
 		
 		if(professionMedecin == null) {
 			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(professionMedecin.getIdProfession()), professionMedecin.getNomProfession(), caller, UserOperationsCodes.PROFESSION_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
 		}
 		
@@ -116,6 +131,7 @@ public static final Logger logger = LoggerFactory.getLogger(ProfessionMedecinCon
 		
 		if (erreur != "OK") {
 			logger.error(ResponseCodes.ERROR_GENERIC.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(professionMedecin.getIdProfession()), professionMedecin.getNomProfession(), caller, UserOperationsCodes.PROFESSION_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
 		}
 		
@@ -126,10 +142,12 @@ public static final Logger logger = LoggerFactory.getLogger(ProfessionMedecinCon
 		
 		if (pm == null) {
 			logger.error(ResponseCodes.ERROR_SET_PROFESSIONS_DB.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(professionMedecin.getIdProfession()), professionMedecin.getNomProfession(), caller, UserOperationsCodes.PROFESSION_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_PROFESSIONS_DB), HttpStatus.OK);
 		}
 		
-		logger.info("UPDATE -> /profession/update - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" UPDATE -> /profession/update - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(professionMedecin.getIdProfession()), professionMedecin.getNomProfession(), caller, UserOperationsCodes.PROFESSION_REPORT_UPDATE);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_MODIFY_PROFESSION), HttpStatus.OK);
 	}
 	
@@ -137,15 +155,17 @@ public static final Logger logger = LoggerFactory.getLogger(ProfessionMedecinCon
 	public ResponseEntity<Object> deleteProfessionMedecin (@PathVariable("id") String id,
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("DELETE -> /profession/delete/{id} - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" DELETE -> /profession/delete/{id} - Caller ["+caller+"]");
 
 		if(id == null) {
 			logger.error(ResponseCodes.ERROR_INVALID_INPUT.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller, UserOperationsCodes.PROFESSION_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_INVALID_INPUT), HttpStatus.OK);
 		}
 				
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller, UserOperationsCodes.PROFESSION_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
 		
@@ -153,6 +173,7 @@ public static final Logger logger = LoggerFactory.getLogger(ProfessionMedecinCon
 			professionMedecinRepository.deleteById(Integer.parseInt(id));
 		} catch (Exception e) {
 			logger.error(ResponseCodes.ERROR_DELETE_PROFESSION_DB.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller, UserOperationsCodes.PROFESSION_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_DELETE_PROFESSION_DB), HttpStatus.OK);
 		}
 		
@@ -165,7 +186,8 @@ public static final Logger logger = LoggerFactory.getLogger(ProfessionMedecinCon
 			}
 		}
 		
-		logger.info("DELETE -> /profession/delete/{id} - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" DELETE -> /profession/delete/{id} - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(id), caller, UserOperationsCodes.PROFESSION_REPORT_DELETE);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_DELETE_PROFESSION), HttpStatus.OK);
 	}
 }
