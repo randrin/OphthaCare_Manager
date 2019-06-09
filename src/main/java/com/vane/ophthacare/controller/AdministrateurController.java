@@ -64,7 +64,6 @@ public class AdministrateurController {
 		}
 		
 		logger.info(Constants.END +" GET -> /admin/getAllAdmins - Caller ["+caller+"]");
-		//userOperations.saveOperationReport(Constants.SUCCESS, caller, UserOperationsCodes.ADMIN_GET_ALL);
 		return new ResponseEntity<Object>(listAdmins, HttpStatus.OK);
 	}
 	

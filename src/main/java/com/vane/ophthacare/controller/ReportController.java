@@ -22,6 +22,7 @@ import com.vane.ophthacare.exception.ResponseCodes;
 import com.vane.ophthacare.model.Patient;
 import com.vane.ophthacare.model.Report;
 import com.vane.ophthacare.repository.ReportRepository;
+import com.vane.ophthacare.utils.Constants;
 
 @RestController
 @CrossOrigin
@@ -34,8 +35,9 @@ public class ReportController {
 	public static final Logger logger = LoggerFactory.getLogger(ReportController.class);
 	
 	@GetMapping("/getAllReports")
-	public ResponseEntity<Object> getAllReports() {
-		logger.info("GET -> /report/getAllReports - Start");
+	public ResponseEntity<Object> getAllReports(@RequestHeader(value= "caller",required = false) String caller) {
+		
+		logger.info(Constants.BEGIN +" GET -> /report/getAllReports - Caller ["+caller+"]");
 		
 		List<Report> listReport = reportRepository.findAll();
 		
@@ -44,7 +46,7 @@ public class ReportController {
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GET_REPORTS_DB), HttpStatus.OK);
 		}
 		
-		logger.info("GET -> /report/getAllReports - End");
+		logger.info(Constants.END +" GET -> /report/getAllReports - Caller ["+caller+"]");
 		return new ResponseEntity<Object>(listReport, HttpStatus.OK);
 	}
 	
@@ -52,7 +54,7 @@ public class ReportController {
 	public ResponseEntity<Object> deleteReport (@PathVariable("id") String id,
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("DELETE -> /report/delete/{id} - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" DELETE -> /report/delete/{id} - Caller ["+caller+"]");
 		
 		if(id == null) {
 			logger.error(ResponseCodes.ERROR_INVALID_INPUT.toString());
@@ -71,7 +73,7 @@ public class ReportController {
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_DELETE_PATIENT_DB), HttpStatus.OK);
 		}
 		
-		logger.info("DELETE -> /report/delete/{id} - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" DELETE -> /report/delete/{id} - Caller ["+caller+"]");
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_DELETE_PATIENT), HttpStatus.OK);
 	}
 }

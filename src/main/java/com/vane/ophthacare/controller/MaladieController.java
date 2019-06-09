@@ -24,7 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vane.ophthacare.exception.Response;
 import com.vane.ophthacare.exception.ResponseCodes;
 import com.vane.ophthacare.model.Maladie;
+import com.vane.ophthacare.operations.UserOperations;
+import com.vane.ophthacare.operations.UserOperationsCodes;
 import com.vane.ophthacare.repository.MaladieRepository;
+import com.vane.ophthacare.utils.Constants;
 import com.vane.ophthacare.utils.Utils;
 
 @RestController
@@ -37,20 +40,25 @@ public static final Logger logger = LoggerFactory.getLogger(MaladieController.cl
 	@Autowired
 	private MaladieRepository maladieRepository;
 	
+	@Autowired
+	private UserOperations userOperations;
+	
 	public List<Maladie> maladieList = new ArrayList<>();
 	
 	@GetMapping("/getAllMaladies")
-	public ResponseEntity<Object> getAllMaladies () {
-		logger.info("GET -> /maladie/getAllMaladies - Start");
+	public ResponseEntity<Object> getAllMaladies (@RequestHeader(value= "caller",required = false) String caller) {
+		
+		logger.info(Constants.BEGIN +" GET -> /maladie/getAllMaladies - Caller ["+caller+"]");
 		
 		List<Maladie> listMaladies = maladieRepository.findAll();
 		
 		if (listMaladies == null) {
 			logger.error(ResponseCodes.ERROR_GET_DISEASES_DB.toString());
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.DISEASE_GET_ALL);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GET_DISEASES_DB), HttpStatus.OK);
 		}
 		
-		logger.info("GET -> /maladie/getAllMaladies - End");
+		logger.info(Constants.END +" GET -> /maladie/getAllMaladies - Caller ["+caller+"]");
 		return new ResponseEntity<Object>(listMaladies, HttpStatus.OK);
 	}
 	
@@ -58,15 +66,17 @@ public static final Logger logger = LoggerFactory.getLogger(MaladieController.cl
 	public ResponseEntity<Object> insertMaladie(@RequestBody Maladie maladie, 
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("INSERT -> /maladie/insert - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" INSERT -> /maladie/insert - Caller ["+caller+"]");
 		
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(maladie.getIdMaladie()), maladie.getNomMaladie(), caller, UserOperationsCodes.DISEASE_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
 		
 		if(maladie == null) {
 			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(maladie.getIdMaladie()), maladie.getNomMaladie(), caller, UserOperationsCodes.DISEASE_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
 		}
 		
@@ -76,6 +86,7 @@ public static final Logger logger = LoggerFactory.getLogger(MaladieController.cl
 		
 		if (erreur != "OK") {
 			logger.error(ResponseCodes.ERROR_GENERIC.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(maladie.getIdMaladie()), maladie.getNomMaladie(), caller, UserOperationsCodes.DISEASE_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
 		}
 		
@@ -86,10 +97,12 @@ public static final Logger logger = LoggerFactory.getLogger(MaladieController.cl
 		
 		if (m == null) {
 			logger.error(ResponseCodes.ERROR_SET_DISEASE_DB.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(maladie.getIdMaladie()), maladie.getNomMaladie(), caller, UserOperationsCodes.DISEASE_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_DISEASE_DB), HttpStatus.OK);
 		}
 		
-		logger.info("INSERT -> /maladie/insert - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" INSERT -> /maladie/insert - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(maladie.getIdMaladie()), maladie.getNomMaladie(), caller, UserOperationsCodes.DISEASE_REPORT_INSERT);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_INSERT_DISEASE), HttpStatus.OK);
 	}
 	
@@ -97,15 +110,17 @@ public static final Logger logger = LoggerFactory.getLogger(MaladieController.cl
 	public ResponseEntity<Object> updateMaladie(@RequestBody Maladie maladie, 
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("UPDATE -> /maladie/update - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" UPDATE -> /maladie/update - Caller ["+caller+"]");
 		
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(maladie.getIdMaladie()), maladie.getNomMaladie(), caller, UserOperationsCodes.DISEASE_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
 		
 		if(maladie == null) {
 			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(maladie.getIdMaladie()), maladie.getNomMaladie(), caller, UserOperationsCodes.DISEASE_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
 		}
 		
@@ -115,6 +130,7 @@ public static final Logger logger = LoggerFactory.getLogger(MaladieController.cl
 		
 		if (erreur != "OK") {
 			logger.error(ResponseCodes.ERROR_GENERIC.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(maladie.getIdMaladie()), maladie.getNomMaladie(), caller, UserOperationsCodes.DISEASE_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
 		}
 		
@@ -125,10 +141,12 @@ public static final Logger logger = LoggerFactory.getLogger(MaladieController.cl
 		
 		if (m == null) {
 			logger.error(ResponseCodes.ERROR_SET_DISEASE_DB.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(maladie.getIdMaladie()), maladie.getNomMaladie(), caller, UserOperationsCodes.DISEASE_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_DISEASE_DB), HttpStatus.OK);
 		}
 		
-		logger.info("UPDATE -> /maladie/update - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" UPDATE -> /maladie/update - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(maladie.getIdMaladie()), maladie.getNomMaladie(), caller, UserOperationsCodes.DISEASE_REPORT_UPDATE);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_MODIFY_DISEASE), HttpStatus.OK);
 	}
 	
@@ -136,15 +154,17 @@ public static final Logger logger = LoggerFactory.getLogger(MaladieController.cl
 	public ResponseEntity<Object> deleteMaladie (@PathVariable("id") String id,
 			@RequestHeader(value= "caller",required = false) String caller) {
 		
-		logger.info("DELETE -> /maladie/delete/{id} - Start - Caller ["+caller+"]");
+		logger.info(Constants.BEGIN +" DELETE -> /maladie/delete/{id} - Caller ["+caller+"]");
 		
 		if(id == null) {
 			logger.error(ResponseCodes.ERROR_INVALID_INPUT.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller, UserOperationsCodes.DISEASE_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_INVALID_INPUT), HttpStatus.OK);
 		}
 				
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller, UserOperationsCodes.DISEASE_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
 		
@@ -152,6 +172,7 @@ public static final Logger logger = LoggerFactory.getLogger(MaladieController.cl
 			maladieRepository.deleteById(Integer.parseInt(id));
 		} catch (Exception e) {
 			logger.error(ResponseCodes.ERROR_DELETE_DISEASE_DB.toString());
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller, UserOperationsCodes.DISEASE_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_DELETE_DISEASE_DB), HttpStatus.OK);
 		}
 		
@@ -164,7 +185,8 @@ public static final Logger logger = LoggerFactory.getLogger(MaladieController.cl
 			}
 		}
 		
-		logger.info("DELETE -> /maladie/delete/{id} - End - Caller ["+caller+"]");
+		logger.info(Constants.END +" DELETE -> /maladie/delete/{id} - Caller ["+caller+"]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(id), caller, UserOperationsCodes.DISEASE_REPORT_DELETE);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_DELETE_DISEASE), HttpStatus.OK);
 	}
 }
