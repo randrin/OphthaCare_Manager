@@ -56,6 +56,12 @@ public class AdministrateurController {
 		
 		logger.info(Constants.BEGIN +" GET -> /admin/getAllAdmins - Caller ["+caller+"]");
 		
+		if (StringUtils.isEmpty(caller)) {
+			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ADMIN_GET_ALL);
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
+		}
+		
 		List<Administrateur> listAdmins = administrateurRepository.findAll();
 		
 		if (listAdmins == null) {
