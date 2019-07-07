@@ -19,6 +19,7 @@
 		<java.version>1.8</java.version>
 		<hibernate.version>5.2.4.Final</hibernate.version>
 		<poi.version>3.17</poi.version>
+		<itext.version>5.0.6</itext.version>
 	</properties>
 
 	<dependencies>
@@ -77,6 +78,11 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>${itext.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
