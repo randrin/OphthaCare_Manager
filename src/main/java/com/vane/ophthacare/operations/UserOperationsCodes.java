@@ -10,6 +10,7 @@ public enum UserOperationsCodes {
 	
 	// Administrateurs
 	ADMIN_GET_ALL("Get all Administrateurs from DB"),
+	ADMIN_DOWNLOAD_PDF("Download PDF Administrateurs"),
 	ADMIN_REPORT_INSERT("Insert new Administrateur on DB with id [%s] and pseudo [%s]"),
 	ADMIN_REPORT_UPDATE("Update Administrateur on DB with id [%s] and pseudo [%s]"),
 	ADMIN_REPORT_DELETE("Deleted Administrateur from DB with id [%s]"),
