@@ -2,9 +2,12 @@ package com.vane.ophthacare.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +31,7 @@ import com.vane.ophthacare.exception.ExceptionCodes;
 import com.vane.ophthacare.exception.Response;
 import com.vane.ophthacare.exception.ResponseCodes;
 import com.vane.ophthacare.model.Administrateur;
+import com.vane.ophthacare.model.Session;
 import com.vane.ophthacare.operations.UserOperations;
 import com.vane.ophthacare.operations.UserOperationsCodes;
 import com.vane.ophthacare.repository.AdministrateurRepository;
@@ -177,6 +181,9 @@ public class AdministrateurController {
 			if (admin.getActiveAdmin().equals("true")) {
 				logger.info("Admin : [" +admin.getNomAdmin()+ " "+admin.getPrenomAdmin()+ "] is activated? " +admin.getActiveAdmin());
 				logger.info(Constants.END +" POST -> /admin/login");
+				admin.setToken(Utils.getSecureToken());
+				admin.setTokenDate(new Date());
+				adminList.add(admin);
 				return new ResponseEntity<Object>(admin, HttpStatus.OK);
 			} else {
 				logger.info(Constants.END +" POST -> /admin/login");
@@ -184,6 +191,25 @@ public class AdministrateurController {
 			}
 		}
 	}
+	
+	@PostMapping("/logout")
+	public ResponseEntity<Object> logout(@Context HttpServletRequest request) {
+		
+		logger.info(Constants.BEGIN +" LOGOUT -> /admin/logout ");
+		
+		for(Administrateur admin : adminList) {
+			if(request.getHeader(Constants.TOKEN_KEY) != null && request.getHeader(Constants.TOKEN_KEY).equals(u.getToken())){
+				String role = admin.getRoleAdmin();
+				admin.setLastLoginAdmin(format.format(GregorianCalendar.getInstance().getTime()));
+				adminList.remove(admin);
+				logger.info("token trovato username ["+admin.getNomAdmin()+"], elimino sessione");
+				return new ResponseEntity<Object>(new Session(true, role), HttpStatus.OK);		
+			}
+		}
+		logger.info(Constants.END +" LOGOUT -> /admin/logout ");
+		return new ResponseEntity<Object>(new Session(false, null), HttpStatus.OK);		
+	}
+	
 	@DeleteMapping(path = {"/delete/{id}"})
 	public ResponseEntity<Object> deleteAdministrateur (@PathVariable("id") String id,
 			@RequestHeader(value= "caller",required = false) String caller) {

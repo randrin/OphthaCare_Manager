@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.vane.ophthacare.excel.export.ExcelField;
 
@@ -43,6 +44,12 @@ public class Administrateur implements Serializable {
 	
 	@Column(name="registration_admin")
 	private String registrationAdmin;
+	
+	@Transient
+	private String token;
+	
+	@Transient
+	private Date tokenDate;
 	
 	/**
 	 * @return the idAdmin
@@ -153,5 +160,29 @@ public class Administrateur implements Serializable {
 	@ExcelField(field = "Date de Registration", position = 5)
 	public void setRegistrationAdmin(String registrationAdmin) {
 		this.registrationAdmin = registrationAdmin;
+	}
+	/**
+	 * @return the token
+	 */
+	public String getToken() {
+		return token;
+	}
+	/**
+	 * @param token the token to set
+	 */
+	public void setToken(String token) {
+		this.token = token;
+	}
+	/**
+	 * @return the tokenDate
+	 */
+	public Date getTokenDate() {
+		return tokenDate;
+	}
+	/**
+	 * @param tokenDate the tokenDate to set
+	 */
+	public void setTokenDate(Date tokenDate) {
+		this.tokenDate = tokenDate;
 	}
 }
