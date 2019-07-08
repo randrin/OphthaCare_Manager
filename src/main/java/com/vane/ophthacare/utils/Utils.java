@@ -2,6 +2,8 @@ package com.vane.ophthacare.utils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;	
@@ -14,6 +16,11 @@ import com.vane.ophthacare.model.ProfessionMedecin;
 public class Utils {
 
 	private static final Logger logger = LoggerFactory.getLogger(Utils.class);
+	
+	public static String getSecureToken() {
+		SecureRandom random = new SecureRandom();
+		return new BigInteger(130, random).toString(32);
+	}
 	
 	// Création du code du patient au format: NNN-PPP-YY-X-DD
     // Où NNN: 3 premiers lettres du nom, PPP: 3 premiers lettres du prénom, 
