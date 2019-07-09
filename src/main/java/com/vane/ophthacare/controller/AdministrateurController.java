@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
+import org.mapstruct.Context;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -195,18 +196,19 @@ public class AdministrateurController {
 	@PostMapping("/logout")
 	public ResponseEntity<Object> logout(@Context HttpServletRequest request) {
 		
-		logger.info(Constants.BEGIN +" LOGOUT -> /admin/logout ");
+		logger.info(Constants.BEGIN +" LOGOUT -> /admin/logout");
 		
 		for(Administrateur admin : adminList) {
-			if(request.getHeader(Constants.TOKEN_KEY) != null && request.getHeader(Constants.TOKEN_KEY).equals(u.getToken())){
+//			if(request.getHeader(Constants.TOKEN_KEY) != null && request.getHeader(Constants.TOKEN_KEY).equals(admin.getToken())){
 				String role = admin.getRoleAdmin();
 				admin.setLastLoginAdmin(format.format(GregorianCalendar.getInstance().getTime()));
+				administrateurRepository.save(admin);
 				adminList.remove(admin);
-				logger.info("token trovato username ["+admin.getNomAdmin()+"], elimino sessione");
+				logger.info("token trouvé pour l'username ["+admin.getNomAdmin()+"], elimination de la session");
 				return new ResponseEntity<Object>(new Session(true, role), HttpStatus.OK);		
-			}
+//			}
 		}
-		logger.info(Constants.END +" LOGOUT -> /admin/logout ");
+		logger.info(Constants.END +" LOGOUT -> /admin/logout");
 		return new ResponseEntity<Object>(new Session(false, null), HttpStatus.OK);		
 	}
 	
