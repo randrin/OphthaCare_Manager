@@ -169,7 +169,7 @@ public class AdministrateurController {
 			@RequestParam("username") String username, 
 			@RequestParam("password") String password) {
 		
-		logger.info(Constants.END +" POST -> /admin/login");
+		logger.info(Constants.BEGIN +" POST -> /admin/login");
 		logger.info("Username/Pseudo administrateur: " +username);
 		logger.info("Password administrateur: " +password);
 		
@@ -177,14 +177,15 @@ public class AdministrateurController {
 		//logger.info("Admin qui est entrain de se connecter: " +admin.getNomAdmin()+ " "+admin.getPrenomAdmin());
 		
 		if (admin == null) {
+			logger.info(Constants.END +" POST -> /admin/login");
 			return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_ADMIN_NO_PERMISSION), HttpStatus.OK);
 		} else {
 			if (admin.getActiveAdmin().equals("true")) {
 				logger.info("Admin : [" +admin.getNomAdmin()+ " "+admin.getPrenomAdmin()+ "] is activated? " +admin.getActiveAdmin());
-				logger.info(Constants.END +" POST -> /admin/login");
 				admin.setToken(Utils.getSecureToken());
 				admin.setTokenDate(new Date());
 				adminList.add(admin);
+				logger.info(Constants.END +" POST -> /admin/login");
 				return new ResponseEntity<Object>(admin, HttpStatus.OK);
 			} else {
 				logger.info(Constants.END +" POST -> /admin/login");
