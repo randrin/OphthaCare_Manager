@@ -2,7 +2,8 @@ package com.vane.ophthacare.exception;
 
 public enum ExceptionCodes {
 
-	ERROR_ADMIN_NO_PERMISSION("ERR0001","Admin sans permissions. Contactez votre administrateur");
+	ERROR_ADMIN_NO_PERMISSION("ERR0001","Admin sans permissions. Contactez votre administrateur"),
+	ERROR_MEDECIN_NO_PERMISSION("ERR0002","Personnel sans permissions. Contactez votre administrateur");
 	
 	private String code;
 	private String message;

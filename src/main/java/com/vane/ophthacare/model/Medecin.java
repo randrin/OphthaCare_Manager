@@ -2,6 +2,7 @@ package com.vane.ophthacare.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.vane.ophthacare.excel.export.ExcelField;
 
@@ -52,6 +54,15 @@ public class Medecin implements Serializable {
 	
 	@Column(name="numFixe_medecin")
 	private BigInteger numFixeMedecin;
+	
+	@Column(name="active")
+	private String activeMedecin;
+	
+	@Transient
+	private String token;
+	
+	@Transient
+	private Date tokenDate;
 	
 	/**
 	 * @return the idMedecin
@@ -226,5 +237,46 @@ public class Medecin implements Serializable {
 	public void setNumFixeMedecin(BigInteger numFixeMedecin) {
 		this.numFixeMedecin = numFixeMedecin;
 	}
-	
+
+	/**
+	 * @return the activeMedecin
+	 */
+	public String getActiveMedecin() {
+		return activeMedecin;
+	}
+
+	/**
+	 * @param activeMedecin the activeMedecin to set
+	 */
+	public void setActiveMedecin(String activeMedecin) {
+		this.activeMedecin = activeMedecin;
+	}
+
+	/**
+	 * @return the token
+	 */
+	public String getToken() {
+		return token;
+	}
+
+	/**
+	 * @param token the token to set
+	 */
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	/**
+	 * @return the tokenDate
+	 */
+	public Date getTokenDate() {
+		return tokenDate;
+	}
+
+	/**
+	 * @param tokenDate the tokenDate to set
+	 */
+	public void setTokenDate(Date tokenDate) {
+		this.tokenDate = tokenDate;
+	}
 }

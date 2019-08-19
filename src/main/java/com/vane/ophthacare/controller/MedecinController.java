@@ -1,6 +1,7 @@
 package com.vane.ophthacare.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vane.ophthacare.exception.ExceptionCodes;
 import com.vane.ophthacare.exception.Response;
 import com.vane.ophthacare.exception.ResponseCodes;
 import com.vane.ophthacare.model.Medecin;
@@ -155,6 +158,35 @@ public class MedecinController {
 		logger.info(Constants.END +" UPDATE -> /medecin/update - Caller ["+caller+"]");
 		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(medecin.getIdMedecin()), medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_UPDATE);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_MODIFY_MEDECIN), HttpStatus.OK);
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<Object> login (
+			@RequestParam("matricule") String matricule, 
+			@RequestParam("password") String password) {
+		
+		logger.info(Constants.BEGIN +" POST -> /medecin/login");
+		logger.info("Matricule/Pseudo medecin: " +matricule);
+		logger.info("Password medecin: " +password);
+		
+		Medecin medecin = medecinRepository.findByMatriculeMedecin(matricule);
+		
+		if (medecin == null) {
+			logger.info(Constants.END +" POST -> /medecin/login");
+			return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_MEDECIN_NO_PERMISSION), HttpStatus.OK);
+		} else {
+			if (medecin.getActiveMedecin().equals("true")) {
+				logger.info("Personnel : [" +medecin.getNomMedecin()+ " "+medecin.getPrenomMedecin()+ "] is activated? " +medecin.getActiveMedecin());
+				medecin.setToken(Utils.getSecureToken());
+				medecin.setTokenDate(new Date());
+				specialisteList.add(medecin);
+				medecinRepository.save(medecin);
+				return new ResponseEntity<Object>(medecin, HttpStatus.OK);
+			} else {
+				logger.info(Constants.END +" POST -> /medecin/login");
+				return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_MEDECIN_NO_PERMISSION), HttpStatus.OK);
+			}
+		}
 	}
 	
 	@DeleteMapping(path = {"/delete/{id}"})
