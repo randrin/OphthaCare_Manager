@@ -36,6 +36,9 @@ public class Administrateur implements Serializable {
 	@Column(name="role")
 	private String roleAdmin;
 	
+	@Column(name="email_admin")
+	private String emailAdmin;
+	
 	@Column(name="active")
 	private String activeAdmin;
 	
@@ -184,5 +187,17 @@ public class Administrateur implements Serializable {
 	 */
 	public void setTokenDate(Date tokenDate) {
 		this.tokenDate = tokenDate;
+	}
+	/**
+	 * @return the emailAdmin
+	 */
+	public String getEmailAdmin() {
+		return emailAdmin;
+	}
+	/**
+	 * @param emailAdmin the emailAdmin to set
+	 */
+	public void setEmailAdmin(String emailAdmin) {
+		this.emailAdmin = emailAdmin;
 	}
 }
