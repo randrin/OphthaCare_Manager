@@ -10,9 +10,9 @@ public class Session implements Serializable {
 
 	private String role;
 
-	public Session() {}
+	public Session() {
+	}
 
-	
 	public Session(boolean check, String role) {
 		this.check = check;
 		this.role = role;

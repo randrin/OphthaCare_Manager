@@ -31,49 +31,49 @@ public class ReportController {
 
 	@Autowired
 	private ReportRepository reportRepository;
-	
+
 	public static final Logger logger = LoggerFactory.getLogger(ReportController.class);
-	
+
 	@GetMapping("/getAllReports")
-	public ResponseEntity<Object> getAllReports(@RequestHeader(value= "caller",required = false) String caller) {
-		
-		logger.info(Constants.BEGIN +" GET -> /report/getAllReports - Caller ["+caller+"]");
-		
+	public ResponseEntity<Object> getAllReports(@RequestHeader(value = "caller", required = false) String caller) {
+
+		logger.info(Constants.BEGIN + " GET -> /report/getAllReports - Caller [" + caller + "]");
+
 		List<Report> listReport = reportRepository.findAll();
-		
+
 		if (listReport == null) {
 			logger.error(ResponseCodes.ERROR_GET_REPORTS_DB.toString());
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GET_REPORTS_DB), HttpStatus.OK);
 		}
-		
-		logger.info(Constants.END +" GET -> /report/getAllReports - Caller ["+caller+"]");
+
+		logger.info(Constants.END + " GET -> /report/getAllReports - Caller [" + caller + "]");
 		return new ResponseEntity<Object>(listReport, HttpStatus.OK);
 	}
-	
-	@DeleteMapping(path = {"/delete/{id}"})
-	public ResponseEntity<Object> deleteReport (@PathVariable("id") String id,
-			@RequestHeader(value= "caller",required = false) String caller) {
-		
-		logger.info(Constants.BEGIN +" DELETE -> /report/delete/{id} - Caller ["+caller+"]");
-		
-		if(id == null) {
+
+	@DeleteMapping(path = { "/delete/{id}" })
+	public ResponseEntity<Object> deleteReport(@PathVariable("id") String id,
+			@RequestHeader(value = "caller", required = false) String caller) {
+
+		logger.info(Constants.BEGIN + " DELETE -> /report/delete/{id} - Caller [" + caller + "]");
+
+		if (id == null) {
 			logger.error(ResponseCodes.ERROR_INVALID_INPUT.toString());
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_INVALID_INPUT), HttpStatus.OK);
 		}
-				
+
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
-		
+
 		try {
 			reportRepository.deleteById(Integer.parseInt(id));
 		} catch (Exception e) {
 			logger.error(ResponseCodes.ERROR_DELETE_PATIENT_DB.toString());
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_DELETE_PATIENT_DB), HttpStatus.OK);
 		}
-		
-		logger.info(Constants.END +" DELETE -> /report/delete/{id} - Caller ["+caller+"]");
+
+		logger.info(Constants.END + " DELETE -> /report/delete/{id} - Caller [" + caller + "]");
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_DELETE_PATIENT), HttpStatus.OK);
 	}
 }

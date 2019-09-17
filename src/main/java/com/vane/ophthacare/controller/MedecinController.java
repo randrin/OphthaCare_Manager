@@ -41,192 +41,208 @@ import com.vane.ophthacare.utils.Utils;
 public class MedecinController {
 
 	public static final Logger logger = LoggerFactory.getLogger(MedecinController.class);
-	
+
 	@Autowired
 	private MedecinRepository medecinRepository;
-	
+
 	@Autowired
 	private ProfessionMedecinRepository professionMedecinRepository;
-	
+
 	@Autowired
 	private UserOperations userOperations;
-	
+
 	public List<Medecin> specialisteList = new ArrayList<>();
 	public List<ProfessionMedecin> professionMedecinList = new ArrayList<>();
-	
+
 	@GetMapping("/getAllMedecins")
-	public ResponseEntity<Object> getAllMedecins (@RequestHeader(value= "caller",required = false) String caller) {
-		logger.info(Constants.BEGIN +" GET -> /medecin/getAllMedecins - Caller ["+caller+"]");
-		
+	public ResponseEntity<Object> getAllMedecins(@RequestHeader(value = "caller", required = false) String caller) {
+		logger.info(Constants.BEGIN + " GET -> /medecin/getAllMedecins - Caller [" + caller + "]");
+
 		List<Medecin> listMedecins = medecinRepository.findAll();
 		professionMedecinList = professionMedecinRepository.findAll();
-		
+
 		if (listMedecins == null) {
 			logger.error(ResponseCodes.ERROR_GET_MEDECINS_DB.toString());
 			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.MEDECIN_GET_ALL);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GET_MEDECINS_DB), HttpStatus.OK);
 		}
-		
-		logger.info(Constants.END +" GET -> /medecin/getAllMedecins - Caller ["+caller+"]");
+
+		logger.info(Constants.END + " GET -> /medecin/getAllMedecins - Caller [" + caller + "]");
 		return new ResponseEntity<Object>(listMedecins, HttpStatus.OK);
 	}
-	
+
 	@PutMapping("/insert")
-	public ResponseEntity<Object> insertMedecin(@RequestBody Medecin medecin, 
-			@RequestHeader(value= "caller",required = false) String caller) {
-		
-		logger.info(Constants.BEGIN +" INSERT -> /medecin/insert - Caller ["+caller+"]");
-		
+	public ResponseEntity<Object> insertMedecin(@RequestBody Medecin medecin,
+			@RequestHeader(value = "caller", required = false) String caller) {
+
+		logger.info(Constants.BEGIN + " INSERT -> /medecin/insert - Caller [" + caller + "]");
+
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
-			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()), medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_INSERT);
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()),
+					medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
-		
-		if(medecin == null) {
+
+		if (medecin == null) {
 			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
-			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()), medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_INSERT);
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()),
+					medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
 		}
-		
+
 		String erreur = Utils.checkAttributeFromObject(medecin, false);
-		
-		logger.info("Erreur response: " +erreur);
-		
+
+		logger.info("Erreur response: " + erreur);
+
 		if (erreur != "OK") {
 			logger.error(ResponseCodes.ERROR_GENERIC.toString());
-			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()), medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_INSERT);
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()),
+					medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
 		}
-		
-		//Set Model Medecin
-		medecin.setMatriculeMedecin(Utils.matriculeMedecin(professionMedecinList, medecin.getProfessionMedecin(), medecin.getNomMedecin(), medecin.getPrenomMedecin(), medecin.getDateNaisMedecin()));
+
+		// Set Model Medecin
+		medecin.setMatriculeMedecin(Utils.matriculeMedecin(professionMedecinList, medecin.getProfessionMedecin(),
+				medecin.getNomMedecin(), medecin.getPrenomMedecin(), medecin.getDateNaisMedecin()));
 		medecin.setAgeMedecin(Utils.calculAgePatient(medecin.getDateNaisMedecin()));
-		
+
 		Medecin m = medecinRepository.save(medecin);
-		
+
 		if (m == null) {
 			logger.error(ResponseCodes.ERROR_SET_MEDECINS_DB.toString());
-			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()), medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_INSERT);
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()),
+					medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_MEDECINS_DB), HttpStatus.OK);
 		}
-		
-		logger.info(Constants.END +" INSERT -> /medecin/insert - Caller ["+caller+"]");
-		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(medecin.getIdMedecin()), medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_INSERT);
+
+		logger.info(Constants.END + " INSERT -> /medecin/insert - Caller [" + caller + "]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(medecin.getIdMedecin()),
+				medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_INSERT);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_INSERT_MEDECIN), HttpStatus.OK);
 	}
 
 	@PostMapping("/update")
-	public ResponseEntity<Object> updateMedecin(@RequestBody Medecin medecin, 
-			@RequestHeader(value= "caller",required = false) String caller) {
-		
-		logger.info(Constants.BEGIN +" UPDATE -> /medecin/update - Caller ["+caller+"]");
-		
+	public ResponseEntity<Object> updateMedecin(@RequestBody Medecin medecin,
+			@RequestHeader(value = "caller", required = false) String caller) {
+
+		logger.info(Constants.BEGIN + " UPDATE -> /medecin/update - Caller [" + caller + "]");
+
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
-			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()), medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_UPDATE);
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()),
+					medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
-		
-		if(medecin == null) {
+
+		if (medecin == null) {
 			logger.error(ResponseCodes.ERROR_PARSE_OBJECT.toString());
-			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()), medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_UPDATE);
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()),
+					medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_PARSE_OBJECT), HttpStatus.OK);
 		}
-		
+
 		String erreur = Utils.checkAttributeFromObject(medecin, false);
-		
-		logger.info("Erreur response: " +erreur);
-		
+
+		logger.info("Erreur response: " + erreur);
+
 		if (erreur != "OK") {
 			logger.error(ResponseCodes.ERROR_GENERIC.toString());
-			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()), medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_UPDATE);
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()),
+					medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
 		}
-		
-		//Set Model Medecin
+
+		// Set Model Medecin
 		medecin.setAgeMedecin(Utils.calculAgePatient(medecin.getDateNaisMedecin()));
-		
+
 		Medecin m = medecinRepository.save(medecin);
-		
+
 		if (m == null) {
 			logger.error(ResponseCodes.ERROR_SET_MEDECINS_DB.toString());
-			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()), medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_UPDATE);
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()),
+					medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_UPDATE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_MEDECINS_DB), HttpStatus.OK);
 		}
-		
-		logger.info(Constants.END +" UPDATE -> /medecin/update - Caller ["+caller+"]");
-		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(medecin.getIdMedecin()), medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_UPDATE);
+
+		logger.info(Constants.END + " UPDATE -> /medecin/update - Caller [" + caller + "]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(medecin.getIdMedecin()),
+				medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_UPDATE);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_MODIFY_MEDECIN), HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/login")
-	public ResponseEntity<Object> login (
-			@RequestParam("matricule") String matricule, 
+	public ResponseEntity<Object> login(@RequestParam("matricule") String matricule,
 			@RequestParam("password") String password) {
-		
-		logger.info(Constants.BEGIN +" POST -> /medecin/login");
-		logger.info("Matricule/Pseudo medecin: " +matricule);
-		logger.info("Password medecin: " +password);
-		
+
+		logger.info(Constants.BEGIN + " POST -> /medecin/login");
+		logger.info("Matricule/Pseudo medecin: " + matricule);
+		logger.info("Password medecin: " + password);
+
 		Medecin medecin = medecinRepository.findByMatriculeMedecin(matricule);
-		
+
 		if (medecin == null) {
-			logger.info(Constants.END +" POST -> /medecin/login");
+			logger.info(Constants.END + " POST -> /medecin/login");
 			return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_MEDECIN_NO_PERMISSION), HttpStatus.OK);
 		} else {
 			if (medecin.getActiveMedecin().equals("true")) {
-				logger.info("Personnel : [" +medecin.getNomMedecin()+ " "+medecin.getPrenomMedecin()+ "] is activated? " +medecin.getActiveMedecin());
+				logger.info("Personnel : [" + medecin.getNomMedecin() + " " + medecin.getPrenomMedecin()
+						+ "] is activated? " + medecin.getActiveMedecin());
 				medecin.setToken(Utils.getSecureToken());
 				medecin.setTokenDate(new Date());
 				specialisteList.add(medecin);
 				medecinRepository.save(medecin);
 				return new ResponseEntity<Object>(medecin, HttpStatus.OK);
 			} else {
-				logger.info(Constants.END +" POST -> /medecin/login");
-				return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_MEDECIN_NO_PERMISSION), HttpStatus.OK);
+				logger.info(Constants.END + " POST -> /medecin/login");
+				return new ResponseEntity<Object>(new Response(ExceptionCodes.ERROR_MEDECIN_NO_PERMISSION),
+						HttpStatus.OK);
 			}
 		}
 	}
-	
-	@DeleteMapping(path = {"/delete/{id}"})
-	public ResponseEntity<Object> deleteMedecin (@PathVariable("id") String id,
-			@RequestHeader(value= "caller",required = false) String caller) {
-		
-		logger.info(Constants.BEGIN +" DELETE -> /medecin/delete/{id} - Caller ["+caller+"]");
-		
-		if(id == null) {
+
+	@DeleteMapping(path = { "/delete/{id}" })
+	public ResponseEntity<Object> deleteMedecin(@PathVariable("id") String id,
+			@RequestHeader(value = "caller", required = false) String caller) {
+
+		logger.info(Constants.BEGIN + " DELETE -> /medecin/delete/{id} - Caller [" + caller + "]");
+
+		if (id == null) {
 			logger.error(ResponseCodes.ERROR_INVALID_INPUT.toString());
-			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller, UserOperationsCodes.MEDECIN_REPORT_DELETE);
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller,
+					UserOperationsCodes.MEDECIN_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_INVALID_INPUT), HttpStatus.OK);
 		}
-				
+
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
-			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller, UserOperationsCodes.MEDECIN_REPORT_DELETE);
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller,
+					UserOperationsCodes.MEDECIN_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
 		}
-		
+
 		try {
 			medecinRepository.deleteById(Integer.parseInt(id));
 		} catch (Exception e) {
 			logger.error(ResponseCodes.ERROR_DELETE_MEDECIN_DB.toString());
-			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller, UserOperationsCodes.MEDECIN_REPORT_DELETE);
+			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(id), caller,
+					UserOperationsCodes.MEDECIN_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_DELETE_MEDECIN_DB), HttpStatus.OK);
 		}
-		
+
 		Iterator<Medecin> iter = specialisteList.iterator();
 
 		while (iter.hasNext()) {
 			Medecin medecinList = iter.next();
-			if(medecinList.getIdMedecin().equals(Integer.parseInt(id))) {	
+			if (medecinList.getIdMedecin().equals(Integer.parseInt(id))) {
 				iter.remove();
 			}
 		}
-		
-		logger.info(Constants.END +" DELETE -> /medecin/delete/{id} - Caller ["+caller+"]");
-		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(id), caller, UserOperationsCodes.MEDECIN_REPORT_DELETE);
+
+		logger.info(Constants.END + " DELETE -> /medecin/delete/{id} - Caller [" + caller + "]");
+		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(id), caller,
+				UserOperationsCodes.MEDECIN_REPORT_DELETE);
 		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_DELETE_MEDECIN), HttpStatus.OK);
 	}
-	
+
 }

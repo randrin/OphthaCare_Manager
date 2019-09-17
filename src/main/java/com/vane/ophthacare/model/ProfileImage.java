@@ -35,7 +35,8 @@ public class ProfileImage implements Serializable {
 	@OneToOne(mappedBy = "profileImage")
 	private Administrateur administrateur;
 
-	public ProfileImage() {}
+	public ProfileImage() {
+	}
 
 	/**
 	 * @param name

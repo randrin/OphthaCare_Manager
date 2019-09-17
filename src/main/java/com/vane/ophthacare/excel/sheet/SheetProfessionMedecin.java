@@ -18,27 +18,30 @@ public class SheetProfessionMedecin extends SheetInterface {
 	private final String TITLE = "OphthaCare Clinique Médecins Professions";
 	private final short indexColorFont = IndexedColors.BLACK.getIndex();
 	private final short indexColorBackground = IndexedColors.YELLOW.getIndex();
-	
+
 	private Class classForMethod = ProfessionMedecin.class;
 	private Workbook workbook;
 	private List<ProfessionMedecin> professionMedecins;
 	private CellStyle dataCellStyle;
 	private ArrayList<ExcelObjectList> excelObjectList;
-	
+
 	private int titleStart = 1;
 	private int headerStart = 3;
-	
-	public SheetProfessionMedecin () {super ();}
-	
-	public SheetProfessionMedecin (Workbook workbook, List<ProfessionMedecin> profesionMedecinList) {
+
+	public SheetProfessionMedecin() {
+		super();
+	}
+
+	public SheetProfessionMedecin(Workbook workbook, List<ProfessionMedecin> profesionMedecinList) {
 		this.workbook = workbook;
 		this.professionMedecins = profesionMedecinList;
 	}
-	
+
 	public void createSheet() {
 		Sheet sheet = workbook.createSheet(SHEET_NAME);
 		excelObjectList = getAllGetterMethod(classForMethod);
-		createSheetData(workbook, sheet, excelObjectList, TITLE, indexColorFont, indexColorBackground, titleStart, headerStart);
+		createSheetData(workbook, sheet, excelObjectList, TITLE, indexColorFont, indexColorBackground, titleStart,
+				headerStart);
 		startingPopulate(sheet);
 	}
 
@@ -46,8 +49,8 @@ public class SheetProfessionMedecin extends SheetInterface {
 		int rowStart = rowNumDataCelStart;
 		dataCellStyle = workbook.createCellStyle();
 		borderCell(dataCellStyle);
-		
-		for(ProfessionMedecin profressionMedecin: professionMedecins) {
+
+		for (ProfessionMedecin profressionMedecin : professionMedecins) {
 			populateCell(sheet, excelObjectList, profressionMedecin, rowStart, dataCellStyle);
 			rowStart++;
 		}

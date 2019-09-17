@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.vane.ophthacare.model.Maladie;
 
 @Repository
-public interface MaladieRepository extends JpaRepository<Maladie, Integer>{
+public interface MaladieRepository extends JpaRepository<Maladie, Integer> {
 
 }

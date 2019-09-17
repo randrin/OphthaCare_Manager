@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.vane.ophthacare.model.Administrateur;
 
 @Repository
-public interface AdministrateurRepository extends JpaRepository<Administrateur, Integer>{
+public interface AdministrateurRepository extends JpaRepository<Administrateur, Integer> {
 
 	Administrateur findByPseudoAdmin(String username);
 }

@@ -15,55 +15,55 @@ import javax.persistence.Transient;
 import com.vane.ophthacare.excel.export.ExcelField;
 
 @Entity
-@Table(name="Medecins")
+@Table(name = "Medecins")
 public class Medecin implements Serializable {
 
 	private static final long serialVersionUID = -4281958355038427867L;
 
 	@Id
-	@Column(name="id_medecin")
+	@Column(name = "id_medecin")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idMedecin;
-	
-	@Column(name="nom_medecin")
+
+	@Column(name = "nom_medecin")
 	private String nomMedecin;
-	
-	@Column(name="prenom_medecin")
+
+	@Column(name = "prenom_medecin")
 	private String prenomMedecin;
-	
-	@Column(name="date_medecin_patient")
+
+	@Column(name = "date_medecin_patient")
 	private String dateNaisMedecin;
-	
-	@Column(name="age_medecin")
+
+	@Column(name = "age_medecin")
 	private int ageMedecin;
-	
-	@Column(name="sexe_medecin")
+
+	@Column(name = "sexe_medecin")
 	private String sexeMedecin;
-	
-	@Column(name="matricule_medecin")
+
+	@Column(name = "matricule_medecin")
 	private String matriculeMedecin;
-	
-	@Column(name="profession_medecin")
+
+	@Column(name = "profession_medecin")
 	private String professionMedecin;
 
-	@Column(name="email_medecin", length = 25)
+	@Column(name = "email_medecin", length = 25)
 	private String emailMedecin;
-	
-	@Column(name="numTel_medecin")
+
+	@Column(name = "numTel_medecin")
 	private BigInteger numTelMedecin;
-	
-	@Column(name="numFixe_medecin")
+
+	@Column(name = "numFixe_medecin")
 	private BigInteger numFixeMedecin;
-	
-	@Column(name="active")
+
+	@Column(name = "active")
 	private String activeMedecin;
-	
+
 	@Transient
 	private String token;
-	
+
 	@Transient
 	private Date tokenDate;
-	
+
 	/**
 	 * @return the idMedecin
 	 */

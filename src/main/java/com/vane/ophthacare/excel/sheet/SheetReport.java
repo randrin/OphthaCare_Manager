@@ -19,27 +19,30 @@ public class SheetReport extends SheetInterface {
 	private final String TITLE = "OphthaCare Clinique Reports";
 	private final short indexColorFont = IndexedColors.BLACK.getIndex();
 	private final short indexColorBackground = IndexedColors.YELLOW.getIndex();
-	
+
 	private Class classForMethod = Report.class;
 	private Workbook workbook;
 	private List<Report> reports;
 	private CellStyle dataCellStyle;
 	private ArrayList<ExcelObjectList> excelObjectList;
-	
+
 	private int titleStart = 1;
 	private int headerStart = 3;
-	
-	public SheetReport() { super();}
-	
-	public SheetReport (Workbook workbook, List<Report> reportList) {
+
+	public SheetReport() {
+		super();
+	}
+
+	public SheetReport(Workbook workbook, List<Report> reportList) {
 		this.workbook = workbook;
 		this.reports = reportList;
 	}
-	
+
 	public void createSheet() {
 		Sheet sheet = workbook.createSheet(SHEET_NAME);
 		excelObjectList = getAllGetterMethod(classForMethod);
-		createSheetData(workbook, sheet, excelObjectList, TITLE, indexColorFont, indexColorBackground, titleStart, headerStart);
+		createSheetData(workbook, sheet, excelObjectList, TITLE, indexColorFont, indexColorBackground, titleStart,
+				headerStart);
 		startingPopulate(sheet);
 	}
 
@@ -47,8 +50,8 @@ public class SheetReport extends SheetInterface {
 		int rowStart = rowNumDataCelStart;
 		dataCellStyle = workbook.createCellStyle();
 		borderCell(dataCellStyle);
-		
-		for(Report report: reports) {
+
+		for (Report report : reports) {
 			populateCell(sheet, excelObjectList, report, rowStart, dataCellStyle);
 			rowStart++;
 		}
