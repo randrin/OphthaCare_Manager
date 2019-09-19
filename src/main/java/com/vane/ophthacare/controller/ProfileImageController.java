@@ -48,10 +48,18 @@ public class ProfileImageController {
 	public Administrateur admin;
 	
 	@GetMapping("/download")
-	public ResponseEntity<byte[]> downloadProfileImage(@RequestParam("username") String username) {
+	public ResponseEntity<byte[]> downloadProfileImage(@RequestHeader(value = "caller", required = false) String caller) {
 
+		logger.info(Constants.BEGIN + " GET -> /profile/downloadProfileImage - Caller [" + caller + "]");
+		
+		if (StringUtils.isEmpty(caller)) {
+			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.GET_PROFILE);
+			return new ResponseEntity<byte[]>(HttpStatus.OK);
+		}
+		
 		// First find admin by username or pseudo
-		admin = administrateurRepository.findByPseudoAdmin(username);
+		admin = administrateurRepository.findByPseudoAdmin(caller);
 		Optional<ProfileImage> fileOptional = profileImageRepository.findById(admin.getIdAdmin());
 
 		if (fileOptional.isPresent()) {
@@ -60,7 +68,8 @@ public class ProfileImageController {
 					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + image.getName() + "\"")
 					.body(image.getPicture());
 		}
-
+		
+		logger.info(Constants.END + " UPLOAD -> /profile/downloadProfileImage - Caller [" + caller + "]");
 		return ResponseEntity.status(404).body(null);
 	}
 	
@@ -68,7 +77,7 @@ public class ProfileImageController {
 	public ResponseEntity<byte[]> uploadProfileImage(@RequestParam("profileImage") MultipartFile file,
 			@RequestHeader(value = "caller", required = false) String caller) throws IOException {
 
-		logger.info(Constants.BEGIN + " UPLOAD -> /profile/upload - Caller [" + caller + "]");
+		logger.info(Constants.BEGIN + " UPLOAD -> /profile/uploadProfileImage - Caller [" + caller + "]");
 		
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
@@ -93,7 +102,7 @@ public class ProfileImageController {
 			return new ResponseEntity<byte[]>(HttpStatus.OK);
 		}
 
-		logger.info(Constants.END + " UPLOAD -> /profile/upload - Caller [" + caller + "]");
+		logger.info(Constants.END + " UPLOAD -> /profile/uploadProfileImage - Caller [" + caller + "]");
 		
 		userOperations.saveOperationReport(Constants.SUCCESS, String.valueOf(admin.getIdAdmin()),
 				admin.getNomAdmin(), caller, UserOperationsCodes.PROFILE_REPORT_INSERT);
