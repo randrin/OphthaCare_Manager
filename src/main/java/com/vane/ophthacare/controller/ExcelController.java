@@ -48,44 +48,47 @@ public class ExcelController {
 
 	@Autowired
 	public PatientRepository patientRepository;
-	
+
 	@Autowired
 	public AdministrateurRepository administrateurRepository;
-	
+
 	@Autowired
 	public MaladieRepository maladieRepository;
-	
+
 	@Autowired
 	public MedecinRepository medecinRepository;
-	
+
 	@Autowired
 	public ProfessionMedecinRepository professionMedecinRepository;
-	
+
 	@Autowired
 	public ReportRepository reportRepository;
-	
+
 	@Autowired
 	private UserOperations userOperations;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(ExcelController.class);
-	
-	@GetMapping(value="/downloadExcelPatients", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Object> downloadExcelPatients(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
-		
-		logger.info(Constants.BEGIN +" GET -> /excel/downloadExcelPatients - Caller ["+caller+"]");
-		
+
+	@GetMapping(value = "/downloadExcelPatients", produces = { MediaType.APPLICATION_OCTET_STREAM_VALUE,
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Object> downloadExcelPatients(
+			@RequestHeader(value = "caller", required = false) String caller) throws IOException {
+
+		logger.info(Constants.BEGIN + " GET -> /excel/downloadExcelPatients - Caller [" + caller + "]");
+
 		Workbook workbook = null;
 		List<Patient> patientList = patientRepository.findAll();
 
-		if(patientList != null && patientList.size() > 0) {
-			workbook =  ExcelBuilder.buildExcelPatient(patientList);
-		} 
-
-		if(workbook == null) {
-			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
+		if (patientList != null && patientList.size() > 0) {
+			workbook = ExcelBuilder.buildExcelPatient(patientList);
 		}
-		
+
+		if (workbook == null) {
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT),
+					HttpStatus.OK);
+		}
+
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		workbook.write(out);
 		ByteArrayInputStream test = new ByteArrayInputStream(out.toByteArray());
@@ -93,31 +96,32 @@ public class ExcelController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
-		logger.info(Constants.END +" GET -> /excel/downloadExcelPatients - Caller ["+caller+"]");
-		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller, UserOperationsCodes.EXCEL_EXPORT_PATIENTS);
-		return ResponseEntity
-				.ok()
-				.headers(headers)
-				.body(new InputStreamResource(test));
+		logger.info(Constants.END + " GET -> /excel/downloadExcelPatients - Caller [" + caller + "]");
+		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller,
+				UserOperationsCodes.EXCEL_EXPORT_PATIENTS);
+		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(test));
 	}
-	
-	@GetMapping(value="/downloadExcelAdministrateurs", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Object> downloadExcelAdministrateurs(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
-		
-		logger.info(Constants.BEGIN +" GET -> /excel/downloadExcelAdministrateurs - Caller ["+caller+"]");
-		
+
+	@GetMapping(value = "/downloadExcelAdministrateurs", produces = { MediaType.APPLICATION_OCTET_STREAM_VALUE,
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Object> downloadExcelAdministrateurs(
+			@RequestHeader(value = "caller", required = false) String caller) throws IOException {
+
+		logger.info(Constants.BEGIN + " GET -> /excel/downloadExcelAdministrateurs - Caller [" + caller + "]");
+
 		Workbook workbook = null;
 		List<Administrateur> adminList = administrateurRepository.findAll();
 
-		if(adminList != null && adminList.size() > 0) {
-			workbook =  ExcelBuilder.buildExcelAdmin(adminList);
-		} 
-
-		if(workbook == null) {
-			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
+		if (adminList != null && adminList.size() > 0) {
+			workbook = ExcelBuilder.buildExcelAdmin(adminList);
 		}
-		
+
+		if (workbook == null) {
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT),
+					HttpStatus.OK);
+		}
+
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		workbook.write(out);
 		ByteArrayInputStream test = new ByteArrayInputStream(out.toByteArray());
@@ -125,31 +129,32 @@ public class ExcelController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
-		logger.info(Constants.END +" GET -> /excel/downloadExcelAdministrateurs - Caller ["+caller+"]");
-		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller, UserOperationsCodes.EXCEL_EXPORT_ADMINISTRATEURS);
-		return ResponseEntity
-				.ok()
-				.headers(headers)
-				.body(new InputStreamResource(test));
+		logger.info(Constants.END + " GET -> /excel/downloadExcelAdministrateurs - Caller [" + caller + "]");
+		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller,
+				UserOperationsCodes.EXCEL_EXPORT_ADMINISTRATEURS);
+		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(test));
 	}
-	
-	@GetMapping(value="/downloadExcelMaladies", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Object> downloadExcelMaladies(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
-		
-		logger.info(Constants.BEGIN +" GET -> /excel/downloadExcelMaladies - Caller ["+caller+"]");
-		
+
+	@GetMapping(value = "/downloadExcelMaladies", produces = { MediaType.APPLICATION_OCTET_STREAM_VALUE,
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Object> downloadExcelMaladies(
+			@RequestHeader(value = "caller", required = false) String caller) throws IOException {
+
+		logger.info(Constants.BEGIN + " GET -> /excel/downloadExcelMaladies - Caller [" + caller + "]");
+
 		Workbook workbook = null;
 		List<Maladie> maladieList = maladieRepository.findAll();
 
-		if(maladieList != null && maladieList.size() > 0) {
-			workbook =  ExcelBuilder.buildExcelMaladie(maladieList);
-		} 
-
-		if(workbook == null) {
-			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
+		if (maladieList != null && maladieList.size() > 0) {
+			workbook = ExcelBuilder.buildExcelMaladie(maladieList);
 		}
-		
+
+		if (workbook == null) {
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT),
+					HttpStatus.OK);
+		}
+
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		workbook.write(out);
 		ByteArrayInputStream test = new ByteArrayInputStream(out.toByteArray());
@@ -157,31 +162,32 @@ public class ExcelController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
-		logger.info(Constants.END +" GET -> /excel/downloadExcelMaladies - Caller ["+caller+"]");
-		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller, UserOperationsCodes.EXCEL_EXPORT_DISEASES);
-		return ResponseEntity
-				.ok()
-				.headers(headers)
-				.body(new InputStreamResource(test));
+		logger.info(Constants.END + " GET -> /excel/downloadExcelMaladies - Caller [" + caller + "]");
+		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller,
+				UserOperationsCodes.EXCEL_EXPORT_DISEASES);
+		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(test));
 	}
-	
-	@GetMapping(value="/downloadExcelMedecins", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Object> downloadExcelMedecins(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
-		
-		logger.info(Constants.BEGIN +" GET -> /excel/downloadExcelMedecins - Caller ["+caller+"]");
-		
+
+	@GetMapping(value = "/downloadExcelMedecins", produces = { MediaType.APPLICATION_OCTET_STREAM_VALUE,
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Object> downloadExcelMedecins(
+			@RequestHeader(value = "caller", required = false) String caller) throws IOException {
+
+		logger.info(Constants.BEGIN + " GET -> /excel/downloadExcelMedecins - Caller [" + caller + "]");
+
 		Workbook workbook = null;
 		List<Medecin> medecinList = medecinRepository.findAll();
 
-		if(medecinList != null && medecinList.size() > 0) {
-			workbook =  ExcelBuilder.buildExcelMedecin(medecinList);
-		} 
-
-		if(workbook == null) {
-			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
+		if (medecinList != null && medecinList.size() > 0) {
+			workbook = ExcelBuilder.buildExcelMedecin(medecinList);
 		}
-		
+
+		if (workbook == null) {
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT),
+					HttpStatus.OK);
+		}
+
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		workbook.write(out);
 		ByteArrayInputStream test = new ByteArrayInputStream(out.toByteArray());
@@ -189,31 +195,32 @@ public class ExcelController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
-		logger.info(Constants.END +" GET -> /excel/downloadExcelMedecins - Caller ["+caller+"]");
-		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller, UserOperationsCodes.EXCEL_EXPORT_MEDECINS);
-		return ResponseEntity
-				.ok()
-				.headers(headers)
-				.body(new InputStreamResource(test));
+		logger.info(Constants.END + " GET -> /excel/downloadExcelMedecins - Caller [" + caller + "]");
+		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller,
+				UserOperationsCodes.EXCEL_EXPORT_MEDECINS);
+		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(test));
 	}
-	
-	@GetMapping(value="/downloadExcelProfessionsMedecins", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Object> downloadExcelProfessionsMedecins(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
-		
-		logger.info(Constants.BEGIN +" GET -> /excel/downloadExcelProfessionsMedecins - Caller ["+caller+"]");
-		
+
+	@GetMapping(value = "/downloadExcelProfessionsMedecins", produces = { MediaType.APPLICATION_OCTET_STREAM_VALUE,
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Object> downloadExcelProfessionsMedecins(
+			@RequestHeader(value = "caller", required = false) String caller) throws IOException {
+
+		logger.info(Constants.BEGIN + " GET -> /excel/downloadExcelProfessionsMedecins - Caller [" + caller + "]");
+
 		Workbook workbook = null;
 		List<ProfessionMedecin> professionMedecinList = professionMedecinRepository.findAll();
 
-		if(professionMedecinList != null && professionMedecinList.size() > 0) {
-			workbook =  ExcelBuilder.buildExcelProfessionMedecin(professionMedecinList);
-		} 
-
-		if(workbook == null) {
-			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
+		if (professionMedecinList != null && professionMedecinList.size() > 0) {
+			workbook = ExcelBuilder.buildExcelProfessionMedecin(professionMedecinList);
 		}
-		
+
+		if (workbook == null) {
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT),
+					HttpStatus.OK);
+		}
+
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		workbook.write(out);
 		ByteArrayInputStream test = new ByteArrayInputStream(out.toByteArray());
@@ -221,31 +228,32 @@ public class ExcelController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
-		logger.info(Constants.END +" GET -> /excel/downloadExcelProfessionsMedecins - Caller ["+caller+"]");
-		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller, UserOperationsCodes.EXCEL_EXPORT_PROFESSIONS);
-		return ResponseEntity
-				.ok()
-				.headers(headers)
-				.body(new InputStreamResource(test));
+		logger.info(Constants.END + " GET -> /excel/downloadExcelProfessionsMedecins - Caller [" + caller + "]");
+		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller,
+				UserOperationsCodes.EXCEL_EXPORT_PROFESSIONS);
+		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(test));
 	}
-	
-	@GetMapping(value="/downloadExcelReports", produces = {MediaType.APPLICATION_OCTET_STREAM_VALUE,MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Object> downloadExcelReports(@RequestHeader(value = "caller", required = false) String caller) throws IOException {
-		
-		logger.info(Constants.BEGIN +" GET -> /excel/downloadExcelReports - Caller ["+caller+"]");
-		
+
+	@GetMapping(value = "/downloadExcelReports", produces = { MediaType.APPLICATION_OCTET_STREAM_VALUE,
+			MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Object> downloadExcelReports(@RequestHeader(value = "caller", required = false) String caller)
+			throws IOException {
+
+		logger.info(Constants.BEGIN + " GET -> /excel/downloadExcelReports - Caller [" + caller + "]");
+
 		Workbook workbook = null;
 		List<Report> reportList = reportRepository.findAll();
 
-		if(reportList != null && reportList.size() > 0) {
-			workbook =  ExcelBuilder.buildExcelReport(reportList);
-		} 
-
-		if(workbook == null) {
-			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT), HttpStatus.OK);
+		if (reportList != null && reportList.size() > 0) {
+			workbook = ExcelBuilder.buildExcelReport(reportList);
 		}
-		
+
+		if (workbook == null) {
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ERROR_EXCEL_EXPORT);
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_EXCEL_CONCURRENCY_EXPORT),
+					HttpStatus.OK);
+		}
+
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		workbook.write(out);
 		ByteArrayInputStream test = new ByteArrayInputStream(out.toByteArray());
@@ -253,11 +261,8 @@ public class ExcelController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "attachment; filename=export.xlsx");
 
-		logger.info(Constants.END +" GET -> /excel/downloadExcelReports - Caller ["+caller+"]");
+		logger.info(Constants.END + " GET -> /excel/downloadExcelReports - Caller [" + caller + "]");
 		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller, UserOperationsCodes.EXCEL_EXPORT_REPORTS);
-		return ResponseEntity
-				.ok()
-				.headers(headers)
-				.body(new InputStreamResource(test));
+		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(test));
 	}
 }

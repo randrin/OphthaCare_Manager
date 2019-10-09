@@ -5,6 +5,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ExcelField {
-    public String field();
-    public int position();
+	public String field();
+
+	public int position();
 }

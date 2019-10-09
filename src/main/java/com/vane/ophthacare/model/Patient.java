@@ -19,59 +19,59 @@ import org.hibernate.validator.constraints.Length;
 import com.vane.ophthacare.excel.export.ExcelField;
 
 @Entity
-@Table(name="Patients")
+@Table(name = "Patients")
 public class Patient implements Serializable {
 
 	private static final long serialVersionUID = -7687560243779956203L;
 
 	@Id
-	@Column(name="id_patient")
+	@Column(name = "id_patient")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idPatient;
-	
-	@Column(name="code_patient")
+
+	@Column(name = "code_patient")
 	private String codePatient;
 
-	@Column(name="nom_patient")
+	@Column(name = "nom_patient")
 	private String nomPatient;
-	
-	@Column(name="prenom_patient")
+
+	@Column(name = "prenom_patient")
 	private String prenomPatient;
-	
-	@Column(name="date_nais_patient")
+
+	@Column(name = "date_nais_patient")
 	private String dateNaisPatient;
-	
-	@Column(name="age_patient")
+
+	@Column(name = "age_patient")
 	private int agePatient;
-	
-	@Column(name="sexe_patient")
+
+	@Column(name = "sexe_patient")
 	private String sexePatient;
-	
-	@Column(name="addresse_patient")
+
+	@Column(name = "addresse_patient")
 	private String addressePatient;
-	
-	@Column(name="codPost_patient")
+
+	@Column(name = "codPost_patient")
 	private Integer codePostPatient;
-	
-	@Column(name="domicile_patient")
+
+	@Column(name = "domicile_patient")
 	private String domicilePatient;
-	
-	@Column(name="infoSuppl_patient")
+
+	@Column(name = "infoSuppl_patient")
 	private String infoSupplPatient;
-	
-	@Column(name="email_patient", length = 25)
+
+	@Column(name = "email_patient", length = 25)
 	private String emailPatient;
-	
-	@Column(name="numTel_patient")
+
+	@Column(name = "numTel_patient")
 	private BigInteger numTelPatient;
-	
-	@Column(name="numFixe_patient")
+
+	@Column(name = "numFixe_patient")
 	private BigInteger numFixePatient;
 
-	//@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
-	//@JoinColumn(name="patient_maladies")
-	//List<Maladie> maladie;
-	
+	// @OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+	// @JoinColumn(name="patient_maladies")
+	// List<Maladie> maladie;
+
 	/**
 	 * @return the idPatient
 	 */
@@ -99,7 +99,7 @@ public class Patient implements Serializable {
 	public void setCodePatient(String codePatient) {
 		this.codePatient = codePatient;
 	}
-	
+
 	/**
 	 * @return the nomPatient
 	 */

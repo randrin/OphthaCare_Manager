@@ -12,26 +12,26 @@ import javax.persistence.Table;
 import com.vane.ophthacare.excel.export.ExcelField;
 
 @Entity
-@Table(name="Reports")
+@Table(name = "Reports")
 public class Report implements Serializable {
 
 	private static final long serialVersionUID = 6788231499698266679L;
-	
+
 	@Id
-	@Column(name="id_report")
+	@Column(name = "id_report")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idReport;
-	
-	@Column(name="user_report")
+
+	@Column(name = "user_report")
 	private String userReport;
-	
-	@Column(name="action_report")
+
+	@Column(name = "action_report")
 	private String actionReport;
-	
-	@Column(name="result_report")
+
+	@Column(name = "result_report")
 	private String resultReport;
-	
-	@Column(name="date_report")
+
+	@Column(name = "date_report")
 	private String dateReport;
 
 	/**

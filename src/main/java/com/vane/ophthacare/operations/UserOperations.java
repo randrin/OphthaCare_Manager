@@ -19,22 +19,25 @@ public class UserOperations {
 	public ReportRepository reportRepository;
 
 	SimpleDateFormat format = new SimpleDateFormat(Constants.FORMAT_DATETIME);
-	
+
 	public static final Logger logger = LoggerFactory.getLogger(UserOperations.class);
-	
-	public String logOperationString(String status, String id, String cardName, String caller, UserOperationsCodes enumOperations) {
-		return "["+caller+"] " + String.format(enumOperations.getMessage(), id, cardName) + " ["+status+"]"; 	
+
+	public String logOperationString(String status, String id, String cardName, String caller,
+			UserOperationsCodes enumOperations) {
+		return "[" + caller + "] " + String.format(enumOperations.getMessage(), id, cardName) + " [" + status + "]";
 	}
-	
-	public String logOperationString(String status, String idOrcardName, String caller, UserOperationsCodes enumOperations) {
-		return "["+caller+"] " + String.format(enumOperations.getMessage(),idOrcardName) + " ["+status+"]"; 	
+
+	public String logOperationString(String status, String idOrcardName, String caller,
+			UserOperationsCodes enumOperations) {
+		return "[" + caller + "] " + String.format(enumOperations.getMessage(), idOrcardName) + " [" + status + "]";
 	}
 
 	public String logOperationString(String status, String caller, UserOperationsCodes enumOperations) {
-		return "["+caller+"] " + enumOperations.getMessage() + " ["+status+"]"; 
+		return "[" + caller + "] " + enumOperations.getMessage() + " [" + status + "]";
 	}
-	
-	public void saveOperationReport(String status, String id, String cardName, String caller, UserOperationsCodes enumOperations) {
+
+	public void saveOperationReport(String status, String id, String cardName, String caller,
+			UserOperationsCodes enumOperations) {
 
 		Report entity = new Report();
 		entity.setActionReport(String.format(enumOperations.getMessage(), id, cardName));
@@ -45,7 +48,7 @@ public class UserOperations {
 		logger.info(entity.toString());
 		reportRepository.save(entity);
 	}
-	
+
 	public void saveOperationReport(String status, String cardName, String caller, UserOperationsCodes enumOperations) {
 
 		Report entity = new Report();
@@ -57,7 +60,7 @@ public class UserOperations {
 		logger.info(entity.toString());
 		reportRepository.save(entity);
 	}
-	
+
 	public void saveOperationReport(String status, String caller, UserOperationsCodes enumOperations) {
 
 		Report entity = new Report();

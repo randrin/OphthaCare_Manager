@@ -12,23 +12,23 @@ import javax.persistence.Table;
 import com.vane.ophthacare.excel.export.ExcelField;
 
 @Entity
-@Table(name="Professions")
+@Table(name = "Professions")
 public class ProfessionMedecin implements Serializable {
 
 	private static final long serialVersionUID = -2535009268345858580L;
 
 	@Id
-	@Column(name="id_profession")
+	@Column(name = "id_profession")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idProfession;
-	
-	@Column(name="nom_profession")
+
+	@Column(name = "nom_profession")
 	private String nomProfession;
-	
-	@Column(name="desc_profession", length = 1000)
+
+	@Column(name = "desc_profession", length = 1000)
 	private String descProfession;
-	
-	@Column(name="code_profession")
+
+	@Column(name = "code_profession")
 	private String codeProfession;
 
 	/**

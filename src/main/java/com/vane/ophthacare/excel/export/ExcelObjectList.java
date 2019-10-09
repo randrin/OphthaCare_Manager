@@ -6,7 +6,7 @@ public class ExcelObjectList implements Comparable {
 	private int position;
 	private String nameField;
 	private Method methodCaller;
-	
+
 	public ExcelObjectList(int position, String nameField, Method methodCaller) {
 		super();
 		this.position = position;
@@ -40,7 +40,7 @@ public class ExcelObjectList implements Comparable {
 
 	@Override
 	public int compareTo(Object o) {
-		int comparePosition=((ExcelObjectList)o).getPosition();
-        return this.position-comparePosition;
+		int comparePosition = ((ExcelObjectList) o).getPosition();
+		return this.position - comparePosition;
 	}
 }

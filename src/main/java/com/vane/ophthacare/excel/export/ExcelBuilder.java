@@ -25,16 +25,16 @@ public class ExcelBuilder {
 
 		SheetPatient sheetPatient = new SheetPatient(workbook, patients);
 		sheetPatient.createSheet();
-		
+
 		return workbook;
 	}
-	
-	public static Workbook buildExcelAdmin (List<Administrateur> admins) {
+
+	public static Workbook buildExcelAdmin(List<Administrateur> admins) {
 		Workbook workbook = new XSSFWorkbook();
 
 		SheetAdministrateur sheetAdministrateur = new SheetAdministrateur(workbook, admins);
 		sheetAdministrateur.createSheet();
-		
+
 		return workbook;
 	}
 
@@ -43,7 +43,7 @@ public class ExcelBuilder {
 
 		SheetMaladie sheetMaladie = new SheetMaladie(workbook, maladies);
 		sheetMaladie.createSheet();
-		
+
 		return workbook;
 	}
 
@@ -52,7 +52,7 @@ public class ExcelBuilder {
 
 		SheetMedecin sheetMedecin = new SheetMedecin(workbook, medecinList);
 		sheetMedecin.createSheet();
-		
+
 		return workbook;
 	}
 
@@ -61,7 +61,7 @@ public class ExcelBuilder {
 
 		SheetProfessionMedecin sheetProfessionMedecin = new SheetProfessionMedecin(workbook, professionMedecinList);
 		sheetProfessionMedecin.createSheet();
-		
+
 		return workbook;
 	}
 
@@ -70,7 +70,7 @@ public class ExcelBuilder {
 
 		SheetReport sheetReport = new SheetReport(workbook, reportList);
 		sheetReport.createSheet();
-		
+
 		return workbook;
 	}
 

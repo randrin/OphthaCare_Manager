@@ -34,37 +34,36 @@ import com.vane.ophthacare.utils.PDFGenerator;
 public class PdfController {
 
 	private static final Logger logger = LoggerFactory.getLogger(PdfController.class);
-	
+
 	@Autowired
-    AdministrateurRepository administrateurRepository;
- 
+	AdministrateurRepository administrateurRepository;
+
 	@Autowired
 	private UserOperations userOperations;
-	
+
 	@GetMapping(value = "/admins", produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> getPDFAdmins(@RequestHeader(value= "caller",required = false) String caller) throws IOException {
-		
-		logger.info(Constants.BEGIN +" GET -> /pdf/getPDFAdmins - Caller ["+caller+"]");
-		
+	public ResponseEntity<InputStreamResource> getPDFAdmins(
+			@RequestHeader(value = "caller", required = false) String caller) throws IOException {
+
+		logger.info(Constants.BEGIN + " GET -> /pdf/getPDFAdmins - Caller [" + caller + "]");
+
 		if (StringUtils.isEmpty(caller)) {
 			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
 			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.ADMIN_DOWNLOAD_PDF);
 			return new ResponseEntity<InputStreamResource>(HttpStatus.OK);
 		}
-		
+
 		List<Administrateur> admins = administrateurRepository.findAll();
 		String tableTitle = "Administrateurs Table";
 		Integer columnNumber = 5;
-		String[] headerTable = {"ID", "Nom", "Prenom", "Pseudo", "Role"};
+		String[] headerTable = { "ID", "Nom", "Prenom", "Pseudo", "Role" };
 		ByteArrayInputStream bis = PDFGenerator.PDFReport(admins, tableTitle, columnNumber, headerTable);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "inline; filename=Administrateurs.pdf");
 
 		userOperations.saveOperationReport(Constants.SUCCESS, caller, caller, UserOperationsCodes.ADMIN_DOWNLOAD_PDF);
-		return ResponseEntity
-				.ok()
-				.headers(headers).contentType(MediaType.APPLICATION_PDF)
+		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
 				.body(new InputStreamResource(bis));
 	}
 }
