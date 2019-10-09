@@ -85,8 +85,8 @@ public class ProfileImageController {
 			return new ResponseEntity<byte[]>(HttpStatus.OK);
 		}
 		
-		// First find admin by username or pseudo
-		Optional<ProfileImage> fileOptional = profileImageRepository.findById(admin.getIdAdmin());
+		// First find admin by username or pseudo: Test
+		Optional<ProfileImage> fileOptional = profileImageRepository.findById(1);
 
 		ProfileImage image = fileOptional.get();
 		image.setMimetype(file.getContentType());
