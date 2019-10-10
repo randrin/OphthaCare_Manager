@@ -38,9 +38,9 @@ public class Administrateur implements Serializable {
 	private String pseudoAdmin;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "imageAdmin")
-	private ProfileImage profileImage;
-
+	@JoinColumn(name = "profile_id")
+	private ProfileImage profileAdmin;
+	
 	@Column(name = "role")
 	private String roleAdmin;
 
