@@ -65,9 +65,9 @@ public class Medecin implements Serializable {
 	// @OneToMany(mappedBy = "medecin", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set<ProfessionMedecin> ProfessionMedecins;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "profile_id")
-	private ProfileImage profileMedecin;
+	//@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	//@JoinColumn(name = "profile_id")
+	//private ProfileImage profileMedecin;
 	
 	@Transient
 	private String token;

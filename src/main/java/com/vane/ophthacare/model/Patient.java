@@ -73,9 +73,9 @@ public class Patient implements Serializable {
 	// @OneToMany(mappedBy = "patient", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	// Set<Maladie> maladies;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "profile_id")
-	private ProfileImage profilePatient;
+	//@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	//@JoinColumn(name = "profile_id")
+	//private ProfileImage profilePatient;
 	
 	/**
 	 * @return the idPatient
