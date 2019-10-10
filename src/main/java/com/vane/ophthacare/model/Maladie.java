@@ -34,6 +34,10 @@ public class Maladie implements Serializable {
 	@Column(name = "medecin_maladie")
 	private String medecinMaladie;
 
+	// @ManyToOne(fetch = FetchType.EAGER)
+	// @JoinColumn(name = "id_patient")
+	// private Patient patient;
+	
 	/**
 	 * @return the idMaladie
 	 */

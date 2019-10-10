@@ -19,7 +19,7 @@ public class ProfileImage implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "profile_id")
 	private Long id;
 
 	@Column(name = "name")
@@ -32,9 +32,15 @@ public class ProfileImage implements Serializable {
 	@Column(name = "picture")
 	private byte[] picture;
 
-	@OneToOne(mappedBy = "profileImage")
+	@OneToOne(mappedBy = "profileAdmin")
 	private Administrateur administrateur;
 
+	@OneToOne(mappedBy = "profilePatient")
+	private Patient patient;
+	
+	@OneToOne(mappedBy = "profileMedecin")
+	private Medecin medecin;
+	
 	public ProfileImage() {
 	}
 
