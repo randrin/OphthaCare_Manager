@@ -18,7 +18,7 @@ import javax.persistence.Transient;
 import com.vane.ophthacare.excel.export.ExcelField;
 
 @Entity
-@Table(name = "Administrateur")
+@Table(name = "Administrateurs")
 public class Administrateur implements Serializable {
 
 	private static final long serialVersionUID = 6501686897066383042L;

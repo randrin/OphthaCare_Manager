@@ -59,8 +59,14 @@ public class ProfileImageController {
 			return new ResponseEntity<byte[]>(HttpStatus.OK);
 		}
 		
+		List<Administrateur> getAdministrateurs = administrateurRepository.findAll();
+		
 		// First find admin by username or pseudo
-		admin = administrateurRepository.findByPseudoAdmin(caller);
+		getAdministrateurs.forEach(obj -> {
+			if ((obj.getNomAdmin() + " " + obj.getPrenomAdmin()).equals(caller)) {
+				admin = obj;
+			}
+		});
 		Optional<ProfileImage> fileOptional = profileImageRepository.findById(admin.getIdAdmin());
 
 		if (fileOptional.isPresent()) {
@@ -88,7 +94,7 @@ public class ProfileImageController {
 		
 		List<Administrateur> getAdministrateurs = administrateurRepository.findAll();
 		getAdministrateurs.forEach(obj -> {
-			if (obj.getPseudoAdmin().equals(caller)) {
+			if ((obj.getNomAdmin() + " " + obj.getPrenomAdmin()).equals(caller)) {
 				admin = obj;
 			}
 		});
