@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ProfileImage")
+@Table(name = "ProfileImages")
 public class ProfileImage implements Serializable {
 
 	private static final long serialVersionUID = 5140658863493524983L;

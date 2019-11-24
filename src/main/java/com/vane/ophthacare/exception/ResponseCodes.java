@@ -69,6 +69,9 @@ public enum ResponseCodes {
 	// Report
 	ERROR_GET_REPORTS_DB("ERR0008", "Error getting Reports on DB"),
 		
+	// Permissions
+	ERROR_GET_PERMISSIONS_DB("ERR0008", "Error getting permissions on DB"),
+	
 	// Others
 	ERROR_GENERIC("ERR0001", "Generic Error"),
 
