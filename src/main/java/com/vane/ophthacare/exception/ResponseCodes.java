@@ -6,29 +6,42 @@ public enum ResponseCodes {
 	 * * OK RESPONSE * *
 	 *****************************/
 	// Patients
-	OK_INSERT_PATIENT("OK", "Patient added to DB"), OK_DELETE_PATIENT("OK", "Patient deleted from DB"),
+	OK_INSERT_PATIENT("OK", "Patient added to DB"),
 	OK_MODIFY_PATIENT("OK", "Patient modified"),
+	OK_DELETE_PATIENT("OK", "Patient deleted from DB"),
 
 	// Administrateurs
-	OK_INSERT_ADMIN("OK", "Admin added to DB"), OK_DELETE_ADMIN("OK", "Admin deleted from DB"),
+	OK_INSERT_ADMIN("OK", "Admin added to DB"),
 	OK_MODIFY_ADMIN("OK", "Admin modified"),
+	OK_DELETE_ADMIN("OK", "Admin deleted from DB"),
 
 	// Specialistes-Medecins
-	OK_INSERT_MEDECIN("OK", "Medecin added to DB"), OK_MODIFY_MEDECIN("OK", "Medecin modified"),
+	OK_INSERT_MEDECIN("OK", "Medecin added to DB"),
+	OK_MODIFY_MEDECIN("OK", "Medecin modified"),
 	OK_DELETE_MEDECIN("OK", "Medecin deleted from DB"),
 
 	// Maladies
-	OK_INSERT_DISEASE("OK", "Disease added to DB"), OK_DELETE_DISEASE("OK", "Disease deleted from DB"),
+	OK_INSERT_DISEASE("OK", "Disease added to DB"), 
 	OK_MODIFY_DISEASE("OK", "Disease modified"),
+	OK_DELETE_DISEASE("OK", "Disease deleted from DB"),
 
 	// Profession Medecins
 	OK_INSERT_PROFESSION("OK", "Profession Medecin added to DB"),
 	OK_MODIFY_PROFESSION("OK", "Profession Medecin modified"),
 	OK_DELETE_PROFESSION("OK", "Profession Medecin deleted from DB"),
 
+	// Permissions
+	OK_INSERT_PERMISSION("OK", "Permission added to DB"),
+	OK_MODIFY_PERMISSION("OK", "Permission modified"),
+	OK_DELETE_PERMISSION("OK", "Permission deleted from DB"),
+		
+	// Reports
+	OK_DELETE_REPORT("OK", "Report deleted from DB"),
+	
 	// Others
 	OK_EXCEL_FILE_NOT_EXIST("OK", "Monitoring card does not exist. Adding new"),
-	OK_INSERT_MONITORING_CARD("OK", "Monitoring card inserted on DB"), OK_CHECK_MONITORING_CARD("OK", "Check passed"),
+	OK_INSERT_MONITORING_CARD("OK", "Monitoring card inserted on DB"), 
+	OK_CHECK_MONITORING_CARD("OK", "Check passed"),
 	OK_INSERT_SKYDE("OK", "SkyDE inserted on DB"),
 
 	/******************************
@@ -62,15 +75,19 @@ public enum ResponseCodes {
 
 	// Spécialités-Medecins
 	ERROR_GET_MEDECINS_DB("ERR0004", "Error getting medecins on DB"),
-	ERROR_SET_MEDECINS_DB("ERR0005", "Error on insert medecins on DB"),
+	ERROR_SET_MEDECIN_DB("ERR0005", "Error on insert medecin on DB"),
 	ERROR_DELETE_MEDECIN_DB("ERR0006", "Error on delete medecin on DB"),
 	ERROR_MODIFY_MEDECIN_DB("ERR0007", "Error on modify medecin on DB"),
 
-	// Report
-	ERROR_GET_REPORTS_DB("ERR0008", "Error getting Reports on DB"),
+	// Reports
+	ERROR_GET_REPORTS_DB("ERR0008", "Error getting reports on DB"),
+	ERROR_DELETE_REPORT_DB("ERR0008", "Error on delete report on DB"),
 		
 	// Permissions
 	ERROR_GET_PERMISSIONS_DB("ERR0008", "Error getting permissions on DB"),
+	ERROR_SET_PERMISSION_DB("ERR0008", "Error on insert permission on DB"),
+	ERROR_MODIFY_PERMISSION_DB("ERR0008", "Error on modify permission on DB"),
+	ERROR_DELETE_PERMISSION_DB("ERR0008", "Error on delete permission on DB"),
 	
 	// Others
 	ERROR_GENERIC("ERR0001", "Generic Error"),
