@@ -19,6 +19,9 @@ public enum UserOperationsCodes {
 
 	// Permissions
 	PERMISSION_GET_ALL("Get all Permissions from DB"),
+	PERMISSION_REPORT_INSERT("Insert new Permission on DB with id [%s] and name [%s]"),
+	PERMISSION_REPORT_UPDATE("Update Permission on DB with id [%s] and name [%s]"),
+	PERMISSION_REPORT_DELETE("Deleted Permission from DB with id [%s]"),
 		
 	// Profile Image
 	GET_PROFILE("Get Profile"),

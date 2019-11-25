@@ -46,8 +46,6 @@ public class PatientController {
 	@Autowired
 	private UserOperations userOperations;
 
-	public List<Patient> patientList = new ArrayList<>();
-
 	@GetMapping("/getAllPatients")
 	public ResponseEntity<Object> getAllPatients(@RequestHeader(value = "caller", required = false) String caller) {
 
@@ -152,10 +150,10 @@ public class PatientController {
 		Patient p = patientRepository.save(patient);
 
 		if (p == null) {
-			logger.error(ResponseCodes.ERROR_SET_PATIENT_DB.toString());
+			logger.error(ResponseCodes.ERROR_MODIFY_PATIENT_DB.toString());
 			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(patient.getIdPatient()),
 					patient.getNomPatient(), caller, UserOperationsCodes.PATIENT_REPORT_UPDATE);
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_PATIENT_DB), HttpStatus.OK);
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_MODIFY_PATIENT_DB), HttpStatus.OK);
 		}
 
 		logger.info(Constants.END + " UPDATE -> /patient/update - Caller [" + caller + "]");
@@ -192,8 +190,8 @@ public class PatientController {
 					UserOperationsCodes.PATIENT_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_DELETE_PATIENT_DB), HttpStatus.OK);
 		}
-
-		Iterator<Patient> iter = patientList.iterator();
+		
+		Iterator<Patient> iter = patientRepository.findAll().iterator();
 
 		while (iter.hasNext()) {
 			Patient patient = iter.next();

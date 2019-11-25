@@ -148,10 +148,10 @@ public class MaladieController {
 		Maladie m = maladieRepository.save(maladie);
 
 		if (m == null) {
-			logger.error(ResponseCodes.ERROR_SET_DISEASE_DB.toString());
+			logger.error(ResponseCodes.ERROR_MODIFY_DISEASE_DB.toString());
 			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(maladie.getIdMaladie()),
 					maladie.getNomMaladie(), caller, UserOperationsCodes.DISEASE_REPORT_UPDATE);
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_DISEASE_DB), HttpStatus.OK);
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_MODIFY_DISEASE_DB), HttpStatus.OK);
 		}
 
 		logger.info(Constants.END + " UPDATE -> /maladie/update - Caller [" + caller + "]");
