@@ -1,5 +1,7 @@
 package com.vane.ophthacare.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vane.ophthacare.exception.Response;
 import com.vane.ophthacare.exception.ResponseCodes;
-import com.vane.ophthacare.model.Patient;
 import com.vane.ophthacare.model.Permission;
 import com.vane.ophthacare.operations.UserOperations;
 import com.vane.ophthacare.operations.UserOperationsCodes;
@@ -41,6 +42,8 @@ public class PermissionController {
 	@Autowired
 	private UserOperations userOperations;
 
+	SimpleDateFormat format = new SimpleDateFormat(Constants.FORMAT_DATE);
+	
 	private static final Logger logger = LoggerFactory.getLogger(PermissionController.class);
 
 	@GetMapping("/getAllPermissions")
@@ -96,8 +99,10 @@ public class PermissionController {
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
 		}
 
-		// Set Model Permission to uppercase
+		// Set Model Permission to uppercase and popolate date
 		permission.setNomPermission(permission.getNomPermission().toUpperCase());
+		permission.setDateRegistration(format.format(GregorianCalendar.getInstance().getTime()));
+		permission.setDateUpdate(format.format(GregorianCalendar.getInstance().getTime()));
 
 		Permission p = permissionRepository.save(permission);
 
@@ -147,6 +152,7 @@ public class PermissionController {
 
 		// Set Model Permission to uppercase
 		permission.setNomPermission(permission.getNomPermission().toUpperCase());
+		permission.setDateUpdate(format.format(GregorianCalendar.getInstance().getTime()));
 
 		Permission p = permissionRepository.save(permission);
 

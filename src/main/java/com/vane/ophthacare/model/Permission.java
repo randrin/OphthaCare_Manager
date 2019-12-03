@@ -38,6 +38,12 @@ public class Permission implements Serializable {
 	@Column(name = "download_permission")
 	private boolean downloadPermission;
 
+	@Column(name = "date_update")
+	private String dateUpdate;
+
+	@Column(name = "date_registration")
+	private String dateRegistration;
+	
 	/**
 	 * @return the idPermission
 	 */
@@ -135,5 +141,32 @@ public class Permission implements Serializable {
 	public void setDownloadPermission(boolean downloadPermission) {
 		this.downloadPermission = downloadPermission;
 	}
-	
+
+	/**
+	 * @return the dateUpdate
+	 */
+	public String getDateUpdate() {
+		return dateUpdate;
+	}
+
+	/**
+	 * @param dateUpdate the dateUpdate to set
+	 */
+	public void setDateUpdate(String dateUpdate) {
+		this.dateUpdate = dateUpdate;
+	}
+
+	/**
+	 * @return the dateRegistration
+	 */
+	public String getDateRegistration() {
+		return dateRegistration;
+	}
+
+	/**
+	 * @param dateRegistration the dateRegistration to set
+	 */
+	public void setDateRegistration(String dateRegistration) {
+		this.dateRegistration = dateRegistration;
+	}
 }
