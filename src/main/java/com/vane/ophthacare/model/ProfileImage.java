@@ -12,15 +12,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ProfileImage")
+@Table(name = "ProfileImages")
 public class ProfileImage implements Serializable {
 
 	private static final long serialVersionUID = 5140658863493524983L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+	@Column(name = "profile_id")
+	private Integer id;
 
 	@Column(name = "name")
 	private String name;
@@ -32,9 +32,15 @@ public class ProfileImage implements Serializable {
 	@Column(name = "picture")
 	private byte[] picture;
 
-	@OneToOne(mappedBy = "profileImage")
+	@OneToOne(mappedBy = "profileAdmin")
 	private Administrateur administrateur;
 
+	//@OneToOne(mappedBy = "profilePatient")
+	//private Patient patient;
+	
+	//@OneToOne(mappedBy = "profileMedecin")
+	//private Medecin medecin;
+	
 	public ProfileImage() {
 	}
 
@@ -52,14 +58,14 @@ public class ProfileImage implements Serializable {
 	/**
 	 * @return the id
 	 */
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

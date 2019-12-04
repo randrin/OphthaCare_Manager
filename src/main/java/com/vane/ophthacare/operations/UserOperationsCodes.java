@@ -17,6 +17,12 @@ public enum UserOperationsCodes {
 	// Report
 	REPORT_GET_ALL("Get all Report from DB"),
 
+	// Permissions
+	PERMISSION_GET_ALL("Get all Permissions from DB"),
+	PERMISSION_REPORT_INSERT("Insert new Permission on DB with id [%s] and name [%s]"),
+	PERMISSION_REPORT_UPDATE("Update Permission on DB with id [%s] and name [%s]"),
+	PERMISSION_REPORT_DELETE("Deleted Permission from DB with id [%s]"),
+		
 	// Profile Image
 	GET_PROFILE("Get Profile"),
 	PROFILE_REPORT_INSERT("Insert profile on DB with id [%s] and pseudo [%s]"),

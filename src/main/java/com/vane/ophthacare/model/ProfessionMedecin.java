@@ -31,6 +31,10 @@ public class ProfessionMedecin implements Serializable {
 	@Column(name = "code_profession")
 	private String codeProfession;
 
+	// @ManyToOne(fetch = FetchType.EAGER)
+	// @JoinColumn(name = "id_medecin")
+	// private Medecin medecin;
+	
 	/**
 	 * @return the idProfession
 	 */

@@ -1,6 +1,7 @@
 package com.vane.ophthacare.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -58,8 +59,14 @@ public class ProfileImageController {
 			return new ResponseEntity<byte[]>(HttpStatus.OK);
 		}
 		
+		List<Administrateur> getAdministrateurs = administrateurRepository.findAll();
+		
 		// First find admin by username or pseudo
-		admin = administrateurRepository.findByPseudoAdmin(caller);
+		getAdministrateurs.forEach(obj -> {
+			if ((obj.getNomAdmin() + " " + obj.getPrenomAdmin()).equals(caller)) {
+				admin = obj;
+			}
+		});
 		Optional<ProfileImage> fileOptional = profileImageRepository.findById(admin.getIdAdmin());
 
 		if (fileOptional.isPresent()) {
@@ -85,8 +92,15 @@ public class ProfileImageController {
 			return new ResponseEntity<byte[]>(HttpStatus.OK);
 		}
 		
+		List<Administrateur> getAdministrateurs = administrateurRepository.findAll();
+		getAdministrateurs.forEach(obj -> {
+			if ((obj.getNomAdmin() + " " + obj.getPrenomAdmin()).equals(caller)) {
+				admin = obj;
+			}
+		});
+		
 		// First find admin by username or pseudo: Test
-		Optional<ProfileImage> fileOptional = profileImageRepository.findById(1);
+		Optional<ProfileImage> fileOptional = profileImageRepository.findById(admin.getIdAdmin());
 
 		ProfileImage image = fileOptional.get();
 		image.setMimetype(file.getContentType());

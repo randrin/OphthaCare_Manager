@@ -149,10 +149,10 @@ public class ProfessionMedecinController {
 		ProfessionMedecin pm = professionMedecinRepository.save(professionMedecin);
 
 		if (pm == null) {
-			logger.error(ResponseCodes.ERROR_SET_PROFESSIONS_DB.toString());
+			logger.error(ResponseCodes.ERROR_MODIFY_PROFSSION_DB.toString());
 			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(professionMedecin.getIdProfession()),
 					professionMedecin.getNomProfession(), caller, UserOperationsCodes.PROFESSION_REPORT_UPDATE);
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_PROFESSIONS_DB), HttpStatus.OK);
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_MODIFY_PROFSSION_DB), HttpStatus.OK);
 		}
 
 		logger.info(Constants.END + " UPDATE -> /profession/update - Caller [" + caller + "]");

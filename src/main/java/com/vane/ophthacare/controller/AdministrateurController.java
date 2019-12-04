@@ -162,10 +162,10 @@ public class AdministrateurController {
 		Administrateur a = administrateurRepository.save(admin);
 
 		if (a == null) {
-			logger.error(ResponseCodes.ERROR_SET_ADMIN_DB.toString());
+			logger.error(ResponseCodes.ERROR_MODIFY_ADMIN_DB.toString());
 			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(admin.getIdAdmin()),
 					admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_UPDATE);
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_ADMIN_DB), HttpStatus.OK);
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_MODIFY_ADMIN_DB), HttpStatus.OK);
 		}
 
 		logger.info(Constants.END + " UPDATE -> /admin/update - Caller [" + caller + "]");

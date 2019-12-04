@@ -69,11 +69,11 @@ public class ReportController {
 		try {
 			reportRepository.deleteById(Integer.parseInt(id));
 		} catch (Exception e) {
-			logger.error(ResponseCodes.ERROR_DELETE_PATIENT_DB.toString());
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_DELETE_PATIENT_DB), HttpStatus.OK);
+			logger.error(ResponseCodes.ERROR_DELETE_REPORT_DB.toString());
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_DELETE_REPORT_DB), HttpStatus.OK);
 		}
 
 		logger.info(Constants.END + " DELETE -> /report/delete/{id} - Caller [" + caller + "]");
-		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_DELETE_PATIENT), HttpStatus.OK);
+		return new ResponseEntity<Object>(new Response(ResponseCodes.OK_DELETE_REPORT), HttpStatus.OK);
 	}
 }
