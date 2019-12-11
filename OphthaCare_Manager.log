@@ -1453,3 +1453,8 @@
 03-12-2019 14:38:10.149 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 77 - END ... GET -> /admin/getAllAdmins - Caller [randrin deco]
 03-12-2019 14:38:10.152 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.PermissionController.getAllPermissions 52 - PROCESSING ... GET -> /permission/getAllPermissions - Caller [randrin deco]
 03-12-2019 14:38:10.156 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.PermissionController.getAllPermissions 67 - END ... GET -> /permission/getAllPermissions - Caller [randrin deco]
+03-12-2019 16:10:07.356 [RMI TCP Connection(486)-127.0.0.1] INFO  org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin.shutdown 163 - Application shutdown requested.
+03-12-2019 16:10:07.421 [RMI TCP Connection(486)-127.0.0.1] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor.shutdown 208 - Shutting down ExecutorService 'applicationTaskExecutor'
+03-12-2019 16:10:07.427 [RMI TCP Connection(486)-127.0.0.1] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.destroy 597 - Closing JPA EntityManagerFactory for persistence unit 'default'
+03-12-2019 16:10:07.454 [RMI TCP Connection(486)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource.close 350 - HikariPool-8 - Shutdown initiated...
+03-12-2019 16:10:07.461 [RMI TCP Connection(486)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource.close 352 - HikariPool-8 - Shutdown completed.

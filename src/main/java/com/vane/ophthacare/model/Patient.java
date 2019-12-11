@@ -2,7 +2,7 @@ package com.vane.ophthacare.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.List;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,12 +11,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.validator.constraints.Length;
 
 import com.vane.ophthacare.excel.export.ExcelField;
 
@@ -70,8 +67,8 @@ public class Patient implements Serializable {
 	@Column(name = "numFixe_patient")
 	private BigInteger numFixePatient;
 
-	// @OneToMany(mappedBy = "patient", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	// Set<Maladie> maladies;
+	@ManyToOne
+	private Collection<Maladie> maladies;
 
 	//@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	//@JoinColumn(name = "profile_id")
