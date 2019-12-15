@@ -90,8 +90,6 @@ public class PermissionController {
 
 		String erreur = Utils.checkAttributeFromObject(permission, false);
 
-		logger.info("Erreur response: " + erreur);
-
 		if (erreur != "OK") {
 			logger.error(ResponseCodes.ERROR_GENERIC.toString());
 			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(permission.getIdPermission()),
@@ -99,6 +97,16 @@ public class PermissionController {
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
 		}
 
+		// Check if permission not already exist in DB
+		List<Permission> listPermissions = permissionRepository.findAll();
+		for (Permission per : listPermissions) {
+			if (per.getNomPermission().equalsIgnoreCase(permission.getNomPermission().toUpperCase())) {
+				userOperations.saveOperationReport(Constants.FAILED, String.valueOf(permission.getIdPermission()),
+						permission.getNomPermission(), caller, UserOperationsCodes.PERMISSION_REPORT_FOUND);
+				return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_INSERT_PERMISSION_DB), HttpStatus.OK);
+			}
+		}
+		
 		// Set Model Permission to uppercase and popolate date
 		permission.setNomPermission(permission.getNomPermission().toUpperCase());
 		permission.setDateRegistration(format.format(GregorianCalendar.getInstance().getTime()));
@@ -140,8 +148,6 @@ public class PermissionController {
 		}
 
 		String erreur = Utils.checkAttributeFromObject(permission, false);
-
-		logger.info("Erreur response: " + erreur);
 
 		if (erreur != "OK") {
 			logger.error(ResponseCodes.ERROR_GENERIC.toString());

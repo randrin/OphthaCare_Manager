@@ -35,7 +35,6 @@ public class Maladie implements Serializable {
 	@Column(name = "medecin_maladie")
 	private String medecinMaladie;
 
-	@OneToMany(mappedBy = "maladies")
 	private Patient patient;
 	
 	/**

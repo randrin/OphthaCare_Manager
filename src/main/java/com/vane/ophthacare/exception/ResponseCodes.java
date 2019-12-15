@@ -88,6 +88,7 @@ public enum ResponseCodes {
 	ERROR_SET_PERMISSION_DB("ERR0008", "Error on insert permission on DB"),
 	ERROR_MODIFY_PERMISSION_DB("ERR0008", "Error on modify permission on DB"),
 	ERROR_DELETE_PERMISSION_DB("ERR0008", "Error on delete permission on DB"),
+	ERROR_INSERT_PERMISSION_DB("ERR0008", "Permission already present in DB"),
 	
 	// Others
 	ERROR_GENERIC("ERR0001", "Generic Error"),

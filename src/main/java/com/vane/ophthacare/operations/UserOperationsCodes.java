@@ -22,6 +22,7 @@ public enum UserOperationsCodes {
 	PERMISSION_REPORT_INSERT("Insert new Permission on DB with id [%s] and name [%s]"),
 	PERMISSION_REPORT_UPDATE("Update Permission on DB with id [%s] and name [%s]"),
 	PERMISSION_REPORT_DELETE("Deleted Permission from DB with id [%s]"),
+	PERMISSION_REPORT_FOUND("Permission already present. Try another one"),
 		
 	// Profile Image
 	GET_PROFILE("Get Profile"),

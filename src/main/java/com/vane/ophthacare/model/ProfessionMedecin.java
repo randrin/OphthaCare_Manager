@@ -32,7 +32,6 @@ public class ProfessionMedecin implements Serializable {
 	@Column(name = "code_profession")
 	private String codeProfession;
 
-	@OneToMany(mappedBy = "ProfessionMedecins")
 	private Medecin medecin;
 	
 	/**
