@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.vane.ophthacare.excel.export.ExcelField;
@@ -31,6 +32,8 @@ public class ProfessionMedecin implements Serializable {
 	@Column(name = "code_profession")
 	private String codeProfession;
 
+	private Medecin medecin;
+	
 	/**
 	 * @return the idProfession
 	 */

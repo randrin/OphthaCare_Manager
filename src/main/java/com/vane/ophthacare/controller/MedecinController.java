@@ -110,10 +110,10 @@ public class MedecinController {
 		Medecin m = medecinRepository.save(medecin);
 
 		if (m == null) {
-			logger.error(ResponseCodes.ERROR_SET_MEDECINS_DB.toString());
+			logger.error(ResponseCodes.ERROR_SET_MEDECIN_DB.toString());
 			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()),
 					medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_INSERT);
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_MEDECINS_DB), HttpStatus.OK);
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_MEDECIN_DB), HttpStatus.OK);
 		}
 
 		logger.info(Constants.END + " INSERT -> /medecin/insert - Caller [" + caller + "]");
@@ -159,10 +159,10 @@ public class MedecinController {
 		Medecin m = medecinRepository.save(medecin);
 
 		if (m == null) {
-			logger.error(ResponseCodes.ERROR_SET_MEDECINS_DB.toString());
+			logger.error(ResponseCodes.ERROR_MODIFY_MEDECIN_DB.toString());
 			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(medecin.getIdMedecin()),
 					medecin.getNomMedecin(), caller, UserOperationsCodes.MEDECIN_REPORT_UPDATE);
-			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_SET_MEDECINS_DB), HttpStatus.OK);
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_MODIFY_MEDECIN_DB), HttpStatus.OK);
 		}
 
 		logger.info(Constants.END + " UPDATE -> /medecin/update - Caller [" + caller + "]");

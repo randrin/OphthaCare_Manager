@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.vane.ophthacare.excel.export.ExcelField;
@@ -34,6 +35,8 @@ public class Maladie implements Serializable {
 	@Column(name = "medecin_maladie")
 	private String medecinMaladie;
 
+	private Patient patient;
+	
 	/**
 	 * @return the idMaladie
 	 */

@@ -18,7 +18,7 @@ import javax.persistence.Transient;
 import com.vane.ophthacare.excel.export.ExcelField;
 
 @Entity
-@Table(name = "Administrateur")
+@Table(name = "Administrateurs")
 public class Administrateur implements Serializable {
 
 	private static final long serialVersionUID = 6501686897066383042L;
@@ -38,9 +38,9 @@ public class Administrateur implements Serializable {
 	private String pseudoAdmin;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "imageAdmin")
-	private ProfileImage profileImage;
-
+	@JoinColumn(name = "profile_id")
+	private ProfileImage profileAdmin;
+	
 	@Column(name = "role")
 	private String roleAdmin;
 
