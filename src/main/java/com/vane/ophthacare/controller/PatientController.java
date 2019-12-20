@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vane.ophthacare.exception.Response;
 import com.vane.ophthacare.exception.ResponseCodes;
 import com.vane.ophthacare.model.Patient;
+import com.vane.ophthacare.model.Permission;
 import com.vane.ophthacare.operations.UserOperations;
 import com.vane.ophthacare.operations.UserOperationsCodes;
 import com.vane.ophthacare.repository.PatientRepository;
@@ -84,13 +85,23 @@ public class PatientController {
 
 		String erreur = Utils.checkAttributeFromObject(patient, false);
 
-		logger.info("Erreur response: " + erreur);
-
 		if (erreur != "OK") {
 			logger.error(ResponseCodes.ERROR_GENERIC.toString());
 			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(patient.getIdPatient()),
 					patient.getNomPatient(), caller, UserOperationsCodes.PATIENT_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
+		}
+
+		// Check if patient not already exist in DB
+		List<Patient> listPatients = patientRepository.findAll();
+		for (Patient pat : listPatients) {
+			if (pat.getNomPatient().equalsIgnoreCase(patient.getNomPatient()) &&
+					pat.getPrenomPatient().equalsIgnoreCase(patient.getPrenomPatient())) {
+				userOperations.saveOperationReport(Constants.FAILED, String.valueOf(patient.getIdPatient()),
+						patient.getNomPatient(), caller, UserOperationsCodes.PATIENT_REPORT_FOUND);
+				return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_INSERT_PATIENT_DB),
+						HttpStatus.OK);
+			}
 		}
 
 		// Set Model Patient
@@ -190,7 +201,7 @@ public class PatientController {
 					UserOperationsCodes.PATIENT_REPORT_DELETE);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_DELETE_PATIENT_DB), HttpStatus.OK);
 		}
-		
+
 		Iterator<Patient> iter = patientRepository.findAll().iterator();
 
 		while (iter.hasNext()) {

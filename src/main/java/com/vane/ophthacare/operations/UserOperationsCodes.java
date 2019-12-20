@@ -7,6 +7,7 @@ public enum UserOperationsCodes {
 	PATIENT_REPORT_INSERT("Insert new Patient on DB with id [%s] and pseudo [%s]"),
 	PATIENT_REPORT_UPDATE("Update Patient on DB with id [%s] and pseudo [%s]"),
 	PATIENT_REPORT_DELETE("Deleted Patient from DB with id [%s]"),
+	PATIENT_REPORT_FOUND("Patient already present. Try another one"),
 
 	// Administrateurs
 	ADMIN_GET_ALL("Get all Administrateurs from DB"), ADMIN_DOWNLOAD_PDF("Download PDF Administrateurs"),

@@ -54,6 +54,7 @@ public enum ResponseCodes {
 	ERROR_SET_PATIENT_DB("ERR0005", "Error on insert patient on DB"),
 	ERROR_DELETE_PATIENT_DB("ERR0006", "Error on delete patient on DB"),
 	ERROR_MODIFY_PATIENT_DB("ERR0007", "Error on modify patient on DB"),
+	ERROR_INSERT_PATIENT_DB("ERR0008", "Patient already present in DB"),
 
 	// Administrateurs
 	ERROR_GET_ADMINISTRATORS_DB("ERR0004", "Error getting administrators on DB"),
