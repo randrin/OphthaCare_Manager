@@ -7,12 +7,14 @@ public enum UserOperationsCodes {
 	PATIENT_REPORT_INSERT("Insert new Patient on DB with id [%s] and pseudo [%s]"),
 	PATIENT_REPORT_UPDATE("Update Patient on DB with id [%s] and pseudo [%s]"),
 	PATIENT_REPORT_DELETE("Deleted Patient from DB with id [%s]"),
+	PATIENT_REPORT_FOUND("Patient already present. Try another one"),
 
 	// Administrateurs
 	ADMIN_GET_ALL("Get all Administrateurs from DB"), ADMIN_DOWNLOAD_PDF("Download PDF Administrateurs"),
 	ADMIN_REPORT_INSERT("Insert new Administrateur on DB with id [%s] and pseudo [%s]"),
 	ADMIN_REPORT_UPDATE("Update Administrateur on DB with id [%s] and pseudo [%s]"),
 	ADMIN_REPORT_DELETE("Deleted Administrateur from DB with id [%s]"),
+	ADMIN_REPORT_FOUND("Administrateur already present. Try another one"),
 
 	// Report
 	REPORT_GET_ALL("Get all Report from DB"),
@@ -22,6 +24,7 @@ public enum UserOperationsCodes {
 	PERMISSION_REPORT_INSERT("Insert new Permission on DB with id [%s] and name [%s]"),
 	PERMISSION_REPORT_UPDATE("Update Permission on DB with id [%s] and name [%s]"),
 	PERMISSION_REPORT_DELETE("Deleted Permission from DB with id [%s]"),
+	PERMISSION_REPORT_FOUND("Permission already present. Try another one"),
 		
 	// Profile Image
 	GET_PROFILE("Get Profile"),

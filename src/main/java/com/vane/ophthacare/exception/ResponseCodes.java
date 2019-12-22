@@ -54,12 +54,14 @@ public enum ResponseCodes {
 	ERROR_SET_PATIENT_DB("ERR0005", "Error on insert patient on DB"),
 	ERROR_DELETE_PATIENT_DB("ERR0006", "Error on delete patient on DB"),
 	ERROR_MODIFY_PATIENT_DB("ERR0007", "Error on modify patient on DB"),
+	ERROR_INSERT_PATIENT_DB("ERR0008", "Patient already present in DB"),
 
 	// Administrateurs
 	ERROR_GET_ADMINISTRATORS_DB("ERR0004", "Error getting administrators on DB"),
 	ERROR_SET_ADMIN_DB("ERR0005", "Error on insert admin on DB"),
 	ERROR_DELETE_ADMIN_DB("ERR0006", "Error on delete admin on DB"),
 	ERROR_MODIFY_ADMIN_DB("ERR0007", "Error on modify admin on DB"),
+	ERROR_INSERT_ADMIN_DB("ERR0008", "Admin already present in DB"),
 
 	// Profession Medecins
 	ERROR_GET_PROFESSIONS_DB("ERR0004", "Error getting Professions Medecins on DB"),
@@ -88,6 +90,7 @@ public enum ResponseCodes {
 	ERROR_SET_PERMISSION_DB("ERR0008", "Error on insert permission on DB"),
 	ERROR_MODIFY_PERMISSION_DB("ERR0008", "Error on modify permission on DB"),
 	ERROR_DELETE_PERMISSION_DB("ERR0008", "Error on delete permission on DB"),
+	ERROR_INSERT_PERMISSION_DB("ERR0008", "Permission already present in DB"),
 	
 	// Others
 	ERROR_GENERIC("ERR0001", "Generic Error"),
