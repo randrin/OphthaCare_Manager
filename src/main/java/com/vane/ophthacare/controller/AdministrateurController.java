@@ -32,6 +32,7 @@ import com.vane.ophthacare.exception.ExceptionCodes;
 import com.vane.ophthacare.exception.Response;
 import com.vane.ophthacare.exception.ResponseCodes;
 import com.vane.ophthacare.model.Administrateur;
+import com.vane.ophthacare.model.Patient;
 import com.vane.ophthacare.model.Session;
 import com.vane.ophthacare.operations.UserOperations;
 import com.vane.ophthacare.operations.UserOperationsCodes;
@@ -100,13 +101,22 @@ public class AdministrateurController {
 
 		String erreur = Utils.checkAttributeFromObject(admin, false);
 
-		logger.info("Erreur response: " + erreur);
-
 		if (erreur != "OK") {
 			logger.error(ResponseCodes.ERROR_GENERIC.toString());
 			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(admin.getIdAdmin()),
 					admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_INSERT);
 			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_GENERIC), HttpStatus.OK);
+		}
+
+		// Check if admin not already exist in DB
+		List<Administrateur> listAdmins = administrateurRepository.findAll();
+		for (Administrateur adm : listAdmins) {
+			if (adm.getNomAdmin().equalsIgnoreCase(adm.getNomAdmin())
+					&& adm.getPrenomAdmin().equalsIgnoreCase(adm.getPrenomAdmin())) {
+				userOperations.saveOperationReport(Constants.FAILED, String.valueOf(admin.getIdAdmin()),
+						admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_FOUND);
+				return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_INSERT_ADMIN_DB), HttpStatus.OK);
+			}
 		}
 
 		// Set Model Admin

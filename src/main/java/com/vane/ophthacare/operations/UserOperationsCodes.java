@@ -14,6 +14,7 @@ public enum UserOperationsCodes {
 	ADMIN_REPORT_INSERT("Insert new Administrateur on DB with id [%s] and pseudo [%s]"),
 	ADMIN_REPORT_UPDATE("Update Administrateur on DB with id [%s] and pseudo [%s]"),
 	ADMIN_REPORT_DELETE("Deleted Administrateur from DB with id [%s]"),
+	ADMIN_REPORT_FOUND("Administrateur already present. Try another one"),
 
 	// Report
 	REPORT_GET_ALL("Get all Report from DB"),

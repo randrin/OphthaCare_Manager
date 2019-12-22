@@ -61,6 +61,7 @@ public enum ResponseCodes {
 	ERROR_SET_ADMIN_DB("ERR0005", "Error on insert admin on DB"),
 	ERROR_DELETE_ADMIN_DB("ERR0006", "Error on delete admin on DB"),
 	ERROR_MODIFY_ADMIN_DB("ERR0007", "Error on modify admin on DB"),
+	ERROR_INSERT_ADMIN_DB("ERR0008", "Admin already present in DB"),
 
 	// Profession Medecins
 	ERROR_GET_PROFESSIONS_DB("ERR0004", "Error getting Professions Medecins on DB"),
