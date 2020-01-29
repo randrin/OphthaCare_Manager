@@ -14620,3 +14620,7 @@ Verify the connector's configuration, identify and stop any process that's liste
 29-01-2020 22:26:06.785 [restartedMain] WARN  org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration.checkTemplateLocationExists 108 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
 29-01-2020 22:26:07.391 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start 204 - Tomcat started on port(s): 8082 (http) with context path '/OphthaCare_Manager'
 29-01-2020 22:26:07.393 [restartedMain] INFO  com.vane.ophthacare.OphthaCareManagerApplication.logStarted 59 - Started OphthaCareManagerApplication in 9.015 seconds (JVM running for 10.439)
+29-01-2020 22:40:43.900 [Thread-6] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor.shutdown 208 - Shutting down ExecutorService 'applicationTaskExecutor'
+29-01-2020 22:40:43.928 [Thread-6] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.destroy 597 - Closing JPA EntityManagerFactory for persistence unit 'default'
+29-01-2020 22:40:43.934 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource.close 350 - HikariPool-1 - Shutdown initiated...
+29-01-2020 22:40:43.961 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource.close 352 - HikariPool-1 - Shutdown completed.

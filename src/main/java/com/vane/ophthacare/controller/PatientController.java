@@ -50,6 +50,12 @@ public class PatientController {
 	public ResponseEntity<Object> getAllPatients(@RequestHeader(value = "caller", required = false) String caller) {
 
 		logger.info(Constants.BEGIN + " GET -> /patient/getAllPatients - Caller [" + caller + "]");
+		
+		if (StringUtils.isEmpty(caller)) {
+			logger.error(ResponseCodes.ERROR_CALLER_MISSING.toString());
+			userOperations.saveOperationReport(Constants.FAILED, caller, UserOperationsCodes.PATIENT_GET_ALL);
+			return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_CALLER_MISSING), HttpStatus.OK);
+		}
 
 		List<Patient> listPatients = patientRepository.findAll();
 
