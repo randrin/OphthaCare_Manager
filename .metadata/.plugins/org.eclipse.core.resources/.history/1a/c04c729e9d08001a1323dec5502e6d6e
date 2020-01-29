@@ -1,0 +1,11 @@
+package com.vane.opthacare.springsecurity.service;
+
+import com.vane.ophthacare.model.User;
+import com.vane.opthacare.web.dto.UserRegistrationDto;
+
+public interface UserService extends UserDetailsService {
+
+    User findByEmail(String email);
+
+    User save(UserRegistrationDto registration);
+}
