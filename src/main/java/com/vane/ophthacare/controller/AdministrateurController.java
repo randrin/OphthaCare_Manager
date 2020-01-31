@@ -111,10 +111,10 @@ public class AdministrateurController {
 		// Check if admin not already exist in DB
 		List<Administrateur> listAdmins = administrateurRepository.findAll();
 		for (Administrateur adm : listAdmins) {
-			if (adm.getNomAdmin().equalsIgnoreCase(adm.getNomAdmin())
-					&& adm.getPrenomAdmin().equalsIgnoreCase(adm.getPrenomAdmin())) {
-				userOperations.saveOperationReport(Constants.FAILED, String.valueOf(admin.getIdAdmin()),
-						admin.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_FOUND);
+			if (admin.getNomAdmin().equalsIgnoreCase(adm.getNomAdmin())
+					&& admin.getPrenomAdmin().equalsIgnoreCase(adm.getPrenomAdmin())) {
+				userOperations.saveOperationReport(Constants.FAILED, String.valueOf(adm.getIdAdmin()),
+						adm.getNomAdmin(), caller, UserOperationsCodes.ADMIN_REPORT_FOUND);
 				return new ResponseEntity<Object>(new Response(ResponseCodes.ERROR_INSERT_ADMIN_DB), HttpStatus.OK);
 			}
 		}
