@@ -14,6 +14,11 @@ public enum ResponseCodes {
 	OK_INSERT_ADMIN("OK", "Admin added to DB"),
 	OK_MODIFY_ADMIN("OK", "Admin modified"),
 	OK_DELETE_ADMIN("OK", "Admin deleted from DB"),
+	
+	// Appointments
+	OK_INSERT_APPOINTMENT("OK", "Appointment added to DB"),
+	OK_MODIFY_APPOINTMENT("OK", "Appointment modified"),
+	OK_DELETE_APPOINTMENT("OK", "Appointment deleted from DB"),
 
 	// Specialistes-Medecins
 	OK_INSERT_MEDECIN("OK", "Medecin added to DB"),
@@ -62,6 +67,12 @@ public enum ResponseCodes {
 	ERROR_DELETE_ADMIN_DB("ERR0006", "Error on delete admin on DB"),
 	ERROR_MODIFY_ADMIN_DB("ERR0007", "Error on modify admin on DB"),
 	ERROR_INSERT_ADMIN_DB("ERR0008", "Admin already present in DB"),
+	
+	// Appointments
+	ERROR_GET_APPOINTMENTS_DB("ERR0004", "Error getting appointments on DB"),
+	ERROR_SET_APPOINTMENT_DB("ERR0005", "Error on insert appointment on DB"),
+	ERROR_DELETE_APPOINTMENT_DB("ERR0006", "Error on delete appointment on DB"),
+	ERROR_MODIFY_APPOINTMENT_DB("ERR0007", "Error on modify appointment on DB"),
 
 	// Profession Medecins
 	ERROR_GET_PROFESSIONS_DB("ERR0004", "Error getting Professions Medecins on DB"),
