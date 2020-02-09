@@ -160,8 +160,6 @@ public class AdministrateurController {
 
 		String erreur = Utils.checkAttributeFromObject(admin, false);
 
-		logger.info("Erreur response: " + erreur);
-
 		if (erreur != "OK") {
 			logger.error(ResponseCodes.ERROR_GENERIC.toString());
 			userOperations.saveOperationReport(Constants.FAILED, String.valueOf(admin.getIdAdmin()),
