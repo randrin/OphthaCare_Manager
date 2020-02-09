@@ -1,180 +1,47 @@
-31-01-2020 00:04:53.243 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool.run 766 - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3h39m41s399ms787µs100ns).
-31-01-2020 02:00:01.428 [RMI TCP Connection(2)-127.0.0.1] INFO  org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin.shutdown 163 - Application shutdown requested.
-31-01-2020 02:00:01.526 [RMI TCP Connection(2)-127.0.0.1] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor.shutdown 208 - Shutting down ExecutorService 'applicationTaskExecutor'
-31-01-2020 02:00:01.539 [RMI TCP Connection(2)-127.0.0.1] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.destroy 597 - Closing JPA EntityManagerFactory for persistence unit 'default'
-31-01-2020 02:00:01.580 [RMI TCP Connection(2)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource.close 350 - HikariPool-1 - Shutdown initiated...
-31-01-2020 02:00:01.597 [RMI TCP Connection(2)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource.close 352 - HikariPool-1 - Shutdown completed.
-31-01-2020 21:21:02.459 [restartedMain] INFO  com.vane.ophthacare.OphthaCareManagerApplication.logStarting 50 - Starting OphthaCareManagerApplication on LAPTOP-S1CQS97F with PID 35740 (C:\Users\nzeuk\ExampleWorkspace\OphthaCare_Manager\target\classes started by nzeuk in C:\Users\nzeuk\ExampleWorkspace\OphthaCare_Manager)
-31-01-2020 21:21:02.465 [restartedMain] INFO  com.vane.ophthacare.OphthaCareManagerApplication.logStartupProfileInfo 675 - No active profile set, falling back to default profiles: default
-31-01-2020 21:21:02.536 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor.logTo 227 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-31-01-2020 21:21:02.536 [restartedMain] INFO  org.springframework.boot.devtools.env.DevToolsPropertyDefaultsPostProcessor.logTo 227 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-31-01-2020 21:21:04.105 [restartedMain] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn 126 - Bootstrapping Spring Data repositories in DEFAULT mode.
-31-01-2020 21:21:04.260 [restartedMain] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn 182 - Finished Spring Data repository scanning in 142ms. Found 8 repository interfaces.
-31-01-2020 21:21:04.833 [restartedMain] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization 330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$706ea2ed] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-31-01-2020 21:21:05.562 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize 90 - Tomcat initialized with port(s): 8082 (http)
-31-01-2020 21:21:05.599 [restartedMain] INFO  org.apache.catalina.core.StandardService.log 173 - Starting service [Tomcat]
-31-01-2020 21:21:05.599 [restartedMain] INFO  org.apache.catalina.core.StandardEngine.log 173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
-31-01-2020 21:21:05.611 [restartedMain] INFO  org.apache.catalina.core.AprLifecycleListener.log 173 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jre1.8.0_181\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\oraclexe\app\oracle\product\11.2.0\server\bin;;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\apache-maven-3.5.4\bin;C:\Program Files\Java\jdk1.8.0_171\bin;C:\Program Files\Microsoft VS Code\bin;%JRE_HOME%\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\110\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\ManagementStudio\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseSVN\bin;C:\Users\nzeuk\OneDrive\Documents\cmder;C:\Program Files (x86)\Brackets\command;C:\Program Files (x86)\Yarn\bin\;C:\Users\nzeuk\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\Users\nzeuk\AppData\Roaming\npm;C:\Users\nzeuk\AppData\Roaming\Composer\vendor\bin;C:\Users\nzeuk\AppData\Local\GitHubDesktop\bin;C:\Program Files\JetBrains\PhpStorm 2018.3\bin;;C:\Users\nzeuk\AppData\Local\Microsoft\WindowsApps;C:\Users\nzeuk\AppData\Local\Yarn\bin;C:\Users\nzeuk\AppData\Local\hyper\app-3.0.2\resources\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2019.2.3\bin;;.]
-31-01-2020 21:21:05.759 [restartedMain] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/OphthaCare_Manager].log 173 - Initializing Spring embedded WebApplicationContext
-31-01-2020 21:21:05.760 [restartedMain] INFO  org.springframework.web.context.ContextLoader.prepareWebApplicationContext 296 - Root WebApplicationContext: initialization completed in 3223 ms
-31-01-2020 21:21:05.958 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource.getConnection 110 - HikariPool-1 - Starting...
-31-01-2020 21:21:05.959 [restartedMain] WARN  com.zaxxer.hikari.util.DriverDataSource.<init> 68 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
-31-01-2020 21:21:06.156 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource.getConnection 123 - HikariPool-1 - Start completed.
-31-01-2020 21:21:06.366 [restartedMain] INFO  org.hibernate.jpa.internal.util.LogHelper.logPersistenceUnitInformation 31 - HHH000204: Processing PersistenceUnitInfo [
-	name: default
-	...]
-31-01-2020 21:21:06.561 [restartedMain] INFO  org.hibernate.Version.logVersion 45 - HHH000412: Hibernate Core {5.2.4.Final}
-31-01-2020 21:21:06.564 [restartedMain] INFO  org.hibernate.cfg.Environment.<clinit> 213 - HHH000206: hibernate.properties not found
-31-01-2020 21:21:06.569 [restartedMain] INFO  org.hibernate.cfg.Environment.buildBytecodeProvider 318 - HHH000021: Bytecode provider name : javassist
-31-01-2020 21:21:06.669 [restartedMain] INFO  org.hibernate.annotations.common.Version.<clinit> 66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
-31-01-2020 21:21:07.029 [restartedMain] INFO  org.hibernate.dialect.Dialect.<init> 153 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
-31-01-2020 21:21:08.200 [restartedMain] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory 415 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-31-01-2020 21:21:08.248 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer.startServer 57 - LiveReload server is running on port 35729
-31-01-2020 21:21:09.147 [restartedMain] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor.initialize 171 - Initializing ExecutorService 'applicationTaskExecutor'
-31-01-2020 21:21:09.197 [restartedMain] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration.openEntityManagerInViewInterceptor 236 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-31-01-2020 21:21:09.306 [restartedMain] WARN  org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration.checkTemplateLocationExists 108 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-31-01-2020 21:21:09.592 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start 204 - Tomcat started on port(s): 8082 (http) with context path '/OphthaCare_Manager'
-31-01-2020 21:21:09.598 [restartedMain] INFO  com.vane.ophthacare.OphthaCareManagerApplication.logStarted 59 - Started OphthaCareManagerApplication in 8.006 seconds (JVM running for 13.043)
-31-01-2020 21:30:42.992 [http-nio-8082-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/OphthaCare_Manager].log 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-31-01-2020 21:30:42.998 [http-nio-8082-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet.initServletBean 524 - Initializing Servlet 'dispatcherServlet'
-31-01-2020 21:30:43.079 [http-nio-8082-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet.initServletBean 546 - Completed initialization in 80 ms
-31-01-2020 21:30:43.603 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.AdministrateurController.login 191 - PROCESSING ... POST -> /admin/login
-31-01-2020 21:30:43.605 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.AdministrateurController.login 192 - Username/Pseudo administrateur: randrino17
-31-01-2020 21:30:43.606 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.AdministrateurController.login 193 - Password administrateur: 1234
-31-01-2020 21:30:44.035 [http-nio-8082-exec-1] INFO  org.hibernate.hql.internal.QueryTranslatorFactoryInitiator.initiateService 47 - HHH000397: Using ASTQueryTranslatorFactory
-31-01-2020 21:30:44.557 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.AdministrateurController.login 204 - Admin : [randrin deco] is activated? true
-31-01-2020 21:30:44.561 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.AdministrateurController.login 209 - END ... POST -> /admin/login
-31-01-2020 21:30:46.048 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [randrin deco]
-31-01-2020 21:30:46.051 [http-nio-8082-exec-6] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 53 - PROCESSING ... GET -> /patient/getAllPatients - Caller [randrin deco]
-31-01-2020 21:30:46.050 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 59 - PROCESSING ... GET -> /medecin/getAllMedecins - Caller [randrin deco]
-31-01-2020 21:30:46.049 [http-nio-8082-exec-7] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 51 - PROCESSING ... GET -> /maladie/getAllMaladies - Caller [randrin deco]
-31-01-2020 21:30:46.140 [http-nio-8082-exec-7] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 61 - END ... GET -> /maladie/getAllMaladies - Caller [randrin deco]
-31-01-2020 21:30:46.157 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [randrin deco]
-31-01-2020 21:30:46.165 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 70 - END ... GET -> /medecin/getAllMedecins - Caller [randrin deco]
-31-01-2020 21:30:46.213 [http-nio-8082-exec-6] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 62 - END ... GET -> /patient/getAllPatients - Caller [randrin deco]
-31-01-2020 21:31:02.503 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [randrin deco]
-31-01-2020 21:31:02.515 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [randrin deco]
-31-01-2020 21:31:02.516 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.PermissionController.getAllPermissions 52 - PROCESSING ... GET -> /permission/getAllPermissions - Caller [randrin deco]
-31-01-2020 21:31:02.536 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.PermissionController.getAllPermissions 67 - END ... GET -> /permission/getAllPermissions - Caller [randrin deco]
-31-01-2020 21:31:24.443 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.AdministrateurController.insertAdmin 86 - PROCESSING ... INSERT -> /admin/insert - Caller [randrin deco]
-31-01-2020 21:31:24.460 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.operations.UserOperations.saveOperationReport 48 - com.vane.ophthacare.model.Report@140f59a6
-31-01-2020 21:31:34.148 [http-nio-8082-exec-4] INFO  com.vane.ophthacare.controller.AdministrateurController.insertAdmin 86 - PROCESSING ... INSERT -> /admin/insert - Caller [randrin deco]
-31-01-2020 21:31:34.152 [http-nio-8082-exec-4] INFO  com.vane.ophthacare.operations.UserOperations.saveOperationReport 48 - com.vane.ophthacare.model.Report@6e253cf8
-31-01-2020 21:31:44.858 [http-nio-8082-exec-10] INFO  com.vane.ophthacare.controller.AdministrateurController.insertAdmin 86 - PROCESSING ... INSERT -> /admin/insert - Caller [randrin deco]
-31-01-2020 21:31:44.865 [http-nio-8082-exec-10] INFO  com.vane.ophthacare.operations.UserOperations.saveOperationReport 48 - com.vane.ophthacare.model.Report@597dc1aa
-31-01-2020 21:35:20.489 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 53 - PROCESSING ... GET -> /patient/getAllPatients - Caller [randrin deco]
-31-01-2020 21:35:20.497 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 62 - END ... GET -> /patient/getAllPatients - Caller [randrin deco]
-31-01-2020 21:35:20.512 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [randrin deco]
-31-01-2020 21:35:20.512 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 59 - PROCESSING ... GET -> /medecin/getAllMedecins - Caller [randrin deco]
-31-01-2020 21:35:20.521 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [randrin deco]
-31-01-2020 21:35:20.512 [http-nio-8082-exec-7] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 51 - PROCESSING ... GET -> /maladie/getAllMaladies - Caller [randrin deco]
-31-01-2020 21:35:20.526 [http-nio-8082-exec-7] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 61 - END ... GET -> /maladie/getAllMaladies - Caller [randrin deco]
-31-01-2020 21:35:20.544 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 70 - END ... GET -> /medecin/getAllMedecins - Caller [randrin deco]
-31-01-2020 21:35:22.131 [http-nio-8082-exec-6] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [randrin deco]
-31-01-2020 21:35:22.144 [http-nio-8082-exec-6] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [randrin deco]
-31-01-2020 21:35:22.142 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.PermissionController.getAllPermissions 52 - PROCESSING ... GET -> /permission/getAllPermissions - Caller [randrin deco]
-31-01-2020 21:35:22.153 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.PermissionController.getAllPermissions 67 - END ... GET -> /permission/getAllPermissions - Caller [randrin deco]
-31-01-2020 21:36:27.664 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.AdministrateurController.insertAdmin 86 - PROCESSING ... INSERT -> /admin/insert - Caller [randrin deco]
-31-01-2020 21:36:27.671 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.operations.UserOperations.saveOperationReport 48 - com.vane.ophthacare.model.Report@12b89eba
-31-01-2020 21:40:12.907 [http-nio-8082-exec-7] INFO  com.vane.ophthacare.controller.AdministrateurController.insertAdmin 86 - PROCESSING ... INSERT -> /admin/insert - Caller [randrin deco]
-31-01-2020 21:40:12.916 [http-nio-8082-exec-7] INFO  com.vane.ophthacare.operations.UserOperations.saveOperationReport 48 - com.vane.ophthacare.model.Report@63e0e015
-31-01-2020 21:40:40.998 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.AdministrateurController.logout 222 - PROCESSING ... LOGOUT -> /admin/logout
-31-01-2020 21:40:41.103 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.AdministrateurController.logout 230 - token trouvé pour l'username [randrin], elimination de la session
-31-01-2020 21:40:50.030 [http-nio-8082-exec-4] INFO  com.vane.ophthacare.controller.AdministrateurController.login 191 - PROCESSING ... POST -> /admin/login
-31-01-2020 21:40:50.033 [http-nio-8082-exec-4] INFO  com.vane.ophthacare.controller.AdministrateurController.login 192 - Username/Pseudo administrateur: vane07
-31-01-2020 21:40:50.034 [http-nio-8082-exec-4] INFO  com.vane.ophthacare.controller.AdministrateurController.login 193 - Password administrateur: Vanesa2018*
-31-01-2020 21:40:50.038 [http-nio-8082-exec-4] INFO  com.vane.ophthacare.controller.AdministrateurController.login 204 - Admin : [Takou Vanessa] is activated? true
-31-01-2020 21:40:50.039 [http-nio-8082-exec-4] INFO  com.vane.ophthacare.controller.AdministrateurController.login 209 - END ... POST -> /admin/login
-31-01-2020 21:40:51.130 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 51 - PROCESSING ... GET -> /maladie/getAllMaladies - Caller [Takou Vanessa]
-31-01-2020 21:40:51.119 [http-nio-8082-exec-10] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:40:51.124 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 59 - PROCESSING ... GET -> /medecin/getAllMedecins - Caller [Takou Vanessa]
-31-01-2020 21:40:51.113 [http-nio-8082-exec-5] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 53 - PROCESSING ... GET -> /patient/getAllPatients - Caller [Takou Vanessa]
-31-01-2020 21:40:51.138 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 61 - END ... GET -> /maladie/getAllMaladies - Caller [Takou Vanessa]
-31-01-2020 21:40:51.145 [http-nio-8082-exec-10] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:40:51.145 [http-nio-8082-exec-5] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 62 - END ... GET -> /patient/getAllPatients - Caller [Takou Vanessa]
-31-01-2020 21:40:51.147 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 70 - END ... GET -> /medecin/getAllMedecins - Caller [Takou Vanessa]
-31-01-2020 21:40:55.495 [http-nio-8082-exec-3] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:40:55.522 [http-nio-8082-exec-3] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:40:55.528 [http-nio-8082-exec-4] INFO  com.vane.ophthacare.controller.PermissionController.getAllPermissions 52 - PROCESSING ... GET -> /permission/getAllPermissions - Caller [Takou Vanessa]
-31-01-2020 21:40:55.532 [http-nio-8082-exec-4] INFO  com.vane.ophthacare.controller.PermissionController.getAllPermissions 67 - END ... GET -> /permission/getAllPermissions - Caller [Takou Vanessa]
-31-01-2020 21:41:09.834 [http-nio-8082-exec-10] INFO  com.vane.ophthacare.controller.AdministrateurController.insertAdmin 86 - PROCESSING ... INSERT -> /admin/insert - Caller [Takou Vanessa]
-31-01-2020 21:41:09.842 [http-nio-8082-exec-10] INFO  com.vane.ophthacare.operations.UserOperations.saveOperationReport 48 - com.vane.ophthacare.model.Report@2e5d047b
-31-01-2020 21:43:08.747 [Thread-6] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor.shutdown 208 - Shutting down ExecutorService 'applicationTaskExecutor'
-31-01-2020 21:43:08.753 [Thread-6] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.destroy 597 - Closing JPA EntityManagerFactory for persistence unit 'default'
-31-01-2020 21:43:08.768 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource.close 350 - HikariPool-1 - Shutdown initiated...
-31-01-2020 21:43:08.802 [Thread-6] INFO  com.zaxxer.hikari.HikariDataSource.close 352 - HikariPool-1 - Shutdown completed.
-31-01-2020 21:43:09.891 [restartedMain] INFO  com.vane.ophthacare.OphthaCareManagerApplication.logStarting 50 - Starting OphthaCareManagerApplication on LAPTOP-S1CQS97F with PID 35740 (C:\Users\nzeuk\ExampleWorkspace\OphthaCare_Manager\target\classes started by nzeuk in C:\Users\nzeuk\ExampleWorkspace\OphthaCare_Manager)
-31-01-2020 21:43:09.892 [restartedMain] INFO  com.vane.ophthacare.OphthaCareManagerApplication.logStartupProfileInfo 675 - No active profile set, falling back to default profiles: default
-31-01-2020 21:43:10.865 [restartedMain] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn 126 - Bootstrapping Spring Data repositories in DEFAULT mode.
-31-01-2020 21:43:11.145 [restartedMain] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn 182 - Finished Spring Data repository scanning in 279ms. Found 8 repository interfaces.
-31-01-2020 21:43:11.296 [restartedMain] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization 330 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$706ea2ed] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-31-01-2020 21:43:11.711 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize 90 - Tomcat initialized with port(s): 8082 (http)
-31-01-2020 21:43:11.713 [restartedMain] INFO  org.apache.catalina.core.StandardService.log 173 - Starting service [Tomcat]
-31-01-2020 21:43:11.713 [restartedMain] INFO  org.apache.catalina.core.StandardEngine.log 173 - Starting Servlet engine: [Apache Tomcat/9.0.16]
-31-01-2020 21:43:11.780 [restartedMain] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/OphthaCare_Manager].log 173 - Initializing Spring embedded WebApplicationContext
-31-01-2020 21:43:11.780 [restartedMain] INFO  org.springframework.web.context.ContextLoader.prepareWebApplicationContext 296 - Root WebApplicationContext: initialization completed in 1880 ms
-31-01-2020 21:43:11.879 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource.getConnection 110 - HikariPool-2 - Starting...
-31-01-2020 21:43:11.879 [restartedMain] WARN  com.zaxxer.hikari.util.DriverDataSource.<init> 68 - Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
-31-01-2020 21:43:11.905 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource.getConnection 123 - HikariPool-2 - Start completed.
-31-01-2020 21:43:11.931 [restartedMain] INFO  org.hibernate.jpa.internal.util.LogHelper.logPersistenceUnitInformation 31 - HHH000204: Processing PersistenceUnitInfo [
-	name: default
-	...]
-31-01-2020 21:43:11.973 [restartedMain] INFO  org.hibernate.dialect.Dialect.<init> 153 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
-31-01-2020 21:43:12.279 [restartedMain] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory 415 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-31-01-2020 21:43:12.303 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer.startServer 57 - LiveReload server is running on port 35729
-31-01-2020 21:43:12.852 [restartedMain] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor.initialize 171 - Initializing ExecutorService 'applicationTaskExecutor'
-31-01-2020 21:43:12.864 [restartedMain] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration.openEntityManagerInViewInterceptor 236 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-31-01-2020 21:43:12.964 [restartedMain] WARN  org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration.checkTemplateLocationExists 108 - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
-31-01-2020 21:43:13.116 [restartedMain] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start 204 - Tomcat started on port(s): 8082 (http) with context path '/OphthaCare_Manager'
-31-01-2020 21:43:13.118 [restartedMain] INFO  com.vane.ophthacare.OphthaCareManagerApplication.logStarted 59 - Started OphthaCareManagerApplication in 3.296 seconds (JVM running for 1336.563)
-31-01-2020 21:43:13.122 [restartedMain] INFO  org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener.onApplicationEvent 70 - Condition evaluation unchanged
-31-01-2020 21:43:33.631 [http-nio-8082-exec-2] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/OphthaCare_Manager].log 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-31-01-2020 21:43:33.633 [http-nio-8082-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet.initServletBean 524 - Initializing Servlet 'dispatcherServlet'
-31-01-2020 21:43:33.642 [http-nio-8082-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet.initServletBean 546 - Completed initialization in 9 ms
-31-01-2020 21:43:33.654 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.AdministrateurController.insertAdmin 86 - PROCESSING ... INSERT -> /admin/insert - Caller [Takou Vanessa]
-31-01-2020 21:43:33.664 [http-nio-8082-exec-2] INFO  org.hibernate.hql.internal.QueryTranslatorFactoryInitiator.initiateService 47 - HHH000397: Using ASTQueryTranslatorFactory
-31-01-2020 21:43:33.713 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.AdministrateurController.insertAdmin 135 - END ... INSERT -> /admin/insert - Caller [Takou Vanessa]
-31-01-2020 21:43:33.723 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.operations.UserOperations.saveOperationReport 48 - com.vane.ophthacare.model.Report@4d45343d
-31-01-2020 21:43:33.805 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:43:33.809 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:44:26.075 [http-nio-8082-exec-3] INFO  com.vane.ophthacare.controller.AdministrateurController.insertAdmin 86 - PROCESSING ... INSERT -> /admin/insert - Caller [Takou Vanessa]
-31-01-2020 21:44:26.081 [http-nio-8082-exec-3] INFO  com.vane.ophthacare.operations.UserOperations.saveOperationReport 48 - com.vane.ophthacare.model.Report@72a63199
-31-01-2020 21:44:38.958 [http-nio-8082-exec-5] INFO  com.vane.ophthacare.controller.AdministrateurController.insertAdmin 86 - PROCESSING ... INSERT -> /admin/insert - Caller [Takou Vanessa]
-31-01-2020 21:44:38.968 [http-nio-8082-exec-5] INFO  com.vane.ophthacare.controller.AdministrateurController.insertAdmin 135 - END ... INSERT -> /admin/insert - Caller [Takou Vanessa]
-31-01-2020 21:44:38.969 [http-nio-8082-exec-5] INFO  com.vane.ophthacare.operations.UserOperations.saveOperationReport 48 - com.vane.ophthacare.model.Report@3ef7bdcf
-31-01-2020 21:44:39.046 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:44:39.053 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:45:21.738 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 59 - PROCESSING ... GET -> /medecin/getAllMedecins - Caller [Takou Vanessa]
-31-01-2020 21:45:21.741 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 53 - PROCESSING ... GET -> /patient/getAllPatients - Caller [Takou Vanessa]
-31-01-2020 21:45:21.746 [http-nio-8082-exec-10] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:45:21.758 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 51 - PROCESSING ... GET -> /maladie/getAllMaladies - Caller [Takou Vanessa]
-31-01-2020 21:45:21.759 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 70 - END ... GET -> /medecin/getAllMedecins - Caller [Takou Vanessa]
-31-01-2020 21:45:21.762 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 62 - END ... GET -> /patient/getAllPatients - Caller [Takou Vanessa]
-31-01-2020 21:45:21.774 [http-nio-8082-exec-10] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:45:21.774 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 61 - END ... GET -> /maladie/getAllMaladies - Caller [Takou Vanessa]
-31-01-2020 21:45:25.742 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:45:25.742 [http-nio-8082-exec-7] INFO  com.vane.ophthacare.controller.PermissionController.getAllPermissions 52 - PROCESSING ... GET -> /permission/getAllPermissions - Caller [Takou Vanessa]
-31-01-2020 21:45:25.747 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:45:25.763 [http-nio-8082-exec-7] INFO  com.vane.ophthacare.controller.PermissionController.getAllPermissions 67 - END ... GET -> /permission/getAllPermissions - Caller [Takou Vanessa]
-31-01-2020 21:45:28.539 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:45:28.539 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 53 - PROCESSING ... GET -> /patient/getAllPatients - Caller [Takou Vanessa]
-31-01-2020 21:45:28.547 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:45:28.543 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 62 - END ... GET -> /patient/getAllPatients - Caller [Takou Vanessa]
-31-01-2020 21:45:28.549 [http-nio-8082-exec-10] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 51 - PROCESSING ... GET -> /maladie/getAllMaladies - Caller [Takou Vanessa]
-31-01-2020 21:45:28.540 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 59 - PROCESSING ... GET -> /medecin/getAllMedecins - Caller [Takou Vanessa]
-31-01-2020 21:45:28.555 [http-nio-8082-exec-10] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 61 - END ... GET -> /maladie/getAllMaladies - Caller [Takou Vanessa]
-31-01-2020 21:45:28.557 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 70 - END ... GET -> /medecin/getAllMedecins - Caller [Takou Vanessa]
-31-01-2020 21:45:29.841 [http-nio-8082-exec-4] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 53 - PROCESSING ... GET -> /patient/getAllPatients - Caller [Takou Vanessa]
-31-01-2020 21:45:29.846 [http-nio-8082-exec-4] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 62 - END ... GET -> /patient/getAllPatients - Caller [Takou Vanessa]
-31-01-2020 21:45:32.590 [http-nio-8082-exec-5] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:45:32.587 [http-nio-8082-exec-6] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 53 - PROCESSING ... GET -> /patient/getAllPatients - Caller [Takou Vanessa]
-31-01-2020 21:45:32.598 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 51 - PROCESSING ... GET -> /maladie/getAllMaladies - Caller [Takou Vanessa]
-31-01-2020 21:45:32.597 [http-nio-8082-exec-5] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [Takou Vanessa]
-31-01-2020 21:45:32.592 [http-nio-8082-exec-3] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 59 - PROCESSING ... GET -> /medecin/getAllMedecins - Caller [Takou Vanessa]
-31-01-2020 21:45:32.603 [http-nio-8082-exec-6] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 62 - END ... GET -> /patient/getAllPatients - Caller [Takou Vanessa]
-31-01-2020 21:45:32.603 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 61 - END ... GET -> /maladie/getAllMaladies - Caller [Takou Vanessa]
-31-01-2020 21:45:32.607 [http-nio-8082-exec-3] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 70 - END ... GET -> /medecin/getAllMedecins - Caller [Takou Vanessa]
-31-01-2020 21:45:38.353 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 59 - PROCESSING ... GET -> /medecin/getAllMedecins - Caller [Takou Vanessa]
-31-01-2020 21:45:38.359 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 70 - END ... GET -> /medecin/getAllMedecins - Caller [Takou Vanessa]
-31-01-2020 21:45:38.362 [http-nio-8082-exec-5] INFO  com.vane.ophthacare.controller.ProfessionMedecinController.getAllProfessionsMedecins 52 - PROCESSING ... GET -> /profession/getAllProfessionsMedecins - Caller [Takou Vanessa]
-31-01-2020 21:45:38.366 [http-nio-8082-exec-5] INFO  com.vane.ophthacare.controller.ProfessionMedecinController.getAllProfessionsMedecins 62 - END ... GET -> /profession/getAllProfessionsMedecins - Caller [Takou Vanessa]
+09-02-2020 08:32:36.373 [HikariPool-34 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool.run 766 - HikariPool-34 - Thread starvation or clock leap detected (housekeeper delta=12h56m5s143ms307µs799ns).
+09-02-2020 13:29:03.388 [HikariPool-34 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool.run 766 - HikariPool-34 - Thread starvation or clock leap detected (housekeeper delta=8m49s527ms937µs300ns).
+09-02-2020 14:05:51.333 [http-nio-8082-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat-1].[localhost].[/OphthaCare_Manager].log 173 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09-02-2020 14:05:51.354 [http-nio-8082-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet.initServletBean 524 - Initializing Servlet 'dispatcherServlet'
+09-02-2020 14:05:51.635 [http-nio-8082-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet.initServletBean 546 - Completed initialization in 277 ms
+09-02-2020 14:05:51.891 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.AdministrateurController.login 189 - PROCESSING ... POST -> /admin/login
+09-02-2020 14:05:51.921 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.AdministrateurController.login 190 - Username/Pseudo administrateur: randrino17
+09-02-2020 14:05:51.923 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.AdministrateurController.login 191 - Password administrateur: 1234
+09-02-2020 14:05:52.081 [http-nio-8082-exec-1] INFO  org.hibernate.hql.internal.QueryTranslatorFactoryInitiator.initiateService 47 - HHH000397: Using ASTQueryTranslatorFactory
+09-02-2020 14:05:52.457 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.AdministrateurController.login 202 - Admin : [randrin deco] is activated? true
+09-02-2020 14:05:52.626 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.AdministrateurController.login 207 - END ... POST -> /admin/login
+09-02-2020 14:05:54.042 [http-nio-8082-exec-7] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 53 - PROCESSING ... GET -> /patient/getAllPatients - Caller [randrin deco]
+09-02-2020 14:05:54.052 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 59 - PROCESSING ... GET -> /medecin/getAllMedecins - Caller [randrin deco]
+09-02-2020 14:05:54.053 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [randrin deco]
+09-02-2020 14:05:54.052 [http-nio-8082-exec-10] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 51 - PROCESSING ... GET -> /maladie/getAllMaladies - Caller [randrin deco]
+09-02-2020 14:05:55.304 [http-nio-8082-exec-7] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 62 - END ... GET -> /patient/getAllPatients - Caller [randrin deco]
+09-02-2020 14:05:55.315 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [randrin deco]
+09-02-2020 14:05:55.316 [http-nio-8082-exec-10] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 61 - END ... GET -> /maladie/getAllMaladies - Caller [randrin deco]
+09-02-2020 14:05:55.331 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 70 - END ... GET -> /medecin/getAllMedecins - Caller [randrin deco]
+09-02-2020 14:05:59.783 [http-nio-8082-exec-4] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [randrin deco]
+09-02-2020 14:05:59.790 [http-nio-8082-exec-4] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [randrin deco]
+09-02-2020 14:05:59.804 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.PermissionController.getAllPermissions 52 - PROCESSING ... GET -> /permission/getAllPermissions - Caller [randrin deco]
+09-02-2020 14:05:59.820 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.PermissionController.getAllPermissions 67 - END ... GET -> /permission/getAllPermissions - Caller [randrin deco]
+09-02-2020 14:06:07.393 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [randrin deco]
+09-02-2020 14:06:07.409 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 59 - PROCESSING ... GET -> /medecin/getAllMedecins - Caller [randrin deco]
+09-02-2020 14:06:07.402 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [randrin deco]
+09-02-2020 14:06:07.398 [http-nio-8082-exec-7] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 53 - PROCESSING ... GET -> /patient/getAllPatients - Caller [randrin deco]
+09-02-2020 14:06:07.438 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 70 - END ... GET -> /medecin/getAllMedecins - Caller [randrin deco]
+09-02-2020 14:06:07.438 [http-nio-8082-exec-3] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 51 - PROCESSING ... GET -> /maladie/getAllMaladies - Caller [randrin deco]
+09-02-2020 14:06:07.444 [http-nio-8082-exec-7] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 62 - END ... GET -> /patient/getAllPatients - Caller [randrin deco]
+09-02-2020 14:06:07.446 [http-nio-8082-exec-3] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 61 - END ... GET -> /maladie/getAllMaladies - Caller [randrin deco]
+09-02-2020 14:06:26.686 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 59 - PROCESSING ... GET -> /medecin/getAllMedecins - Caller [randrin deco]
+09-02-2020 14:06:26.694 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 70 - END ... GET -> /medecin/getAllMedecins - Caller [randrin deco]
+09-02-2020 14:06:26.708 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.ProfessionMedecinController.getAllProfessionsMedecins 52 - PROCESSING ... GET -> /profession/getAllProfessionsMedecins - Caller [randrin deco]
+09-02-2020 14:06:26.714 [http-nio-8082-exec-2] INFO  com.vane.ophthacare.controller.ProfessionMedecinController.getAllProfessionsMedecins 62 - END ... GET -> /profession/getAllProfessionsMedecins - Caller [randrin deco]
+09-02-2020 14:06:33.902 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.ProfessionMedecinController.getAllProfessionsMedecins 52 - PROCESSING ... GET -> /profession/getAllProfessionsMedecins - Caller [randrin deco]
+09-02-2020 14:06:33.907 [http-nio-8082-exec-1] INFO  com.vane.ophthacare.controller.ProfessionMedecinController.getAllProfessionsMedecins 62 - END ... GET -> /profession/getAllProfessionsMedecins - Caller [randrin deco]
+09-02-2020 14:06:52.065 [http-nio-8082-exec-4] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 53 - PROCESSING ... GET -> /patient/getAllPatients - Caller [randrin deco]
+09-02-2020 14:06:52.069 [http-nio-8082-exec-4] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 62 - END ... GET -> /patient/getAllPatients - Caller [randrin deco]
+09-02-2020 14:07:47.273 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 53 - PROCESSING ... GET -> /patient/getAllPatients - Caller [randrin deco]
+09-02-2020 14:07:47.278 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.PatientController.getAllPatients 62 - END ... GET -> /patient/getAllPatients - Caller [randrin deco]
+09-02-2020 14:07:47.281 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 59 - PROCESSING ... GET -> /medecin/getAllMedecins - Caller [randrin deco]
+09-02-2020 14:07:47.291 [http-nio-8082-exec-9] INFO  com.vane.ophthacare.controller.MedecinController.getAllMedecins 70 - END ... GET -> /medecin/getAllMedecins - Caller [randrin deco]
+09-02-2020 14:07:47.281 [http-nio-8082-exec-5] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 63 - PROCESSING ... GET -> /admin/getAllAdmins - Caller [randrin deco]
+09-02-2020 14:07:47.290 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 51 - PROCESSING ... GET -> /maladie/getAllMaladies - Caller [randrin deco]
+09-02-2020 14:07:47.314 [http-nio-8082-exec-5] INFO  com.vane.ophthacare.controller.AdministrateurController.getAllAdmins 78 - END ... GET -> /admin/getAllAdmins - Caller [randrin deco]
+09-02-2020 14:07:47.338 [http-nio-8082-exec-8] INFO  com.vane.ophthacare.controller.MaladieController.getAllMaladies 61 - END ... GET -> /maladie/getAllMaladies - Caller [randrin deco]
