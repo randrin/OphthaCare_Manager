@@ -18,7 +18,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<hibernate.version>5.2.4.Final</hibernate.version>
+		<hibernate.version>5.3.5.Final</hibernate.version>
 		<poi.version>3.17</poi.version>
 		<itext.version>5.0.6</itext.version>
 		<org.mapstruct.version>1.3.0.Final</org.mapstruct.version>
