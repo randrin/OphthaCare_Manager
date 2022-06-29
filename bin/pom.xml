@@ -18,7 +18,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<hibernate.version>5.2.4.Final</hibernate.version>
-		<poi.version>3.17</poi.version>
+		<poi.version>4.1.1</poi.version>
 	</properties>
 
 	<dependencies>
